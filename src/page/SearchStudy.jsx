@@ -6,7 +6,7 @@ const SelectOrderWay = () => {
   return (
     <select
       id="order"
-      className="bg-gray-50 border border-gray-300 text-gray-900 text-xs text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-1.5"
+      className="bg-blue-100 border border-blue-200 text-gray-900 text-xs text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-1.5"
     >
       <option value="US" selected>
         최신 순
@@ -17,6 +17,26 @@ const SelectOrderWay = () => {
   );
 };
 
+const MakeStudyCards = ({ title, description, tier, lang }) => {
+  return (
+    <a
+      href="/"
+      className="block w-2/5 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
+    >
+      <div>
+        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900">
+          {title}
+        </h5>
+        <h6 className="text-sm">{tier}</h6>
+      </div>
+      <p className="font-normal text-gray-700 dark:text-gray-400">
+        {description}
+      </p>
+      <div>{lang}</div>
+    </a>
+  );
+};
+
 const SearchStudy = () => {
   return (
     <CommonLayout title="스터디 찾기">
@@ -24,7 +44,7 @@ const SearchStudy = () => {
         <form>
           <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-grey-500">
-              <Search stroke-width="1.5" class="w-5 h-5" />
+              <Search strokeWidth="2" className="w-5 h-5" />
             </div>
 
             {/* <label
@@ -50,6 +70,26 @@ const SearchStudy = () => {
         </form>
         <div className="grid place-items-end mt-2">
           <SelectOrderWay />
+        </div>
+        <div className="mt-4 flex flex-wrap">
+          <MakeStudyCards
+            title="test"
+            description="testtesttest"
+            tier="gold4"
+            lang="python"
+          />
+          <MakeStudyCards
+            title="test"
+            description="testtesttest"
+            tier="gold4"
+            lang="python"
+          />
+          <MakeStudyCards
+            title="test"
+            description="testtesttest"
+            tier="gold4"
+            lang="python"
+          />
         </div>
       </div>
     </CommonLayout>
