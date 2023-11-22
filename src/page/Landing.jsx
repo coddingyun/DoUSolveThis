@@ -17,7 +17,7 @@ const LandingButton = ({ img, title, clickEvent, bgColor }) => {
     customColor =
       'bg-blue-500 hover:bg-blue-400 focus-visible:outline-blue-500';
   }
-  const buttonClasses = `w-full h-10 flex items-center justify-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${customColor}`;
+  const buttonClasses = `w-64 h-10 flex items-center justify-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${customColor}`;
 
   return (
     <span className="sm:ml-3">
@@ -50,7 +50,7 @@ const Landing = () => {
             함께 풀고 싶은 문제를 제안해보세요.
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2 items-center">
           <LandingButton
             img={<Export strokeWidth="3" className="w-6 h-6" />}
             title="최근 스터디 바로가기"
