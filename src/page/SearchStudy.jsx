@@ -2,6 +2,21 @@ import React from 'react';
 import CommonLayout from '../layout/CommonLayout';
 import { ReactComponent as Search } from '../asset/search.svg';
 
+const SelectOrderWay = () => {
+  return (
+    <select
+      id="order"
+      className="bg-gray-50 border border-gray-300 text-gray-900 text-xs text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-1.5"
+    >
+      <option value="US" selected>
+        최신 순
+      </option>
+      <option value="CA">평균 티어 순</option>
+      <option value="FR">평균 푼 문제 순</option>
+    </select>
+  );
+};
+
 const SearchStudy = () => {
   return (
     <CommonLayout title="스터디 찾기">
@@ -33,6 +48,9 @@ const SearchStudy = () => {
             </button>
           </div>
         </form>
+        <div className="grid place-items-end mt-2">
+          <SelectOrderWay />
+        </div>
       </div>
     </CommonLayout>
   );
