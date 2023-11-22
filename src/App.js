@@ -1,6 +1,19 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Landing from './page/Landing';
+import SearchStudy from './page/SearchStudy';
+
 function App() {
-  // eslint-disable-next-line react/react-in-jsx-scope
-  return <h1 className="text-5xl font-bold underline">Hello world!</h1>;
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/search" element={<SearchStudy />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

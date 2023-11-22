@@ -7,6 +7,14 @@
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/function-component-definition":[
+      2, 
+      { "namedComponents": [
+        "arrow-function", 
+        "function-declaration"
+      ] }
+    ],
+    "react/prop-types": "off"
   }
 }
