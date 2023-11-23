@@ -15,7 +15,7 @@ export const StudyCard = ({ id, title, description, tier, lang }) => {
         </h5>
         <RankTag>{tier}</RankTag>
       </div>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
+      <p className="font-normal text-sm text-gray-700 dark:text-gray-400">
         {description}
       </p>
       <LangTag>{lang}</LangTag>

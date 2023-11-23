@@ -1,9 +1,24 @@
 import React from 'react';
+import levelToRank from '../../constant/levelToRank';
+import { tierBgColor, tierTextColor } from '../../constant/tierColor';
 
 export const RankTag = ({ children }) => {
+  const tierText = levelToRank[children];
+  let bgColor = '';
+  let textColor = '';
+  if (children === 0) {
+    bgColor = 'bg-grey-600';
+    textColor = 'text-white';
+  } else {
+    const idx = parseInt((children - 1) / 5, 10);
+    bgColor = tierBgColor[idx];
+    textColor = tierTextColor[idx];
+  }
   return (
-    <span className="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">
-      {children}
+    <span
+      className={`${bgColor} ${textColor} text-sm font-medium me-2 px-2.5 py-0.5 rounded`}
+    >
+      {tierText}
     </span>
   );
 };
