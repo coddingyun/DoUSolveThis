@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import CommonLayout from '../../layout/CommonLayout';
 import { ReactComponent as Search } from '../../asset/search.svg';
+import { StudyCard, LoadingCard } from './Card';
 
 const SelectOrderWay = ({ order, handleChangeOrder }) => {
   return (
@@ -15,53 +16,6 @@ const SelectOrderWay = ({ order, handleChangeOrder }) => {
       <option value="2">평균 티어 순</option>
       <option value="3">평균 푼 문제 순</option>
     </select>
-  );
-};
-
-const RankTag = ({ children }) => {
-  return (
-    <span className="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">
-      {children}
-    </span>
-  );
-};
-
-const LangTag = ({ children }) => {
-  return (
-    <span className="bg-gray-700 text-gray-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-gray-500">
-      {children}
-    </span>
-  );
-};
-
-const MakeStudyCards = ({ id, title, description, tier, lang }) => {
-  const url = `/room/${id}`;
-  return (
-    <a
-      key={id}
-      href={url}
-      className="block p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
-    >
-      <div className="mb-1 flex items-start justify-between">
-        <h5 className="text-lg font-bold tracking-tight text-gray-900">
-          {title}
-        </h5>
-        <RankTag>{tier}</RankTag>
-      </div>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        {description}
-      </p>
-      <LangTag>{lang}</LangTag>
-    </a>
-  );
-};
-
-const LoadingCard = idx => {
-  return (
-    <div
-      key={idx}
-      className="block h-32 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow"
-    />
   );
 };
 
@@ -105,13 +59,6 @@ const SearchStudy = () => {
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-grey-500">
               <Search strokeWidth="2" className="w-5 h-5" />
             </div>
-
-            {/* <label
-              htmlFor="default-search"
-              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-            >
-              Search
-            </label> */}
             <input
               type="search"
               id="default-search"
@@ -138,7 +85,7 @@ const SearchStudy = () => {
           {!isFetching &&
             data &&
             data.map(item => (
-              <MakeStudyCards
+              <StudyCard
                 id={item.id}
                 title={item.title}
                 description={item.description}
