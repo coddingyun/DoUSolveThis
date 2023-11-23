@@ -3,7 +3,7 @@ import { RankTag, LangTag } from './Tag';
 
 export const StudyCard = React.memo(
   ({ id, title, description, tier, lang }) => {
-    const url = `/room/${id}`;
+    const url = `/info/${id}`;
     return (
       <a
         key={id}

@@ -7,6 +7,7 @@ const queryClient = new QueryClient();
 
 const Landing = lazy(() => import('./page/landing/Landing'));
 const SearchStudy = lazy(() => import('./page/searchStudy/SearchStudy'));
+const StudyInfo = lazy(() => import('./page/studyInfo/StudyInfo'));
 
 const Loading = () => {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/search" element={<SearchStudy />} />
+              <Route path="/info/:id" element={<StudyInfo />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
