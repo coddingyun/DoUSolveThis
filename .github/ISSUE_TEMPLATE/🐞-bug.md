@@ -1,6 +1,6 @@
 ---
 name: "\U0001F41E Bug"
-about: 버그 관련 템플릿
+about: 버그 리포트
 title: ''
 labels: bug
 assignees: coddingyun
@@ -19,4 +19,4 @@ assignees: coddingyun
 
 > 예상했던 정상적인 결과가 어떤 것이었는지 설명해주세요
 
-## Note
+## 비고
