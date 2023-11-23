@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import CommonLayout from '../layout/CommonLayout';
-import { ReactComponent as Search } from '../asset/search.svg';
+import CommonLayout from '../../layout/CommonLayout';
+import { ReactComponent as Search } from '../../asset/search.svg';
 
 const SelectOrderWay = ({ order, handleChangeOrder }) => {
   return (

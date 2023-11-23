@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Landing from './page/Landing';
-import SearchStudy from './page/SearchStudy';
+import Landing from './page/landing/Landing';
+import SearchStudy from './page/searchStudy/SearchStudy';
 
 const queryClient = new QueryClient();
 
