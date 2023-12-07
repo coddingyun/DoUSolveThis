@@ -34,7 +34,6 @@ const SearchStudy = () => {
       refetchOnWindowFocus: false,
     },
   );
-  
 
   useEffect(() => {
     refetch();
