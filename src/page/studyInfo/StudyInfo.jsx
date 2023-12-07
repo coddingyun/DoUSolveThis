@@ -27,6 +27,7 @@ const StudyInfo = () => {
               lang={data.language}
               tier={data.avg_rank}
               solved={data.avg_solved}
+              id={id}
             />
           </div>
           <div>

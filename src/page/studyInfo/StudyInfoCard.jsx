@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import levelToRank from '../../constant/levelToRank';
 import { tierTextColor } from '../../constant/tierColor';
 
@@ -14,7 +15,8 @@ const StudyInfoSubCard = ({ title, info, color }) => {
   );
 };
 
-const StudyInfoCard = ({ people, lang, tier, solved }) => {
+const StudyInfoCard = ({ people, lang, tier, solved, id }) => {
+  const navigate = useNavigate();
   const tierText = levelToRank[tier];
   const idx = parseInt((tier - 1) / 5, 10);
   const tierColor = tierTextColor[idx];
@@ -25,6 +27,9 @@ const StudyInfoCard = ({ people, lang, tier, solved }) => {
         <button
           type="button"
           className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-1 text-center mb-2"
+          onClick={() => {
+            navigate(`/edit/${id}`);
+          }}
         >
           스터디원 추가 및 정보 수정하기
         </button>
