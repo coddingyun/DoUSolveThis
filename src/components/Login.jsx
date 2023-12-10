@@ -1,5 +1,6 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import React from 'react';
+import { setCookie } from '../utils/cookie';
 
 const Login = () => {
   const handleClickLogin = useGoogleLogin({
@@ -10,11 +11,24 @@ const Login = () => {
           authCode: credentialResponse,
           provider: 'GOOGLE',
         }),
-      });
+      })
+        .then(response => {
+          const access = response.headers.get('Gauth');
+          const refresh = response.headers.get('RefreshToken');
+
+          setCookie('Access', access);
+          setCookie('Refresh', refresh);
+
+          return response.json();
+        })
+        .then(data => {
+          console.log(data.username, data.isFirst);
+        });
     },
-    onError: () => {
-      console.log('Login Failed');
+    onError: error => {
+      console.log('Error: ', error);
     },
+    flow: 'auth-code',
   });
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
