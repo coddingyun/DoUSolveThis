@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import CommonLayout from '../../layout/CommonLayout';
 import { ReactComponent as Search } from '../../asset/search.svg';
 import { StudyCard, LoadingCard } from './Card';
+import { getCookie } from '../../utils/cookie';
 
 const SelectOrderWay = ({ order, handleChangeOrder }) => {
   return (
@@ -29,6 +30,11 @@ const SearchStudy = () => {
     () =>
       fetch(
         `${process.env.REACT_APP_BASE_URL}/api/studies?order_by=${order}&term=${completedTerm}`,
+        {
+          headers: {
+            Access: getCookie('Access'),
+          },
+        },
       ).then(res => res.json()),
     {
       refetchOnWindowFocus: false,
