@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../asset/search.svg';
 import { ReactComponent as Study } from '../../asset/study.svg';
 import { ReactComponent as Export } from '../../asset/export.svg';
+import Login from '../../components/Login';
 
 const LandingButton = ({ img, title, clickEvent, bgColor }) => {
   let customColor;
@@ -69,6 +70,7 @@ const Landing = () => {
             clickEvent={() => navigate('/')}
             bgColor="purple"
           />
+          <Login />
         </div>
       </div>
     </div>
