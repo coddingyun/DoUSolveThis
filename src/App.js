@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import spinner from './asset/spinner.gif';
 
 const queryClient = new QueryClient();
@@ -21,18 +22,20 @@ const Loading = () => {
 function App() {
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/search" element={<SearchStudy />} />
-              <Route path="/info/:id" element={<StudyInfo />} />
-              <Route path="/edit/:id" element={<StudyEdit />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </QueryClientProvider>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/search" element={<SearchStudy />} />
+                <Route path="/info/:id" element={<StudyInfo />} />
+                <Route path="/edit/:id" element={<StudyEdit />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </GoogleOAuthProvider>
     </div>
   );
 }
