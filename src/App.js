@@ -2,8 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import spinner from './asset/spinner.gif';
 import { CookiesProvider } from 'react-cookie';
+import spinner from './asset/spinner.gif';
 
 const queryClient = new QueryClient();
 
