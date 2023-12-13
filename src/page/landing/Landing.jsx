@@ -7,7 +7,6 @@ import Login from '../../components/Login';
 
 const LandingButton = ({ img, title, clickEvent, bgColor }) => {
   let customColor;
-
   if (bgColor === 'purple') {
     customColor =
       'bg-purple-500 hover:bg-purple-400 focus-visible:outline-purple-500';
