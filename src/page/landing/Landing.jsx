@@ -4,6 +4,8 @@ import { ReactComponent as Search } from '../../asset/search.svg';
 import { ReactComponent as Study } from '../../asset/study.svg';
 import { ReactComponent as Export } from '../../asset/export.svg';
 import Login from '../../components/Login';
+import NaverLogin from '../../components/NaverLogin';
+import { setCookie } from '../../utils/cookie';
 
 const LandingButton = ({ img, title, clickEvent, bgColor }) => {
   let customColor;
@@ -31,6 +33,32 @@ const LandingButton = ({ img, title, clickEvent, bgColor }) => {
 
 const Landing = () => {
   const navigate = useNavigate();
+
+  const code = new URL(window.location.href).searchParams.get('code');
+  const state = new URL(window.location.href).searchParams.get('state');
+
+  if (code && state) {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        authCode: code,
+        authState: state,
+        provider: 'NAVER',
+      }),
+    })
+      .then(response => {
+        const access = response.headers.get('Gauth');
+        const refresh = response.headers.get('RefreshToken');
+
+        setCookie('Access', access);
+        setCookie('Refresh', refresh);
+
+        return response.json();
+      })
+      .then(data => {
+        console.log(data.username, data.isFirst);
+      });
+  }
   return (
     // <CommonLayout
     //   subTitle="코딩 테스트 스터디 관리 서비스"
@@ -70,6 +98,7 @@ const Landing = () => {
             bgColor="purple"
           />
           <Login />
+          <NaverLogin />
         </div>
       </div>
     </div>
