@@ -8,7 +8,7 @@ const Login = () => {
       fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
         method: 'POST',
         body: JSON.stringify({
-          authCode: credentialResponse,
+          authCode: credentialResponse.code,
           provider: 'GOOGLE',
         }),
       })
