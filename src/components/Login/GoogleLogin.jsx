@@ -1,12 +1,15 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import React from 'react';
-import { setCookie } from '../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
-const Login = () => {
+const GoogleLogin = () => {
   const handleClickLogin = useGoogleLogin({
     onSuccess: credentialResponse => {
       fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           authCode: credentialResponse.code,
           provider: 'GOOGLE',
@@ -38,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default GoogleLogin;
