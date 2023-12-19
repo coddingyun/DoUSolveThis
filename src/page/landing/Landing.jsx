@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../asset/search.svg';
 import { ReactComponent as Study } from '../../asset/study.svg';
 import { ReactComponent as Export } from '../../asset/export.svg';
-import Login from '../../components/Login';
-import NaverLogin from '../../components/NaverLogin';
+import GoogleLogin from '../../components/Login/GoogleLogin';
+import NaverLogin from '../../components/Login/NaverLogin';
 import { setCookie } from '../../utils/cookie';
 
 const LandingButton = ({ img, title, clickEvent, bgColor }) => {
@@ -40,6 +40,9 @@ const Landing = () => {
   if (code && state) {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         authCode: code,
         authState: state,
@@ -97,7 +100,7 @@ const Landing = () => {
             clickEvent={() => navigate('/')}
             bgColor="purple"
           />
-          <Login />
+          <GoogleLogin />
           <NaverLogin />
         </div>
       </div>
