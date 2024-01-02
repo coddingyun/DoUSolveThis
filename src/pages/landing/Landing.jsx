@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Search } from '../../asset/search.svg';
-import { ReactComponent as Export } from '../../asset/export.svg';
-import { ReactComponent as LogoMark } from '../../asset/logomark.svg';
+import { ReactComponent as Search } from '../../assets/search.svg';
+import { ReactComponent as Export } from '../../assets/export.svg';
+import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import { setCookie } from '../../utils/cookie';
 import LandingButton from './LandingButton';
 

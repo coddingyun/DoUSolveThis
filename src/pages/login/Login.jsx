@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as LogoMark } from '../../asset/logomark.svg';
+import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import GoogleLogin from './buttons/GoogleLogin';
 import NaverLogin from './buttons/NaverLogin';
 

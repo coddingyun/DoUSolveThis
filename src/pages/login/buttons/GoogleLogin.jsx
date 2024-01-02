@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { setCookie } from '../../../utils/cookie';
-import { ReactComponent as GoogleIcon } from '../../../asset/googleIcon.svg';
+import { ReactComponent as GoogleIcon } from '../../../assets/googleIcon.svg';
 import LoginButton from '../LoginButton';
 
 const GoogleLogin = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { setCookie } from '../../../utils/cookie';
 import LoginButton from '../LoginButton';
-import { ReactComponent as NaverIcon } from '../../../asset/naverIcon.svg';
+import { ReactComponent as NaverIcon } from '../../../assets/naverIcon.svg';
 
 const NaverLogin = () => {
   const code = new URL(window.location.href).searchParams.get('code');
