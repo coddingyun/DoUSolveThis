@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import CommonLayout from '../../layout/CommonLayout';
-import { ReactComponent as Search } from '../../assets/search.svg';
 import { StudyCard, LoadingCard } from './Card';
 import { getCookie } from '../../utils/cookie';
+import TopNavigation from '../../layout/TopNavigation';
+import Select from './Select';
+import SearchInput from './SearchInput';
 
-const SelectOrderWay = ({ order, handleChangeOrder }) => {
-  return (
-    <select
-      id="order"
-      className="bg-blue-100 border border-blue-200 text-gray-900 text-xs text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-1.5"
-      value={order}
-      onChange={handleChangeOrder}
-    >
-      <option value="1">최신 순</option>
-      <option value="2">평균 티어 순</option>
-      <option value="3">평균 푼 문제 순</option>
-    </select>
-  );
-};
+const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
+const LANG_OPTIONS = [
+  '언어별',
+  'C++',
+  'C',
+  'Python',
+  'Java',
+  'node.js',
+  'Kotlin',
+  'Swift',
+  'Ruby',
+];
+const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
 
 const SearchStudy = () => {
   const [order, setOrder] = useState(1);
+  const [lang, setLang] = useState(1);
+  const [purpose, setPurpose] = useState(1);
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
 
@@ -43,7 +45,7 @@ const SearchStudy = () => {
 
   useEffect(() => {
     refetch();
-  }, [order, completedTerm]);
+  }, [order, lang, purpose, completedTerm]);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -54,38 +56,43 @@ const SearchStudy = () => {
     setOrder(e.target.value);
   };
 
+  const handleChangeLang = e => {
+    setLang(e.target.value);
+  };
+
+  const handleChangePurpose = e => {
+    setPurpose(e.target.value);
+  };
+
   const handleChangeTerm = e => {
     setTerm(e.target.value);
   };
   return (
-    <CommonLayout title="스터디 찾기">
+    <TopNavigation>
       <div>
         <form onSubmit={handleSearch}>
-          <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-grey-500">
-              <Search strokeWidth="2" className="w-5 h-5" />
-            </div>
-            <input
-              type="search"
-              id="default-search"
-              className="block w-full h-12 p-4 ps-10 text-sm text-gray-900 border border-gray-300 focus:border-white rounded-lg bg-gray-50"
-              placeholder="스터디 이름을 입력해 주세요."
-              value={term}
-              onChange={handleChangeTerm}
-              required
-            />
-            <button
-              type="submit"
-              className="text-white absolute end-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
-            >
-              검색
-            </button>
-          </div>
+          <SearchInput value={term} handleChangeValue={handleChangeTerm} />
         </form>
-        <div className="grid place-items-end mt-2">
-          <SelectOrderWay order={order} handleChangeOrder={handleChangeOrder} />
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            <Select
+              value={lang}
+              handleChangeValue={handleChangeLang}
+              options={LANG_OPTIONS}
+            />
+            <Select
+              value={purpose}
+              handleChangeValue={handleChangePurpose}
+              options={PURPOSE_OPTIONS}
+            />
+          </div>
+          <Select
+            value={order}
+            handleChangeValue={handleChangeOrder}
+            options={ORDER_OPTIONS}
+          />
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="scroll-auto mt-6 grid grid-cols-3 gap-6">
           {isFetching &&
             Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
           {!isFetching &&
@@ -101,7 +108,7 @@ const SearchStudy = () => {
             ))}
         </div>
       </div>
-    </CommonLayout>
+    </TopNavigation>
   );
 };
 
