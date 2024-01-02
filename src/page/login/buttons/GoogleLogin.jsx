@@ -1,9 +1,11 @@
-import { useGoogleLogin } from '@react-oauth/google';
 import React from 'react';
-import { setCookie } from '../../utils/cookie';
+import { useGoogleLogin } from '@react-oauth/google';
+import { setCookie } from '../../../utils/cookie';
+import { ReactComponent as GoogleIcon } from '../../../asset/googleIcon.svg';
+import LoginButton from '../LoginButton';
 
 const GoogleLogin = () => {
-  const handleClickLogin = useGoogleLogin({
+  const handleClickGoogleLogin = useGoogleLogin({
     onSuccess: credentialResponse => {
       fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
         method: 'POST',
@@ -34,10 +36,11 @@ const GoogleLogin = () => {
     flow: 'auth-code',
   });
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div onClick={() => handleClickLogin()} style={{ cursor: 'pointer' }}>
-      Google Login
-    </div>
+    <LoginButton
+      icon={<GoogleIcon />}
+      bgColor="bg-white"
+      click={handleClickGoogleLogin}
+    />
   );
 };
 

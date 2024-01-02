@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../asset/search.svg';
 import { ReactComponent as Export } from '../../asset/export.svg';
 import { ReactComponent as LogoMark } from '../../asset/logomark.svg';
-import GoogleLogin from '../../components/Login/GoogleLogin';
-import NaverLogin from '../../components/Login/NaverLogin';
 import { setCookie } from '../../utils/cookie';
 import LandingButton from './LandingButton';
 
@@ -40,11 +38,7 @@ const Landing = () => {
       });
   }
   return (
-    // <CommonLayout
-    //   subTitle="코딩 테스트 스터디 관리 서비스"
-    //   title="이 문제 푸셨나요?"
-    // >
-    <div className="w-full h-screen grid place-items-center py-20">
+    <div className="w-full h-screen grid place-items-center">
       <div className="grid place-items-center">
         <div className="w-full grid place-items-center mb-14">
           <LogoMark className="w-12 h-12 mb-3" />
@@ -69,11 +63,9 @@ const Landing = () => {
           <LandingButton
             img={<Search strokeWidth="3" className="w-6 h-6" />}
             title="로그인 후 시작하기"
-            clickEvent={() => navigate('/search')}
+            clickEvent={() => navigate('/login')}
             bgColor="white"
           />
-          <GoogleLogin />
-          <NaverLogin />
         </div>
       </div>
     </div>
