@@ -4,14 +4,14 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { CookiesProvider } from 'react-cookie';
 import spinner from './assets/spinner.gif';
-import Login from './pages/login/Login';
+import Login from './pages/Login';
 
 const queryClient = new QueryClient();
 
-const Landing = lazy(() => import('./pages/landing/Landing'));
-const SearchStudy = lazy(() => import('./pages/searchStudy/SearchStudy'));
-const StudyInfo = lazy(() => import('./pages/studyInfo/StudyInfo'));
-const StudyEdit = lazy(() => import('./pages/studyEdit/StudyEdit'));
+const Landing = lazy(() => import('./pages/Landing'));
+const SearchStudy = lazy(() => import('./pages/SearchStudy'));
+const StudyInfo = lazy(() => import('./pages/StudyInfo'));
+const StudyEdit = lazy(() => import('./pages/StudyEdit'));
 
 const Loading = () => {
   return (
