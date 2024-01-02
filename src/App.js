@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { CookiesProvider } from 'react-cookie';
 import spinner from './asset/spinner.gif';
+import Login from './page/login/Login';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function App() {
               <Suspense fallback={<Loading />}>
                 <Routes>
                   <Route path="/" element={<Landing />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/search" element={<SearchStudy />} />
                   <Route path="/info/:id" element={<StudyInfo />} />
                   <Route path="/edit/:id" element={<StudyEdit />} />
