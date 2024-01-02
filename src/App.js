@@ -3,14 +3,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { CookiesProvider } from 'react-cookie';
-import spinner from './asset/spinner.gif';
+import spinner from './assets/spinner.gif';
+import Login from './pages/Login';
 
 const queryClient = new QueryClient();
 
-const Landing = lazy(() => import('./page/landing/Landing'));
-const SearchStudy = lazy(() => import('./page/searchStudy/SearchStudy'));
-const StudyInfo = lazy(() => import('./page/studyInfo/StudyInfo'));
-const StudyEdit = lazy(() => import('./page/studyEdit/StudyEdit'));
+const Landing = lazy(() => import('./pages/Landing'));
+const SearchStudy = lazy(() => import('./pages/SearchStudy'));
+const StudyInfo = lazy(() => import('./pages/StudyInfo'));
+const StudyEdit = lazy(() => import('./pages/StudyEdit'));
 
 const Loading = () => {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Suspense fallback={<Loading />}>
                 <Routes>
                   <Route path="/" element={<Landing />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/search" element={<SearchStudy />} />
                   <Route path="/info/:id" element={<StudyInfo />} />
                   <Route path="/edit/:id" element={<StudyEdit />} />

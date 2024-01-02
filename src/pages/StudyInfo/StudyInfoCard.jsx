@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import levelToRank from '../../constant/levelToRank';
-import { tierTextColor } from '../../constant/tierColor';
+import levelToRank from '../../constants/levelToRank';
+import { tierTextColor } from '../../constants/tierColor';
 
 const StudyInfoSubCard = ({ title, info, color }) => {
   const textColor = color || 'text-gray-600';

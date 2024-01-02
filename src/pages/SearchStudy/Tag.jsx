@@ -1,6 +1,6 @@
 import React from 'react';
-import levelToRank from '../../constant/levelToRank';
-import { tierBgColor, tierTextColor } from '../../constant/tierColor';
+import levelToRank from '../../constants/levelToRank';
+import { tierBgColor, tierTextColor } from '../../constants/tierColor';
 
 export const RankTag = ({ children }) => {
   const tierText = levelToRank[children];
