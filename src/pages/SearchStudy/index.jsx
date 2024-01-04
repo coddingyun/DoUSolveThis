@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import { StudyCard, LoadingCard } from './Card';
-import { getCookie } from '../../utils/cookie';
 import TopNavigation from '../../layout/TopNavigation';
 import Select from './Select';
 import SearchInput from './SearchInput';
+import useSearch from '../../hooks/api/useSearch';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
 const LANG_OPTIONS = [
@@ -28,27 +26,7 @@ const SearchStudy = () => {
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
 
-  const { data, isFetching, refetch } = useQuery(
-    'search',
-    async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/studies`,
-        {
-          params: {
-            order_by: order,
-            term: completedTerm,
-          },
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { searchData, isFetching, refetch } = useSearch(order, completedTerm);
 
   useEffect(() => {
     refetch();
@@ -103,8 +81,8 @@ const SearchStudy = () => {
           {isFetching &&
             Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
           {!isFetching &&
-            data &&
-            data.map(item => (
+            searchData &&
+            searchData.map(item => (
               <StudyCard
                 id={item.id}
                 title={item.title}

@@ -1,41 +1,26 @@
 import React from 'react';
-import axios from 'axios';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import CommonLayout from '../../layout/CommonLayout';
 import StudyInfoCard from './StudyInfoCard';
-import { getCookie } from '../../utils/cookie';
+import useStudyInfo from '../../hooks/api/useStudyInfo';
 
 const StudyInfo = () => {
   const { id } = useParams();
-  const { data, isLoading } = useQuery(
-    'info',
-    async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}`,
-        {
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { studyInfoData, isLoading } = useStudyInfo(id);
+
   return (
     !isLoading && (
-      <CommonLayout title={`${data.title} 스터디 정보`}>
+      <CommonLayout title={`${studyInfoData.title} 스터디 정보`}>
         <div className="h-full flex flex-col justify-between">
           <div>
-            <div className="text-gray-700 mb-5">{data && data.description}</div>
+            <div className="text-gray-700 mb-5">
+              {studyInfoData.description}
+            </div>
             <StudyInfoCard
-              people={data.members.length}
-              lang={data.language}
-              tier={data.avg_rank}
-              solved={data.avg_solved}
+              people={studyInfoData.members.length}
+              lang={studyInfoData.language}
+              tier={studyInfoData.avg_rank}
+              solved={studyInfoData.avg_solved}
               id={id}
             />
           </div>
