@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { setCookie } from '../../../utils/cookie';
 import LoginButton from '../LoginButton';
 import { ReactComponent as NaverIcon } from '../../../assets/naverIcon.svg';
@@ -7,31 +8,31 @@ const NaverLogin = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const state = new URL(window.location.href).searchParams.get('state');
 
-  if (code && state) {
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        authCode: code,
-        authState: state,
-        provider: 'NAVER',
-      }),
-    })
-      .then(response => {
+  useEffect(() => {
+    const axiosNaverLogin = async () => {
+      if (code && state) {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/login`,
+          {
+            authCode: code,
+            authState: state,
+            provider: 'NAVER',
+          },
+        );
+
         const access = response.headers.get('Gauth');
         const refresh = response.headers.get('RefreshToken');
 
         setCookie('Access', access);
         setCookie('Refresh', refresh);
 
-        return response.json();
-      })
-      .then(data => {
+        const { data } = response;
         console.log(data.username, data.isFirst, 'naver');
-      });
-  }
+      }
+    };
+
+    axiosNaverLogin();
+  }, []);
 
   const handleClickNaverLogin = () => {
     window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
