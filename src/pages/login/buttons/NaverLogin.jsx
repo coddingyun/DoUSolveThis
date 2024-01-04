@@ -29,7 +29,7 @@ const NaverLogin = () => {
         return response.json();
       })
       .then(data => {
-        console.log(data.username, data.isFirst);
+        console.log(data.username, data.isFirst, 'naver');
       });
   }
 
