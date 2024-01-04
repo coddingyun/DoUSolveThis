@@ -1,17 +1,26 @@
 import React from 'react';
+import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import CommonLayout from '../../layout/CommonLayout';
 import StudyInfoCard from './StudyInfoCard';
+import { getCookie } from '../../utils/cookie';
 
 const StudyInfo = () => {
   const { id } = useParams();
   const { data, isLoading } = useQuery(
     'info',
-    () =>
-      fetch(`${process.env.REACT_APP_BASE_URL}/api/studies/${id}`).then(res =>
-        res.json(),
-      ),
+    async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}`,
+        {
+          headers: {
+            Access: getCookie('Access'),
+          },
+        },
+      );
+      return response.data;
+    },
     {
       refetchOnWindowFocus: false,
     },

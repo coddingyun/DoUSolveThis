@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
+import axios from 'axios';
 import { StudyCard, LoadingCard } from './Card';
 import { getCookie } from '../../utils/cookie';
 import TopNavigation from '../../layout/TopNavigation';
@@ -29,15 +30,21 @@ const SearchStudy = () => {
 
   const { data, isFetching, refetch } = useQuery(
     'search',
-    () =>
-      fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/studies?order_by=${order}&term=${completedTerm}`,
+    async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/studies`,
         {
+          params: {
+            order_by: order,
+            term: completedTerm,
+          },
           headers: {
             Access: getCookie('Access'),
           },
         },
-      ).then(res => res.json()),
+      );
+      return response.data;
+    },
     {
       refetchOnWindowFocus: false,
     },
