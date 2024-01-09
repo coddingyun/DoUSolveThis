@@ -22,15 +22,24 @@ const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
 const SearchStudy = () => {
   const [order, setOrder] = useState(1);
   const [lang, setLang] = useState(1);
-  const [purpose, setPurpose] = useState(1);
+  const [level, setLevel] = useState(1);
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [area, setArea] = useState({
+    si: '',
+    gu: '',
+  });
 
-  const { searchData, isFetching, refetch } = useSearch(order, completedTerm);
+  const {
+    searchData: data,
+    isFetching,
+    refetch,
+  } = useSearch(order, completedTerm, lang, level, area);
 
   useEffect(() => {
     refetch();
-  }, [order, lang, purpose, completedTerm]);
+  }, [order, lang, level, completedTerm]);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -46,7 +55,7 @@ const SearchStudy = () => {
   };
 
   const handleChangePurpose = e => {
-    setPurpose(e.target.value);
+    setLevel(e.target.value);
   };
 
   const handleChangeTerm = e => {
@@ -66,7 +75,7 @@ const SearchStudy = () => {
               options={LANG_OPTIONS}
             />
             <Select
-              value={purpose}
+              value={level}
               handleChangeValue={handleChangePurpose}
               options={PURPOSE_OPTIONS}
             />
@@ -81,8 +90,7 @@ const SearchStudy = () => {
           {isFetching &&
             Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
           {!isFetching &&
-            searchData &&
-            searchData.map(item => (
+            data?.pages?.[0]?.data?.map(item => (
               <StudyCard
                 id={item.id}
                 title={item.title}
