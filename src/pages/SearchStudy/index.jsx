@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StudyCard, LoadingCard } from './Card';
 import TopNavigation from '../../layout/TopNavigation';
-import Select from './Select';
+import SelectComp from './Select';
 import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
+import RegionButton from './RegionButton';
+import useFilterStore from '../../store/filterStore';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
 const LANG_OPTIONS = [
@@ -26,20 +28,17 @@ const SearchStudy = () => {
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [area, setArea] = useState({
-    si: '',
-    gu: '',
-  });
+  const studyArea = useFilterStore(state => state.studyArea);
 
   const {
     searchData: data,
     isFetching,
     refetch,
-  } = useSearch(order, completedTerm, lang, level, area);
+  } = useSearch(order, completedTerm, lang, level, studyArea);
 
   useEffect(() => {
     refetch();
-  }, [order, lang, level, completedTerm]);
+  }, [order, lang, level, completedTerm, studyArea]);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -69,21 +68,25 @@ const SearchStudy = () => {
         </form>
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <Select
+            <SelectComp
               value={lang}
               handleChangeValue={handleChangeLang}
               options={LANG_OPTIONS}
+              className="w-24"
             />
-            <Select
+            <SelectComp
               value={level}
               handleChangeValue={handleChangePurpose}
               options={PURPOSE_OPTIONS}
+              className="w-24"
             />
+            <RegionButton />
           </div>
-          <Select
+          <SelectComp
             value={order}
             handleChangeValue={handleChangeOrder}
             options={ORDER_OPTIONS}
+            className="w-32"
           />
         </div>
         <div className="scroll-auto mt-6 grid grid-cols-3 gap-6">

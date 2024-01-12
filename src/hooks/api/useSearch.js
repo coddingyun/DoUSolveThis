@@ -15,7 +15,7 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, areaStr) => {
               term: completedTerm,
               page: pageParam,
               language: lang,
-              level: levelNum.si + levelNum.gu,
+              level: levelNum,
               area: areaStr,
             },
             headers: {
