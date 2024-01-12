@@ -4,8 +4,13 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { setCookie } from '../../../utils/cookie';
 import { ReactComponent as GoogleIcon } from '../../../assets/googleIcon.svg';
 import LoginButton from '../LoginButton';
+import { useUserStore } from '../../../store/userStore';
 
 const GoogleLogin = () => {
+  const setUserName = useUserStore(state => state.setUserName);
+  const setUserId = useUserStore(state => state.setUserId);
+  const setUserImage = useUserStore(state => state.setUserImage);
+
   const handleClickGoogleLogin = useGoogleLogin({
     onSuccess: async credentialResponse => {
       const response = await axios.post(
@@ -27,6 +32,9 @@ const GoogleLogin = () => {
       setCookie('Refresh', refresh);
 
       const { data } = response;
+      setUserName(data.username);
+      setUserId(data.userId);
+      setUserImage(data.imageUrl);
       console.log(data.username, data.isFirst);
     },
     onError: error => {

@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'brand-600': '#7F56D9',
+        'brand-700': '#6941C6',
         naver: '#03C75A',
       },
     },
