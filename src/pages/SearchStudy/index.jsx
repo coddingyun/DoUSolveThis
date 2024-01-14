@@ -100,6 +100,9 @@ const SearchStudy = () => {
                 description={item.description}
                 tier={item.avg_rank}
                 lang={item.language}
+                area={item.area}
+                level={item.level}
+                meetingType={item.meeting_type}
               />
             ))}
         </div>

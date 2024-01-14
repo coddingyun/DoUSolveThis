@@ -66,7 +66,7 @@ const RegionButton = () => {
     <>
       <Button
         onClick={onOpen}
-        className="h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
+        className="w-24 h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
       >
         {studyArea}
       </Button>

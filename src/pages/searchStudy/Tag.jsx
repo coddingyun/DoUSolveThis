@@ -23,10 +23,8 @@ export const RankTag = ({ children }) => {
   );
 };
 
-export const LangTag = ({ children }) => {
+export const BottomTag = ({ children }) => {
   return (
-    <span className="bg-gray-700 text-gray-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-gray-500">
-      {children}
-    </span>
+    <span className="text-brand-700 text-sm font-semibold">#{children}</span>
   );
 };
