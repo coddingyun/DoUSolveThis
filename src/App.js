@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { CookiesProvider } from 'react-cookie';
+import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Login from './pages/Login';
 
@@ -27,17 +28,19 @@ function App() {
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
         <CookiesProvider>
           <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route path="/" element={<Landing />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/search" element={<SearchStudy />} />
-                  <Route path="/info/:id" element={<StudyInfo />} />
-                  <Route path="/edit/:id" element={<StudyEdit />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
+            <ChakraProvider>
+              <BrowserRouter>
+                <Suspense fallback={<Loading />}>
+                  <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/search" element={<SearchStudy />} />
+                    <Route path="/info/:id" exact element={<StudyInfo />} />
+                    <Route path="/edit/:id" exact element={<StudyEdit />} />
+                  </Routes>
+                </Suspense>
+              </BrowserRouter>
+            </ChakraProvider>
           </QueryClientProvider>
         </CookiesProvider>
       </GoogleOAuthProvider>

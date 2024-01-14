@@ -3,40 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import { ReactComponent as Export } from '../../assets/export.svg';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
-import { setCookie } from '../../utils/cookie';
 import LandingButton from './LandingButton';
 
 const Landing = () => {
   const navigate = useNavigate();
 
-  const code = new URL(window.location.href).searchParams.get('code');
-  const state = new URL(window.location.href).searchParams.get('state');
-
-  if (code && state) {
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        authCode: code,
-        authState: state,
-        provider: 'NAVER',
-      }),
-    })
-      .then(response => {
-        const access = response.headers.get('Gauth');
-        const refresh = response.headers.get('RefreshToken');
-
-        setCookie('Access', access);
-        setCookie('Refresh', refresh);
-
-        return response.json();
-      })
-      .then(data => {
-        console.log(data.username, data.isFirst);
-      });
-  }
   return (
     <div className="w-full h-screen grid place-items-center">
       <div className="grid place-items-center">

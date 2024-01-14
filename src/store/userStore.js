@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useUserStore = create(set => ({
+export const useUserStore = create(set => ({
   userName: '',
   userId: '',
   userImage: '',
@@ -9,4 +9,19 @@ const useUserStore = create(set => ({
   setUserImage: image => set({ userImage: image }),
 }));
 
-export default useUserStore;
+export const useUserName = () => {
+  useUserStore(state => state.userName);
+};
+
+export const useUserId = () => {
+  useUserStore(state => state.userId);
+};
+
+export const useUserImage = () => {
+  useUserStore(state => state.userImage);
+};
+
+// 컴포넌트에서 사용시 구조 분해 할당으로
+export const useUserActions = () => {
+  useUserStore(state => state.actions);
+};

@@ -1,34 +1,44 @@
 import React from 'react';
+import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../../utils/cookie';
 import { ReactComponent as GoogleIcon } from '../../../assets/googleIcon.svg';
 import LoginButton from '../LoginButton';
+import { useUserStore } from '../../../store/userStore';
 
 const GoogleLogin = () => {
+  const setUserName = useUserStore(state => state.setUserName);
+  const setUserId = useUserStore(state => state.setUserId);
+  const setUserImage = useUserStore(state => state.setUserImage);
+  const navigate = useNavigate();
+
   const handleClickGoogleLogin = useGoogleLogin({
-    onSuccess: credentialResponse => {
-      fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+    onSuccess: async credentialResponse => {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/login`,
+        {
           authCode: credentialResponse.code,
           provider: 'GOOGLE',
-        }),
-      })
-        .then(response => {
-          const access = response.headers.get('Gauth');
-          const refresh = response.headers.get('RefreshToken');
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      const access = response.headers.get('Gauth');
+      const refresh = response.headers.get('RefreshToken');
 
-          setCookie('Access', access);
-          setCookie('Refresh', refresh);
+      setCookie('Access', access);
+      setCookie('Refresh', refresh);
 
-          return response.json();
-        })
-        .then(data => {
-          console.log(data.username, data.isFirst);
-        });
+      const { data } = response;
+      setUserName(data.username);
+      setUserId(data.userId);
+      setUserImage(data.imageUrl);
+      console.log(data.username, data.isFirst);
+      navigate('/search');
     },
     onError: error => {
       console.log('Error: ', error);
