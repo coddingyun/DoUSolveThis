@@ -87,8 +87,8 @@ const RegionButton = () => {
           <ModalBody>
             <div className="grid grid-cols-2 gap-1">
               <div>
-                <div>지역</div>
-                <div className="h-[320px] overflow-auto">
+                <h4 className="text-gray-700 text-sm font-medium mb-2">지역</h4>
+                <div className="border border-solid border-gray-200 rounded-lg h-[320px] overflow-auto">
                   {Object.keys(area).map(item => (
                     <RegionContainer
                       title={item}
@@ -100,8 +100,10 @@ const RegionButton = () => {
                 </div>
               </div>
               <div>
-                <div>상세 지역</div>
-                <div className="h-[320px] overflow-auto">
+                <div className="text-gray-700 text-sm font-medium mb-2">
+                  상세 지역
+                </div>
+                <div className="border border-solid border-gray-200 rounded-lg h-[320px] overflow-auto">
                   <DetailRegionContainer
                     title="전체"
                     selectedDetailArea={selectedDetailArea}
