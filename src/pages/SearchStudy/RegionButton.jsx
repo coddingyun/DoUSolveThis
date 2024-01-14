@@ -16,7 +16,12 @@ import { ReactComponent as Check } from '../../assets/check.svg';
 import area from '../../constants/area';
 import useFilterStore from '../../store/filterStore';
 
-const RegionContainer = ({ title, selectedArea, setSelectedArea }) => {
+const RegionContainer = ({
+  title,
+  selectedArea,
+  setSelectedArea,
+  setSelectedDetailArea,
+}) => {
   const style = selectedArea === title ? 'bg-gray-50' : '';
 
   return (
@@ -24,6 +29,7 @@ const RegionContainer = ({ title, selectedArea, setSelectedArea }) => {
       className={`flex flex-row justify-between px-3.5 py-2.5 text-gray-900 ${style} hover:bg-gray-50`}
       onClick={() => {
         setSelectedArea(title);
+        setSelectedDetailArea('전체');
       }}
     >
       {title}
@@ -66,12 +72,12 @@ const RegionButton = () => {
     <>
       <Button
         onClick={onOpen}
-        className="w-24 h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
+        className="h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
       >
         {studyArea}
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} size="xl" onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="text-center text-grey-900 font-semibold">
@@ -88,6 +94,7 @@ const RegionButton = () => {
                       title={item}
                       selectedArea={selectedArea}
                       setSelectedArea={setSelectedArea}
+                      setSelectedDetailArea={setSelectedDetailArea}
                     />
                   ))}
                 </div>

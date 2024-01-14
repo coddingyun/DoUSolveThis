@@ -35,8 +35,8 @@ function App() {
                     <Route path="/" element={<Landing />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/search" element={<SearchStudy />} />
-                    <Route path="/info/:id" element={<StudyInfo />} />
-                    <Route path="/edit/:id" element={<StudyEdit />} />
+                    <Route path="/info/:id" exact element={<StudyInfo />} />
+                    <Route path="/edit/:id" exact element={<StudyEdit />} />
                   </Routes>
                 </Suspense>
               </BrowserRouter>
