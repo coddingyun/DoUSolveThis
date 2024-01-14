@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../../utils/cookie';
 import LoginButton from '../LoginButton';
 import { ReactComponent as NaverIcon } from '../../../assets/naverIcon.svg';
@@ -7,6 +8,8 @@ import { ReactComponent as NaverIcon } from '../../../assets/naverIcon.svg';
 const NaverLogin = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const state = new URL(window.location.href).searchParams.get('state');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const axiosNaverLogin = async () => {
@@ -28,6 +31,7 @@ const NaverLogin = () => {
 
         const { data } = response;
         console.log(data.username, data.isFirst, 'naver');
+        navigate('/search');
       }
     };
 

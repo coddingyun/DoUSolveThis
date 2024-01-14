@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../../utils/cookie';
 import { ReactComponent as GoogleIcon } from '../../../assets/googleIcon.svg';
 import LoginButton from '../LoginButton';
@@ -10,6 +11,7 @@ const GoogleLogin = () => {
   const setUserName = useUserStore(state => state.setUserName);
   const setUserId = useUserStore(state => state.setUserId);
   const setUserImage = useUserStore(state => state.setUserImage);
+  const navigate = useNavigate();
 
   const handleClickGoogleLogin = useGoogleLogin({
     onSuccess: async credentialResponse => {
@@ -36,6 +38,7 @@ const GoogleLogin = () => {
       setUserId(data.userId);
       setUserImage(data.imageUrl);
       console.log(data.username, data.isFirst);
+      navigate('/search');
     },
     onError: error => {
       console.log('Error: ', error);
