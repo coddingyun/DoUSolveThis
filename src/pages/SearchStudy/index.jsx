@@ -5,7 +5,7 @@ import SelectComp from './Select';
 import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
 import RegionButton from './RegionButton';
-import useFilterStore from '../../store/filterStore';
+import { useFilterStudyArea } from '../../store/filterStore';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
 const LANG_OPTIONS = [
@@ -28,7 +28,7 @@ const SearchStudy = () => {
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const studyArea = useFilterStore(state => state.studyArea);
+  const studyArea = useFilterStudyArea();
 
   const {
     searchData: data,

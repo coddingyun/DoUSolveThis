@@ -5,12 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../../utils/cookie';
 import { ReactComponent as GoogleIcon } from '../../../assets/googleIcon.svg';
 import LoginButton from '../LoginButton';
-import { useUserStore } from '../../../store/userStore';
+import { useUserActions } from '../../../store/userStore';
 
 const GoogleLogin = () => {
-  const setUserName = useUserStore(state => state.setUserName);
-  const setUserId = useUserStore(state => state.setUserId);
-  const setUserImage = useUserStore(state => state.setUserImage);
+  const { setUserName, setUserId, setUserImage } = useUserActions();
+
   const navigate = useNavigate();
 
   const handleClickGoogleLogin = useGoogleLogin({
@@ -37,7 +36,7 @@ const GoogleLogin = () => {
       setUserName(data.username);
       setUserId(data.userId);
       setUserImage(data.imageUrl);
-      console.log(data.username, data.isFirst);
+
       navigate('/search');
     },
     onError: error => {

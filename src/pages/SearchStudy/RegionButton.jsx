@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactComponent as Check } from '../../assets/check.svg';
 import area from '../../constants/area';
-import useFilterStore from '../../store/filterStore';
+import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
 
 const RegionContainer = ({
   title,
@@ -61,8 +61,8 @@ const RegionButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedArea, setSelectedArea] = useState('서울특별시');
   const [selectedDetailArea, setSelectedDetailArea] = useState('전체');
-  const studyArea = useFilterStore(state => state.studyArea);
-  const setStudyArea = useFilterStore(state => state.setStudyArea);
+  const studyArea = useFilterStudyArea();
+  const { setStudyArea } = useFilterActions();
 
   const handleClickApply = () => {
     setStudyArea(`${selectedArea} ${selectedDetailArea}`);
