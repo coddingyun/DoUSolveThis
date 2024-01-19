@@ -10,11 +10,11 @@ import { useFilterStudyArea } from '../../store/filterStore';
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
 const LANG_OPTIONS = [
   '언어별',
-  'C++',
+  'Cpp',
   'C',
   'Python',
   'Java',
-  'node.js',
+  'NodeJs',
   'Kotlin',
   'Swift',
   'Ruby',
