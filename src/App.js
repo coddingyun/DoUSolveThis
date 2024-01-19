@@ -6,6 +6,7 @@ import { CookiesProvider } from 'react-cookie';
 import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Login from './pages/Login';
+import MyStudy from './pages/MyStudy';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/search" element={<SearchStudy />} />
                     <Route path="/info/:id" exact element={<StudyInfo />} />
                     <Route path="/edit/:id" exact element={<StudyEdit />} />
+                    <Route path="/my-study" exact element={<MyStudy />} />
                   </Routes>
                 </Suspense>
               </BrowserRouter>

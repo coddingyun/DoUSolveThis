@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import levelToRank from '../../constants/levelToRank';
-import { tierTextColor } from '../../constants/tierColor';
+import { getTierColor, getTierText } from '../../utils/tierInfo';
 
 const StudyInfoSubCard = ({ title, info, color }) => {
   const textColor = color || 'text-gray-600';
@@ -17,9 +16,8 @@ const StudyInfoSubCard = ({ title, info, color }) => {
 
 const StudyInfoCard = ({ people, lang, tier, solved, id }) => {
   const navigate = useNavigate();
-  const tierText = levelToRank[tier];
-  const idx = parseInt((tier - 1) / 5, 10);
-  const tierColor = tierTextColor[idx];
+  const tierText = getTierText(tier);
+  const tierColor = getTierColor(tier);
   return (
     <div className="border border-gray-200 rounded-lg shadow p-2">
       <div className="flex justify-between">

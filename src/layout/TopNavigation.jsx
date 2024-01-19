@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
+import { Button, Image } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../assets/logomark.svg';
 import { ReactComponent as Plus } from '../assets/plus.svg';
-import useAppStore from '../store/appStore';
+import { useAppCurMenu, useAppActions } from '../store/appStore';
 import { useUserImage } from '../store/userStore';
 
 const CreateStudyButton = () => {
@@ -16,15 +16,25 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
-  const userImage = useUserImage();
-  return <img src={userImage} className="rounded-full" alt="profile" />;
+  const userImage = useUserImage(state => state.userImage);
+
+  return (
+    <Button className="!bg-transparent !p-0">
+      <Image
+        src={userImage}
+        className="rounded-full"
+        alt="profile"
+        boxSize="32px"
+      />
+    </Button>
+  );
 };
 
 const TopNavigation = ({ children }) => {
   const navigate = useNavigate();
 
-  const curMenu = useAppStore(state => state.curMenu);
-  const setCurMenu = useAppStore(state => state.setCurMenu);
+  const curMenu = useAppCurMenu();
+  const { setCurMenu } = useAppActions();
 
   const menuStyle = '!text-base !font-semibold !bg-transparent !px-0';
   return (
@@ -56,12 +66,13 @@ const TopNavigation = ({ children }) => {
             ${menuStyle}`}
             onClick={() => {
               setCurMenu(2);
+              navigate('/my-study');
             }}
           >
             내 스터디
           </Button>
         </div>
-        <div className="pr-20 flex gap-9 items-center">
+        <div className="pr-20 flex gap-8 items-center">
           <CreateStudyButton />
           <ProfileButton />
         </div>

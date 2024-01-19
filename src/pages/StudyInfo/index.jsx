@@ -5,6 +5,7 @@ import TopNavigation from '../../layout/TopNavigation';
 import Header from './Header';
 import StudyDetailInfo from './StudyDetailInfo';
 import StudyPlan from './StudyPlan';
+import MemberList from './MemberList';
 
 const StudyInfo = () => {
   const { id } = useParams();
@@ -18,9 +19,11 @@ const StudyInfo = () => {
             title={studyInfoData.title}
             description={studyInfoData.description}
             peopleNum={studyInfoData.members.length}
+            studyId={id}
           />
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
+          <MemberList studyInfoData={studyInfoData} />
         </div>
       </TopNavigation>
     )

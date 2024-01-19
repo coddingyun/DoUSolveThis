@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactComponent as Check } from '../../assets/check.svg';
 import area from '../../constants/area';
-import useFilterStore from '../../store/filterStore';
+import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
 
 const RegionContainer = ({
   title,
@@ -61,8 +61,8 @@ const RegionButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedArea, setSelectedArea] = useState('서울특별시');
   const [selectedDetailArea, setSelectedDetailArea] = useState('전체');
-  const studyArea = useFilterStore(state => state.studyArea);
-  const setStudyArea = useFilterStore(state => state.setStudyArea);
+  const studyArea = useFilterStudyArea();
+  const { setStudyArea } = useFilterActions();
 
   const handleClickApply = () => {
     setStudyArea(`${selectedArea} ${selectedDetailArea}`);
@@ -87,8 +87,8 @@ const RegionButton = () => {
           <ModalBody>
             <div className="grid grid-cols-2 gap-1">
               <div>
-                <div>지역</div>
-                <div className="h-[320px] overflow-auto">
+                <h4 className="text-gray-700 text-sm font-medium mb-2">지역</h4>
+                <div className="border border-solid border-gray-200 rounded-lg h-[320px] overflow-auto">
                   {Object.keys(area).map(item => (
                     <RegionContainer
                       title={item}
@@ -100,8 +100,10 @@ const RegionButton = () => {
                 </div>
               </div>
               <div>
-                <div>상세 지역</div>
-                <div className="h-[320px] overflow-auto">
+                <div className="text-gray-700 text-sm font-medium mb-2">
+                  상세 지역
+                </div>
+                <div className="border border-solid border-gray-200 rounded-lg h-[320px] overflow-auto">
                   <DetailRegionContainer
                     title="전체"
                     selectedDetailArea={selectedDetailArea}
@@ -122,7 +124,7 @@ const RegionButton = () => {
 
           <ModalFooter>
             <Button
-              className="!rounded-lg !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
+              className="!rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
               variant="outlined"
               onClick={onClose}
             >
