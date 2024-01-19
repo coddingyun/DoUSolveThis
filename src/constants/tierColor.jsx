@@ -3,8 +3,8 @@ export const tierBgColor = [
   'bg-gray-100',
   'bg-yellow-400',
   'bg-green-100',
-  'bg-blue-300',
-  'bg-pink-400',
+  'bg-blue-200',
+  'bg-pink-300',
 ];
 
 export const tierTextColor = [

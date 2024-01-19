@@ -124,7 +124,7 @@ const RegionButton = () => {
 
           <ModalFooter>
             <Button
-              className="!rounded-lg !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
+              className="!rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
               variant="outlined"
               onClick={onClose}
             >
