@@ -4,9 +4,12 @@ export const useUserStore = create(set => ({
   userName: '',
   userId: '',
   userImage: '',
-  setUserName: name => set({ userName: name }),
-  setUserId: id => set({ userId: id }),
-  setUserImage: image => set({ userImage: image }),
+
+  actions: {
+    setUserName: name => set({ userName: name }),
+    setUserId: id => set({ userId: id }),
+    setUserImage: image => set({ userImage: image }),
+  },
 }));
 
 export const useUserName = () => useUserStore(state => state.userName);
