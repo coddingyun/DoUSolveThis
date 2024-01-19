@@ -66,6 +66,7 @@ const TopNavigation = ({ children }) => {
             ${menuStyle}`}
             onClick={() => {
               setCurMenu(2);
+              navigate('/my-study');
             }}
           >
             내 스터디
