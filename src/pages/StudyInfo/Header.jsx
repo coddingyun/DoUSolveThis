@@ -3,11 +3,17 @@ import React from 'react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 
-const Header = ({ title, description, peopleNum, studyId, login = true }) => {
+const Header = ({
+  title,
+  description,
+  peopleNum,
+  studyId,
+  participated = true,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const renderModal = () => {
-    if (login) {
+    if (participated) {
       return <EnterProblem isOpen={isOpen} onClose={onClose} />;
     }
     return (
@@ -36,7 +42,7 @@ const Header = ({ title, description, peopleNum, studyId, login = true }) => {
             onClick={onOpen}
             className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
           >
-            참여하기
+            {participated ? '이 문제를 푸셨나요?' : '참여하기'}
           </Button>
         </div>
       </div>
