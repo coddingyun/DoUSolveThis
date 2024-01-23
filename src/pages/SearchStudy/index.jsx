@@ -22,9 +22,9 @@ const LANG_OPTIONS = [
 const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
 
 const SearchStudy = () => {
-  const [order, setOrder] = useState(1);
-  const [lang, setLang] = useState(1);
-  const [level, setLevel] = useState(1);
+  const [order, setOrder] = useState(0);
+  const [lang, setLang] = useState(0);
+  const [level, setLevel] = useState(0);
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -40,8 +40,7 @@ const SearchStudy = () => {
     refetch();
   }, [order, lang, level, completedTerm, studyArea]);
 
-  const handleSearch = e => {
-    e.preventDefault();
+  const handleSearch = () => {
     setCompletedTerm(term);
   };
 

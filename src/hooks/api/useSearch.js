@@ -2,7 +2,21 @@ import { useInfiniteQuery } from 'react-query';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookie';
 
-const useSearch = (orderNum, completedTerm, lang, levelNum, areaStr) => {
+const ORDER_OPTIONS = [1, 2, 3, 4];
+const LANG_OPTIONS = [
+  'ALL',
+  'Cpp',
+  'C',
+  'Python',
+  'Java',
+  'NodeJs',
+  'Kotlin',
+  'Swift',
+  'Ruby',
+];
+const PURPOSE_OPTIONS = ['ALL', 'CONCEPT', 'EMPLOYMENT', 'CONTEST'];
+
+const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
   const { data, isFetching, refetch, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       'search',
@@ -11,12 +25,13 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, areaStr) => {
           `${process.env.REACT_APP_BASE_URL}/api/studies`,
           {
             params: {
-              order_by: orderNum,
+              order_by: ORDER_OPTIONS[orderNum],
               term: completedTerm,
               page: pageParam,
-              language: lang,
-              level: levelNum,
-              area: areaStr,
+              language: LANG_OPTIONS[lang],
+              level: PURPOSE_OPTIONS[levelNum],
+              area: area.area === '지역' ? 'ALL' : area.area,
+              city: area.city === '전체' ? 'ALL' : area.city,
             },
             headers: {
               Access: getCookie('Access'),

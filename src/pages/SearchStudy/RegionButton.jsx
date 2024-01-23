@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -64,8 +64,18 @@ const RegionButton = () => {
   const studyArea = useFilterStudyArea();
   const { setStudyArea } = useFilterActions();
 
+  useEffect(() => {
+    setStudyArea({
+      area: '지역',
+      city: '전체',
+    });
+  }, []);
+
   const handleClickApply = () => {
-    setStudyArea(`${selectedArea} ${selectedDetailArea}`);
+    setStudyArea({
+      area: selectedArea,
+      city: selectedDetailArea,
+    });
     onClose();
   };
   return (
@@ -74,7 +84,7 @@ const RegionButton = () => {
         onClick={onOpen}
         className="h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
       >
-        {studyArea}
+        {`${studyArea.area} ${studyArea.city}`}
       </Button>
 
       <Modal isOpen={isOpen} size="xl" onClose={onClose}>
