@@ -16,7 +16,7 @@ export const RankTag = ({ children }) => {
   }
   return (
     <span
-      className={`${bgColor} ${textColor} text-sm font-medium me-2 px-2.5 py-0.5 rounded`}
+      className={`${bgColor} ${textColor} text-sm font-medium me-2 px-2.5 py-0.5 rounded-2xl`}
     >
       {tierText}
     </span>

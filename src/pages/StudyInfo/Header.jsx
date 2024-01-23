@@ -1,9 +1,30 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ParticipateModal from './modals/ParticipateModal';
+import EnterProblem from './modals/checkProblem/EnterProblem';
 
-const Header = ({ title, description, peopleNum, studyId }) => {
+const Header = ({
+  title,
+  description,
+  peopleNum,
+  studyId,
+  participated = true,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const renderModal = () => {
+    if (participated) {
+      return <EnterProblem isOpen={isOpen} onClose={onClose} />;
+    }
+    return (
+      <ParticipateModal
+        isOpen={isOpen}
+        onClose={onClose}
+        title={title}
+        studyId={studyId}
+      />
+    );
+  };
   return (
     <>
       <div className="py-5 flex justify-between items-start">
@@ -21,16 +42,11 @@ const Header = ({ title, description, peopleNum, studyId }) => {
             onClick={onOpen}
             className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
           >
-            참여하기
+            {participated ? '이 문제를 푸셨나요?' : '참여하기'}
           </Button>
         </div>
       </div>
-      <ParticipateModal
-        isOpen={isOpen}
-        onClose={onClose}
-        title={title}
-        studyId={studyId}
-      />
+      <div className="absolute w-screen h-screen">{renderModal()}</div>
     </>
   );
 };

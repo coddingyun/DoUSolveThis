@@ -6,6 +6,7 @@ import Header from './Header';
 import StudyDetailInfo from './StudyDetailInfo';
 import StudyPlan from './StudyPlan';
 import MemberList from './MemberList';
+import NextProblems from './NextProblems';
 
 const StudyInfo = () => {
   const { id } = useParams();
@@ -24,6 +25,7 @@ const StudyInfo = () => {
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
           <MemberList studyInfoData={studyInfoData} />
+          <NextProblems />
         </div>
       </TopNavigation>
     )

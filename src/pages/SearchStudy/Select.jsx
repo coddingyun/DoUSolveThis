@@ -12,7 +12,7 @@ const SelectComp = ({ value, handleChangeValue, options, className }) => {
       >
         {options &&
           options.map((option, idx) => (
-            <option key={option} value={idx + 1}>
+            <option key={option} value={idx}>
               {option}
             </option>
           ))}
