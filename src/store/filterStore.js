@@ -2,8 +2,8 @@ import { create } from 'zustand';
 
 const useFilterStore = create(set => ({
   studyArea: {
-    area: '',
-    city: '',
+    area: '지역',
+    city: '전체',
   },
 
   actions: {
