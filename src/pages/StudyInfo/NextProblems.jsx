@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, useDisclosure } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../../hooks/api/nextProblems/useDeleteNextProblem';
 import { RankTag } from '../SearchStudy/Tag';
@@ -7,7 +7,7 @@ import UserTag from './UserTag';
 import useGetNextProblems from '../../hooks/api/nextProblems/useGetNextProblems';
 import { ReactComponent as Trash } from '../../assets/trash.svg';
 import { useNextProbs } from '../../store/nextProbStore';
-import useDeleteAllNextProblems from '../../hooks/api/nextProblems/useDeleteAllNextProblems';
+import DeleteModal from './modals/DeleteModal';
 
 const Card = ({ data }) => {
   const { id } = useParams();
@@ -62,16 +62,11 @@ const LoadingCard = () => (
 );
 
 const NextProblems = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
   const { isLoading } = useGetNextProblems(id);
 
   const nextProbs = useNextProbs();
-
-  const { deleteAllFetch } = useDeleteAllNextProblems(id);
-
-  const handleClickAllDelete = () => {
-    deleteAllFetch();
-  };
 
   const renderCard = () => {
     if (isLoading) {
@@ -86,15 +81,18 @@ const NextProblems = () => {
     );
   };
 
+  const title = '정말 문제를\n전체 삭제 하시겠습니까?😭';
+
   return (
     <div className="py-8">
+      <DeleteModal isOpen={isOpen} onClose={onClose} title={title} />
       <div className="flex items-start justify-between">
         <h3 className="text-gray-900 text-[24px] font-semibold">
           📌 다음 스터디까지 풀 문제
         </h3>
         <Button
           className="!text-gray-700 !text-base !font-semibold !bg-white"
-          onClick={handleClickAllDelete}
+          onClick={onOpen}
         >
           전체 삭제
         </Button>
