@@ -9,14 +9,14 @@ const useDeleteAllNextProblems = id => {
     'deleteAllNextProblems',
     async () => {
       const response = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}/suggestion`,
+        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}/suggestions`,
         {
           headers: {
             Access: getCookie('Access'),
           },
         },
       );
-      return response.json();
+      return response;
     },
     {
       refetchOnWindowFocus: false,

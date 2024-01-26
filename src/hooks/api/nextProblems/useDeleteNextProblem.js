@@ -16,13 +16,12 @@ const useDeleteNextProblem = (id, problem) => {
           },
         },
       );
-      return response.json();
+      return response;
     },
     {
       refetchOnWindowFocus: false,
       enabled: false,
-      onSuccess: data => {
-        console.log(data);
+      onSuccess: () => {
         deleteNextProbs(problem);
       },
     },
