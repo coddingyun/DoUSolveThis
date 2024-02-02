@@ -1,28 +1,20 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { getCookie } from '../../../utils/cookie';
 import { useNextProbsActions } from '../../../store/nextProbStore';
+import { api } from '..';
 
 const useDeleteNextProblem = (id, problem) => {
   const { deleteNextProbs } = useNextProbsActions();
   const { data, refetch } = useQuery(
     'deleteNextProblem',
     async () => {
-      const response = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}/suggestion/${problem}`,
-        {
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
+      const response = await api.delete(
+        `/api/studies/${id}/suggestion/${problem}`,
       );
-      return response.json();
+      return response;
     },
     {
-      refetchOnWindowFocus: false,
       enabled: false,
-      onSuccess: data => {
-        console.log(data);
+      onSuccess: () => {
         deleteNextProbs(problem);
       },
     },

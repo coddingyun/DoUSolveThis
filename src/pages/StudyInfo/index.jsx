@@ -25,6 +25,7 @@ const StudyInfo = () => {
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
           <MemberList studyInfoData={studyInfoData} />
+          <div className="w-full h-[1px] bg-gray-200" />
           <NextProblems />
         </div>
       </TopNavigation>

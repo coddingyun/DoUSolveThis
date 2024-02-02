@@ -8,7 +8,13 @@ import spinner from './assets/spinner.gif';
 import Login from './pages/Login';
 import MyStudy from './pages/MyStudy';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const Landing = lazy(() => import('./pages/Landing'));
 const SearchStudy = lazy(() => import('./pages/SearchStudy'));

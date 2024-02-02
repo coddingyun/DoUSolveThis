@@ -1,25 +1,13 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { getCookie } from '../../utils/cookie';
+import { api } from '.';
 
 const useMyStudy = () => {
-  const { data, isLoading } = useQuery(
-    'myStudy',
-    async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/mystudies`,
-        {
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { data, isLoading } = useQuery('myStudy', async () => {
+    const response = await api.get(
+      `${process.env.REACT_APP_BASE_URL}/api/mystudies`,
+    );
+    return response.data;
+  });
 
   return { myStudy: data, isLoading };
 };

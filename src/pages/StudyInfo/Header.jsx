@@ -46,7 +46,7 @@ const Header = ({
           </Button>
         </div>
       </div>
-      <div className="absolute w-screen h-screen">{renderModal()}</div>
+      <div>{renderModal()}</div>
     </>
   );
 };
