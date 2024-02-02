@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from 'react-query';
-import axios from 'axios';
-import { getCookie } from '../../utils/cookie';
+import { api } from '.';
 
 const ORDER_OPTIONS = [1, 2, 3, 4];
 const LANG_OPTIONS = [
@@ -21,7 +20,7 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
     useInfiniteQuery(
       'search',
       async ({ pageParam = 1 }) => {
-        const response = await axios.get(
+        const response = await api.get(
           `${process.env.REACT_APP_BASE_URL}/api/studies`,
           {
             params: {
@@ -33,15 +32,11 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
               area: area.area === '지역' ? 'ALL' : area.area,
               city: area.city === '전체' ? 'ALL' : area.city,
             },
-            headers: {
-              Access: getCookie('Access'),
-            },
           },
         );
         return response;
       },
       {
-        refetchOnWindowFocus: false,
         getNextPageParam: (lastPage, allPosts) => {
           return lastPage.page !== allPosts[0].totalPage
             ? lastPage.page + 1

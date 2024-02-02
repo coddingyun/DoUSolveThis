@@ -37,9 +37,10 @@ const Card = ({ data }) => {
         {data.title}
       </h2>
       <div className="flex flex-wrap gap-2 mb-8">
-        {data.types.map((type, idx) => (
-          <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
-        ))}
+        {data.types &&
+          data.types.map((type, idx) => (
+            <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
+          ))}
       </div>
       <div className="w-full flex gap-3">
         <Button
@@ -77,6 +78,7 @@ const NextProblems = () => {
 
     return (
       nextProbs &&
+      nextProbs.length > 0 &&
       nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)
     );
   };

@@ -25,6 +25,7 @@
     "react/prop-types": "off",
     "import/no-extraneous-dependencies": 0,
     "react/no-array-index-key": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "no-return-await": "off"
   }
 }

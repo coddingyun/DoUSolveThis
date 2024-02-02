@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { getCookie } from '../../../utils/cookie';
 import { useNextProbsActions } from '../../../store/nextProbStore';
+import { api } from '..';
 
 const useGetNextProblems = id => {
   const { setNextProbs } = useNextProbsActions();
@@ -9,18 +8,10 @@ const useGetNextProblems = id => {
   const { data, isLoading } = useQuery(
     'getNextProblems',
     async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/studies/${id}/suggestion`,
-        {
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
-      );
+      const response = await api.get(`/api/studies/${id}/suggestion`);
       return response.data;
     },
     {
-      refetchOnWindowFocus: false,
       onSuccess: data => {
         setNextProbs(data);
       },

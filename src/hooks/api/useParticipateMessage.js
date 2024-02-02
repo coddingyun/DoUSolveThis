@@ -1,27 +1,20 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { getCookie } from '../../utils/cookie';
+import { api } from '.';
 
 const useParticipateMessage = (studyId, message) => {
   const { isLoading, refetch } = useQuery(
     'participateMessage',
     async () => {
-      const response = await axios.post(
+      const response = await api.post(
         `${process.env.REACT_APP_BASE_URL}/api/participation`,
         {
           studyId,
           message,
         },
-        {
-          headers: {
-            Access: getCookie('Access'),
-          },
-        },
       );
       return response.data;
     },
     {
-      refetchOnWindowFocus: false,
       enabled: false,
     },
   );
