@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../../hooks/api/nextProblems/useDeleteNextProblem';
-import { RankTag } from '../SearchStudy/Tag';
+import { RankTag } from '../../components/Tag';
 import UserTag from './UserTag';
 import useGetNextProblems from '../../hooks/api/nextProblems/useGetNextProblems';
 import { ReactComponent as Trash } from '../../assets/trash.svg';

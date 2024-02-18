@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Input = ({ type = 'text', placeholder, value, handleChangeValue }) => {
+const Input = ({
+  type = 'text',
+  placeholder,
+  value,
+  handleChangeValue,
+  handleKeyDown,
+}) => {
   return (
     <input
       type={type}
@@ -8,6 +14,7 @@ const Input = ({ type = 'text', placeholder, value, handleChangeValue }) => {
       placeholder={placeholder}
       value={value}
       onChange={handleChangeValue}
+      onKeyDown={handleKeyDown}
       required
     />
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalLayout from '../ModalLayout';
 import InputContainer from '../InputContainer';
-import SelectComp from '../../SearchStudy/Select';
+import SelectComp from '../../../components/Select';
 import {
   FREQUENCY_NUMBER_OPTIONS,
   FREQUENCY_STANDARD_OPTIONS,
@@ -15,7 +15,7 @@ import {
   useStudyMeetingType,
   useStudyTime,
 } from '../../../store/studyStore';
-import RegionButton from '../../SearchStudy/RegionButton';
+import RegionButton from '../../../components/RegionButton';
 import Input from '../Input';
 
 const WriteMeetingInfo = ({ onPrev, onNext }) => {

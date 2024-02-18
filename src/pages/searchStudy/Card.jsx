@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RankTag, BottomTag } from './Tag';
+import { RankTag, BottomTag } from '../../components/Tag';
 
 export const StudyCard = React.memo(
   ({ id, title, description, tier, lang, area, level, meetingType }) => {

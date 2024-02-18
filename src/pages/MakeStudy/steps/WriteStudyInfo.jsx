@@ -11,7 +11,7 @@ import {
 import Input from '../Input';
 import ModalLayout from '../ModalLayout';
 import InputContainer from '../InputContainer';
-import SelectComp from '../../SearchStudy/Select';
+import SelectComp from '../../../components/Select';
 import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../../constants/options';
 
 const WriteStudyInfo = ({ onPrev, onNext }) => {

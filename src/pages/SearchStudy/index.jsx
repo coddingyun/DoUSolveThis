@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StudyCard, LoadingCard } from './Card';
 import TopNavigation from '../../layout/TopNavigation';
-import SelectComp from './Select';
+import SelectComp from '../../components/Select';
 import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
-import RegionButton from './RegionButton';
+import RegionButton from '../../components/RegionButton';
 import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
 import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../constants/options';
 

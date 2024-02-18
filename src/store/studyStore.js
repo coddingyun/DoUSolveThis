@@ -15,6 +15,7 @@ const useStudyStore = create(set => ({
   studyTime: '',
   frequencyStandard: '',
   frequencyNumber: null,
+  members: [],
 
   actions: {
     setStudyName: s => set({ studyName: s }),
@@ -28,6 +29,9 @@ const useStudyStore = create(set => ({
     setStudyTime: s => set({ studyTime: s }),
     setFrequencyStandard: s => set({ frequencyStandard: s }),
     setFrequencyNumber: s => set({ frequencyNumber: s }),
+    addMember: s => set(state => ({ members: [...state.members, s] })),
+    deleteMember: s =>
+      set(state => ({ members: state.members.filter(member => member !== s) })),
   },
 }));
 
@@ -47,5 +51,6 @@ export const useStudyFrequencyStandard = () =>
   useStudyStore(state => state.frequencyStandard);
 export const useStudyFrequencyNumber = () =>
   useStudyStore(state => state.frequencyNumber);
+export const useStudyMembers = () => useStudyStore(state => state.members);
 
 export const useStudyActions = () => useStudyStore(state => state.actions);

@@ -1,6 +1,8 @@
 import React from 'react';
-import levelToRank from '../../constants/levelToRank';
-import { tierBgColor, tierTextColor } from '../../constants/tierColor';
+import levelToRank from '../constants/levelToRank';
+import { tierBgColor, tierTextColor } from '../constants/tierColor';
+import { ReactComponent as Delete } from '../assets/delete.svg';
+import { useStudyActions } from '../store/studyStore';
 
 export const RankTag = ({ children }) => {
   const tierText = levelToRank[children];
@@ -26,5 +28,22 @@ export const RankTag = ({ children }) => {
 export const BottomTag = ({ children }) => {
   return (
     <span className="text-brand-700 text-sm font-semibold">#{children}</span>
+  );
+};
+
+export const BaekjoonIdTag = ({ children, id }) => {
+  const { deleteMember } = useStudyActions();
+  const handleClickDelete = () => {
+    deleteMember(children);
+  };
+
+  return (
+    <span
+      id={id}
+      className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl"
+    >
+      {children}
+      <Delete onClick={handleClickDelete} />
+    </span>
   );
 };

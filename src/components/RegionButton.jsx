@@ -12,8 +12,8 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ReactComponent as Check } from '../../assets/check.svg';
-import area from '../../constants/area';
+import { ReactComponent as Check } from '../assets/check.svg';
+import area from '../constants/area';
 
 const RegionContainer = ({
   title,
