@@ -21,13 +21,6 @@ const CreateStudyButton = () => {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-        {/* <ModalOverlay />
-        <ModalContent> */}
-        {/* <ModalHeader className="text-grey-900 text-2xl font-semibold">
-            {title}
-          </ModalHeader> */}
-        {/* <ModalCloseButton />
-          <ModalBody> */}
         <MakeStudy
           steps={steps}
           clickHandler={clickHandler}
@@ -35,9 +28,6 @@ const CreateStudyButton = () => {
           Step={Step}
           onClose={onClose}
         />
-        {/* </ModalBody> */}
-        {/* <ModalFooter>{footer}</ModalFooter> */}
-        {/* </ModalContent> */}
       </Modal>
       <Button
         className="flex items-center gap-1 !bg-brand-600"

@@ -27,7 +27,8 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
       <Step name="스터디원 추가">
         <AddStudyMember
           onPrev={() => clickHandler(steps[1])}
-          onNext={() => clickHandler(steps[3])}
+          clickHandler={clickHandler}
+          steps={steps}
         />
       </Step>
 
@@ -35,10 +36,14 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
         <Completed
           onPrev={() => {
             navigate('/search');
+            onClose();
+            clickHandler(steps[0]);
           }}
           onNext={() => {
             // TODO: 내 스터디로
             navigate('/search');
+            onClose();
+            clickHandler(steps[0]);
           }}
         />
       </Step>
