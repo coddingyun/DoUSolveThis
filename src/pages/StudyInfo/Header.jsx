@@ -38,12 +38,14 @@ const Header = ({
           <Button className="!bg-brand-50 !text-brand-700 rounded-lg text-color font-semibold text-sm">
             현재 참여 인원 {peopleNum}명
           </Button>
-          <Button
-            onClick={onOpen}
-            className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
-          >
-            {participated ? '이 문제를 푸셨나요?' : '참여하기'}
-          </Button>
+          {!participated && (
+            <Button
+              onClick={onOpen}
+              className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
+            >
+              참여하기
+            </Button>
+          )}
         </div>
       </div>
       <div>{renderModal()}</div>
