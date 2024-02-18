@@ -6,20 +6,9 @@ import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
 import RegionButton from './RegionButton';
 import { useFilterStudyArea } from '../../store/filterStore';
+import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../constants/options';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
-const LANG_OPTIONS = [
-  '언어별',
-  'Cpp',
-  'C',
-  'Python',
-  'Java',
-  'NodeJs',
-  'Kotlin',
-  'Swift',
-  'Ruby',
-];
-const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
 
 const SearchStudy = () => {
   const [order, setOrder] = useState(0);
