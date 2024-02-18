@@ -1,9 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import WriteStudyInfo from './steps/WriteStudyInfo';
 import WriteMeetingInfo from './steps/WriteMeetingInfo';
 import AddStudyMember from './steps/AddStudyMember';
+import Completed from './steps/Completed';
 
 const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
+  const navigate = useNavigate();
+
   return (
     <Funnel>
       <Step name="스터디 정보 작성">
@@ -27,9 +31,17 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
         />
       </Step>
 
-      {/* <Step name="종료">
-        <SetupEmail onNext={() => nextClickHandler(steps[4])} />
-      </Step> */}
+      <Step name="종료">
+        <Completed
+          onPrev={() => {
+            navigate('/search');
+          }}
+          onNext={() => {
+            // TODO: 내 스터디로
+            navigate('/search');
+          }}
+        />
+      </Step>
     </Funnel>
   );
 };

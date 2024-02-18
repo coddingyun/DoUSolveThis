@@ -14,6 +14,7 @@ const AddStudyMember = ({ onPrev, onNext }) => {
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
       refetch();
+      setTerm('');
     }
   };
 
