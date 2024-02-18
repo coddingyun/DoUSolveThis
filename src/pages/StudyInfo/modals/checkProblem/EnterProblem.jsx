@@ -16,7 +16,11 @@ const EnterProblem = ({ isOpen, onClose }) => {
   const [value, setValue] = useState('');
 
   const { refetch } = useCheckNextProblem(id, value);
-  const mutation = usePostSuggestion();
+
+  const onSuccessCallback = () => {
+    setValue('');
+  };
+  const mutation = usePostSuggestion(onSuccessCallback);
   const status = useSuggestionStatus();
   const solvePeople = useSuggestionSolvePeople();
 

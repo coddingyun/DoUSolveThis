@@ -1,9 +1,11 @@
 import { useMutation } from 'react-query';
 import { api } from '.';
 import { useNextProbsActions } from '../../store/nextProbStore';
+import { useSuggestionActions } from '../../store/suggestionStore';
 
-const usePostSuggestion = () => {
+const usePostSuggestion = successCallback => {
   const { addNextProbs } = useNextProbsActions();
+  const { setStatus } = useSuggestionActions();
 
   return useMutation(
     async ({ id, problem }) =>
@@ -11,6 +13,8 @@ const usePostSuggestion = () => {
     {
       onSuccess: data => {
         addNextProbs(data.data);
+        setStatus(null);
+        successCallback();
       },
     },
   );
