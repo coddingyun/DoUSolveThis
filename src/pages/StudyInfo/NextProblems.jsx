@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, useDisclosure } from '@chakra-ui/react';
+import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../../hooks/api/nextProblems/useDeleteNextProblem';
 import { RankTag } from '../SearchStudy/Tag';
@@ -11,6 +11,7 @@ import DeleteModal from './modals/DeleteModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 
 const Card = ({ data }) => {
+  const toast = useToast();
   const { id } = useParams();
 
   const { deleteFetch } = useDeleteNextProblem(id, data.probNum);
@@ -20,7 +21,13 @@ const Card = ({ data }) => {
   };
   const handleClickCopyLink = () => {
     navigator.clipboard.writeText(data.link).then(() => {
-      console.log('copied toast message');
+      // TODO. 스타일링 반영
+      toast({
+        position: 'top',
+        title: '문제 링크가 복사되었습니다.',
+        status: 'success',
+        duration: 3000,
+      });
     });
   };
 
