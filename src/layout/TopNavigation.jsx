@@ -14,7 +14,7 @@ const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
 
-  const nextClickHandler = nextStep => {
+  const clickHandler = nextStep => {
     setStep(nextStep);
   };
 
@@ -30,9 +30,10 @@ const CreateStudyButton = () => {
           <ModalBody> */}
         <MakeStudy
           steps={steps}
-          nextClickHandler={nextClickHandler}
+          clickHandler={clickHandler}
           Funnel={Funnel}
           Step={Step}
+          onClose={onClose}
         />
         {/* </ModalBody> */}
         {/* <ModalFooter>{footer}</ModalFooter> */}

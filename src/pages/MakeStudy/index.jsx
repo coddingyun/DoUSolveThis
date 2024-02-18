@@ -1,15 +1,19 @@
 import React from 'react';
 import WriteStudyInfo from './steps/WriteStudyInfo';
+import WriteMeetingInfo from './steps/WriteMeetingInfo';
 
-const MakeStudy = ({ steps, nextClickHandler, Funnel, Step }) => {
+const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
   return (
     <Funnel>
       <Step name="스터디 정보 작성">
-        <WriteStudyInfo onNext={() => nextClickHandler(steps[1])} />
+        <WriteStudyInfo
+          onPrev={onClose}
+          onNext={() => clickHandler(steps[1])}
+        />
       </Step>
 
       <Step name="모임 정보 작성">
-        <WriteStudyInfo onNext={() => nextClickHandler(steps[2])} />
+        <WriteMeetingInfo onNext={() => clickHandler(steps[2])} />
       </Step>
 
       {/* <Step name="스터디원 추가">

@@ -5,7 +5,7 @@ import SelectComp from './Select';
 import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
 import RegionButton from './RegionButton';
-import { useFilterStudyArea } from '../../store/filterStore';
+import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
 import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../constants/options';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
@@ -18,6 +18,7 @@ const SearchStudy = () => {
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars
   const studyArea = useFilterStudyArea();
+  const { setStudyArea } = useFilterActions();
 
   const {
     searchData: data,
@@ -68,7 +69,7 @@ const SearchStudy = () => {
               options={PURPOSE_OPTIONS}
               className="w-24"
             />
-            <RegionButton />
+            <RegionButton studyArea={studyArea} setStudyArea={setStudyArea} />
           </div>
           <SelectComp
             value={order}
