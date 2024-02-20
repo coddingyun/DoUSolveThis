@@ -1,17 +1,52 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Image } from '@chakra-ui/react';
+import { Button, Image, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../assets/logomark.svg';
 import { ReactComponent as Plus } from '../assets/plus.svg';
 import { useAppCurMenu, useAppActions } from '../store/appStore';
 import { useUserImage } from '../store/userStore';
+import MakeStudy from '../pages/MakeStudy';
+import useFunnel from '../hooks/useFunnel';
+import { useStudyActions } from '../store/studyStore';
+
+const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
 
 const CreateStudyButton = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { Funnel, Step, setStep } = useFunnel(steps[0]);
+  const { reset } = useStudyActions();
+
+  const clickHandler = nextStep => {
+    setStep(nextStep);
+  };
+
   return (
-    <Button className="flex items-center gap-1 !bg-brand-600">
-      <Plus />
-      <div className="text-white font-semibold text-base">스터디 만들기</div>
-    </Button>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          onClose();
+          clickHandler(steps[0]);
+          reset();
+        }}
+        closeOnOverlayClick={false}
+      >
+        <MakeStudy
+          steps={steps}
+          clickHandler={clickHandler}
+          Funnel={Funnel}
+          Step={Step}
+          onClose={onClose}
+        />
+      </Modal>
+      <Button
+        className="flex items-center gap-1 !bg-brand-600"
+        onClick={onOpen}
+      >
+        <Plus />
+        <div className="text-white font-semibold text-base">스터디 만들기</div>
+      </Button>
+    </>
   );
 };
 

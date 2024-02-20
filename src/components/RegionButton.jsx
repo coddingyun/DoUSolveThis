@@ -12,9 +12,8 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ReactComponent as Check } from '../../assets/check.svg';
-import area from '../../constants/area';
-import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
+import { ReactComponent as Check } from '../assets/check.svg';
+import area from '../constants/area';
 
 const RegionContainer = ({
   title,
@@ -57,12 +56,15 @@ const DetailRegionContainer = ({
   );
 };
 
-const RegionButton = () => {
+const RegionButton = ({
+  studyArea,
+  setStudyArea,
+  className,
+  disabled = false,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedArea, setSelectedArea] = useState('서울특별시');
   const [selectedDetailArea, setSelectedDetailArea] = useState('전체');
-  const studyArea = useFilterStudyArea();
-  const { setStudyArea } = useFilterActions();
 
   useEffect(() => {
     setStudyArea({
@@ -82,7 +84,10 @@ const RegionButton = () => {
     <>
       <Button
         onClick={onOpen}
-        className="h-9 border !border-gray-300 !bg-white !text-gray-700 !text-xs text-center font-semibold rounded-lg"
+        className={`h-9 border !border-gray-300 !bg-white !text-gray-700 rounded-lg ${
+          className || '!text-xs text-center font-semibold'
+        }`}
+        isDisabled={disabled}
       >
         {`${studyArea.area} ${studyArea.city}`}
       </Button>

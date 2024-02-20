@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StudyCard, LoadingCard } from './Card';
 import TopNavigation from '../../layout/TopNavigation';
-import SelectComp from './Select';
+import SelectComp from '../../components/Select';
 import SearchInput from './SearchInput';
 import useSearch from '../../hooks/api/useSearch';
-import RegionButton from './RegionButton';
-import { useFilterStudyArea } from '../../store/filterStore';
+import RegionButton from '../../components/RegionButton';
+import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
+import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../constants/options';
 
 const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
-const LANG_OPTIONS = [
-  '언어별',
-  'Cpp',
-  'C',
-  'Python',
-  'Java',
-  'NodeJs',
-  'Kotlin',
-  'Swift',
-  'Ruby',
-];
-const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
 
 const SearchStudy = () => {
   const [order, setOrder] = useState(0);
@@ -29,6 +18,7 @@ const SearchStudy = () => {
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars
   const studyArea = useFilterStudyArea();
+  const { setStudyArea } = useFilterActions();
 
   const {
     searchData: data,
@@ -79,7 +69,7 @@ const SearchStudy = () => {
               options={PURPOSE_OPTIONS}
               className="w-24"
             />
-            <RegionButton />
+            <RegionButton studyArea={studyArea} setStudyArea={setStudyArea} />
           </div>
           <SelectComp
             value={order}
