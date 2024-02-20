@@ -4,9 +4,11 @@ import WriteStudyInfo from './steps/WriteStudyInfo';
 import WriteMeetingInfo from './steps/WriteMeetingInfo';
 import AddStudyMember from './steps/AddStudyMember';
 import Completed from './steps/Completed';
+import { useStudyActions } from '../../store/studyStore';
 
 const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
   const navigate = useNavigate();
+  const { reset } = useStudyActions();
 
   return (
     <Funnel>
@@ -38,12 +40,14 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
             navigate('/search');
             onClose();
             clickHandler(steps[0]);
+            reset();
           }}
           onNext={() => {
             // TODO: 내 스터디로
             navigate('/search');
             onClose();
             clickHandler(steps[0]);
+            reset();
           }}
         />
       </Step>

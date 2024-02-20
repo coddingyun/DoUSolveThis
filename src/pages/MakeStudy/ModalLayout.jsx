@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ModalOverlay,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalFooter,
@@ -25,6 +26,7 @@ const ModalLayout = ({
             {title}
           </ModalHeader>
         )}
+        <ModalCloseButton />
         <ModalBody className="flex flex-col gap-4">{children}</ModalBody>
         <ModalFooter>
           <div className="!w-full grid grid-cols-2 gap-3">

@@ -69,7 +69,7 @@ const RegionButton = ({
   useEffect(() => {
     setStudyArea({
       area: '지역',
-      city: '선택',
+      city: '전체',
     });
   }, []);
 

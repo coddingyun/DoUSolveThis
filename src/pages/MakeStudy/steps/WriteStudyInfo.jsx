@@ -61,7 +61,7 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
       <InputContainer title="주 사용 언어">
         <SelectComp
           value={language}
-          handleChangeValue={e => setLanguage(e.target.value)}
+          handleChangeValue={e => setLanguage(LANG_OPTIONS[e.target.value + 1])}
           options={LANG_OPTIONS.slice(1)}
           textClassName="!text-base !font-normal"
         />
@@ -69,7 +69,7 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
       <InputContainer title="목표 레벨">
         <SelectComp
           value={level}
-          handleChangeValue={e => setLevel(e.target.value)}
+          handleChangeValue={e => setLevel(PURPOSE_OPTIONS[e.target.value + 1])}
           options={PURPOSE_OPTIONS.slice(1)}
           textClassName="!text-base !font-normal"
         />

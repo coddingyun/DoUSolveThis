@@ -15,9 +15,9 @@ const useCheckId = id => {
     {
       enabled: false,
       onSuccess: data => {
-        addMember(data[0].results[0].bjanme);
-        // if (data[0].results.valid) {
-        // }
+        if (data.results.valid) {
+          addMember(data.results.bjanme);
+        }
       },
     },
   );

@@ -43,7 +43,9 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
       <InputContainer title="온/오프라인 여부">
         <SelectComp
           value={meetingType}
-          handleChangeValue={e => setMeetingType(e.target.value)}
+          handleChangeValue={e =>
+            setMeetingType(MEETING_OPTIONS[e.target.value])
+          }
           options={MEETING_OPTIONS}
           textClassName="!text-base !font-normal"
         />
@@ -60,13 +62,17 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
         <div className="w-full grid grid-cols-2 gap-3">
           <SelectComp
             value={frequencyStandard}
-            handleChangeValue={e => setFrequencyStandard(e.target.value)}
+            handleChangeValue={e =>
+              setFrequencyStandard(FREQUENCY_STANDARD_OPTIONS[e.target.value])
+            }
             options={FREQUENCY_STANDARD_OPTIONS}
             textClassName="!text-base !font-normal"
           />
           <SelectComp
             value={frequencyNumber}
-            handleChangeValue={e => setFrequencyNumber(e.target.value)}
+            handleChangeValue={e =>
+              setFrequencyNumber(FREQUENCY_NUMBER_OPTIONS[e.target.value])
+            }
             options={FREQUENCY_NUMBER_OPTIONS}
             textClassName="!text-base !font-normal"
           />

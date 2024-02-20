@@ -1,21 +1,25 @@
 import { create } from 'zustand';
 
-const useStudyStore = create(set => ({
+const initialState = {
   studyName: '',
   description: '',
   kakaoUrl: '',
   language: 'Cpp',
   level: '입문',
-  solvedProblemNumber: null,
+  solvedProblemNumber: 0,
   meetingType: '온라인',
   studyArea: {
     area: '서울특별시',
     city: '전체',
   },
   studyTime: '',
-  frequencyStandard: '',
-  frequencyNumber: null,
+  frequencyStandard: '월',
+  frequencyNumber: '1회',
   members: [],
+};
+
+export const useStudyStore = create(set => ({
+  ...initialState,
 
   actions: {
     setStudyName: s => set({ studyName: s }),
@@ -32,6 +36,9 @@ const useStudyStore = create(set => ({
     addMember: s => set(state => ({ members: [...state.members, s] })),
     deleteMember: s =>
       set(state => ({ members: state.members.filter(member => member !== s) })),
+    reset: () => {
+      set(initialState);
+    },
   },
 }));
 

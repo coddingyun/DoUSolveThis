@@ -7,12 +7,14 @@ import { useAppCurMenu, useAppActions } from '../store/appStore';
 import { useUserImage } from '../store/userStore';
 import MakeStudy from '../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
+import { useStudyActions } from '../store/studyStore';
 
 const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
+  const { reset } = useStudyActions();
 
   const clickHandler = nextStep => {
     setStep(nextStep);
@@ -20,7 +22,15 @@ const CreateStudyButton = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          onClose();
+          clickHandler(steps[0]);
+          reset();
+        }}
+        closeOnOverlayClick={false}
+      >
         <MakeStudy
           steps={steps}
           clickHandler={clickHandler}
