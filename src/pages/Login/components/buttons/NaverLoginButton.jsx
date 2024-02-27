@@ -15,7 +15,7 @@ const NaverLoginButton = () => {
     const axiosNaverLogin = async () => {
       if (code && state) {
         const response = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/api/login`,
+          `${import.meta.env.VITE_BASE_URL}/api/login`,
           {
             authCode: code,
             authState: state,
@@ -40,8 +40,8 @@ const NaverLoginButton = () => {
 
   const handleClickNaverLogin = () => {
     window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
-      process.env.REACT_APP_NAVER_CLIENT_ID
-    }&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&state=${Math.random()
+      import.meta.env.VITE_NAVER_CLIENT_ID
+    }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&state=${Math.random()
       .toString(36)
       .substring(3, 14)}`;
   };

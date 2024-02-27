@@ -14,7 +14,7 @@ const GoogleLoginButton = () => {
   const handleClickGoogleLogin = useGoogleLogin({
     onSuccess: async credentialResponse => {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/login`,
+        `${import.meta.env.VITE_BASE_URL}/api/login`,
         {
           authCode: credentialResponse.code,
           provider: 'GOOGLE',

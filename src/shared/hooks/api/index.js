@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie, setCookie } from '../../utils/cookie';
 
 export const noAuthApi = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10 * 1000,
   headers: {
     Accept: 'application/json',
@@ -12,7 +12,7 @@ export const noAuthApi = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10 * 1000,
   headers: {
     Accept: 'application/json',

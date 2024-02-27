@@ -7,9 +7,7 @@ const useCheckId = id => {
   const { data, isLoading, refetch } = useQuery(
     'checkId',
     async () => {
-      const response = await api.get(
-        `${process.env.REACT_APP_BASE_URL}/api/validate/baekjoon?id=${id}`,
-      );
+      const response = await api.get(`/api/validate/baekjoon?id=${id}`);
       return response.data;
     },
     {

@@ -32,7 +32,7 @@ const Loading = () => {
 function App() {
   return (
     <div>
-      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <CookiesProvider>
           <QueryClientProvider client={queryClient}>
             <ChakraProvider>
