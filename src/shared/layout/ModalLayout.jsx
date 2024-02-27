@@ -15,6 +15,7 @@ const ModalLayout = ({
   rightButtonTitle,
   buttonTitle,
   prevNext = true,
+  closeButton = true,
   onNext,
   onPrev,
 }) => {
@@ -41,7 +42,7 @@ const ModalLayout = ({
     return (
       <div className="!w-full">
         <Button
-          className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white !text-gray-700 font-semibold"
+          className="!w-full !rounded-lg !bg-brand-600 !text-white font-semibold"
           onClick={onNext}
         >
           {buttonTitle}
@@ -49,7 +50,7 @@ const ModalLayout = ({
       </div>
     );
   };
-  
+
   return (
     <>
       <ModalOverlay />
@@ -59,11 +60,9 @@ const ModalLayout = ({
             {title}
           </ModalHeader>
         )}
-        <ModalCloseButton />
+        { closeButton && <ModalCloseButton />}
         <ModalBody className="flex flex-col gap-4">{children}</ModalBody>
-        <ModalFooter>
-          {renderButton()}
-        </ModalFooter>
+        <ModalFooter>{renderButton()}</ModalFooter>
       </ModalContent>
     </>
   );

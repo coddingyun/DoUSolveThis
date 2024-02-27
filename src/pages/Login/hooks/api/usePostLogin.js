@@ -20,7 +20,7 @@ const usePostLogin = successCallback => {
         setUserName(response.data.username);
         setUserId(response.data.userId);
         setUserImage(response.data.imageUrl);
-        successCallback();
+        successCallback(response);
       },
     },
   );

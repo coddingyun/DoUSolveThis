@@ -4,11 +4,15 @@ import { ReactComponent as GoogleIcon } from '../../../../assets/googleIcon.svg'
 import LoginButton from './LoginButton';
 import usePostLogin from '../../hooks/api/usePostLogin';
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({ onOpen }) => {
   const navigate = useNavigate();
 
-  const onSuccessCallback = () => {
-    navigate('/search');
+  const onSuccessCallback = response => {
+    if (response.data.isFirst) {
+      onOpen();
+    } else {
+      navigate('/search');
+    }
   };
   const googleLogin = usePostLogin(onSuccessCallback);
 

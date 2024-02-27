@@ -6,6 +6,7 @@ const SelectComp = ({
   options,
   className,
   textClassName,
+  placeholder,
 }) => {
   return (
     <div className={className}>
@@ -16,10 +17,11 @@ const SelectComp = ({
         }`}
         value={value}
         onChange={handleChangeValue}
+        placeholder={placeholder}
       >
         {options &&
-          options.map((option, idx) => (
-            <option key={option} value={idx}>
+          options.map((option) => (
+            <option key={option} value={option}>
               {option}
             </option>
           ))}

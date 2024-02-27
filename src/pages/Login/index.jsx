@@ -1,10 +1,15 @@
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
+import UserInfoModal from './components/UserInfoModal';
 import GoogleLoginButton from './components/buttons/GoogleLoginButton';
 import NaverLoginButton from './components/buttons/NaverLoginButton';
+import { useDisclosure } from '@chakra-ui/react';
 
 const Login = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <div className="w-full h-screen grid place-items-center">
+      <UserInfoModal isOpen={isOpen} onClose={onClose}/> 
       <div className="grid place-items-center">
         <div className="w-full grid place-items-center mb-14">
           <LogoMark className="w-12 h-12 mb-3" />
@@ -16,8 +21,8 @@ const Login = () => {
           </div>
         </div>
         <div className="flex gap-4">
-          <GoogleLoginButton />
-          <NaverLoginButton />
+          <GoogleLoginButton onOpen={onOpen}/>
+          <NaverLoginButton onOpen={onOpen}/>
         </div>
       </div>
     </div>

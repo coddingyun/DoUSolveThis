@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { useState, useEffect } from 'react';
 import { StudyCard, LoadingCard } from './components/Card';
 import TopNavigation from '../../shared/layout/TopNavigation';
@@ -62,12 +63,14 @@ const SearchStudy = () => {
               handleChangeValue={handleChangeLang}
               options={LANG_OPTIONS}
               className="w-24"
+              placeholder="언어별"
             />
             <SelectComp
               value={level}
               handleChangeValue={handleChangePurpose}
               options={PURPOSE_OPTIONS}
               className="w-24"
+              placeholder="목적별"
             />
             <RegionButton studyArea={studyArea} setStudyArea={setStudyArea} />
           </div>

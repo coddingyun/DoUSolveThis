@@ -1,7 +1,7 @@
 import RegionButton from '../../../../shared/components/RegionButton';
 import SelectComp from '../../../../shared/components/Select';
 import ModalLayout from '../../../../shared/layout/ModalLayout';
-import InputContainer from '../InputContainer';
+import InputContainer from '../../../../shared/components/InputContainer';
 import {
   FREQUENCY_NUMBER_OPTIONS,
   FREQUENCY_STANDARD_OPTIONS,
@@ -15,7 +15,7 @@ import {
   useStudyMeetingType,
   useStudyTime,
 } from '../../../../store/studyStore';
-import Input from '../Input';
+import Input from '../../../../shared/components/Input';
 
 const WriteMeetingInfo = ({ onPrev, onNext }) => {
   const meetingType = useStudyMeetingType();
@@ -42,9 +42,7 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
       <InputContainer title="온/오프라인 여부">
         <SelectComp
           value={meetingType}
-          handleChangeValue={e =>
-            setMeetingType(MEETING_OPTIONS[e.target.value])
-          }
+          handleChangeValue={e => setMeetingType(e.target.value)}
           options={MEETING_OPTIONS}
           textClassName="!text-base !font-normal"
         />
@@ -61,17 +59,13 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
         <div className="w-full grid grid-cols-2 gap-3">
           <SelectComp
             value={frequencyStandard}
-            handleChangeValue={e =>
-              setFrequencyStandard(FREQUENCY_STANDARD_OPTIONS[e.target.value])
-            }
+            handleChangeValue={e => setFrequencyStandard(e.target.value)}
             options={FREQUENCY_STANDARD_OPTIONS}
             textClassName="!text-base !font-normal"
           />
           <SelectComp
             value={frequencyNumber}
-            handleChangeValue={e =>
-              setFrequencyNumber(FREQUENCY_NUMBER_OPTIONS[e.target.value])
-            }
+            handleChangeValue={e => setFrequencyNumber(e.target.value)}
             options={FREQUENCY_NUMBER_OPTIONS}
             textClassName="!text-base !font-normal"
           />
