@@ -2,6 +2,7 @@
 module.exports = {
   // eslint-disable-next-line prettier/prettier
   content: [
+    "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {

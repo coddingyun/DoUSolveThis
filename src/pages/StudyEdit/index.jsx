@@ -1,6 +1,5 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
-import CommonLayout from '../../layout/CommonLayout';
+import CommonLayout from '../../shared/layout/CommonLayout';
 
 const StudyEdit = () => {
   const { id } = useParams();

@@ -1,12 +1,11 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
-import useStudyInfo from '../../hooks/api/useStudyInfo';
-import TopNavigation from '../../layout/TopNavigation';
-import Header from './Header';
-import StudyDetailInfo from './StudyDetailInfo';
-import StudyPlan from './StudyPlan';
-import MemberList from './MemberList';
-import NextProblems from './NextProblems';
+import useStudyInfo from './hooks/api/useStudyInfo';
+import TopNavigation from '../../shared/layout/TopNavigation';
+import Header from './components/Header';
+import StudyDetailInfo from './components/StudyDetailInfo';
+import StudyPlan from './components/StudyPlan';
+import MemberList from './components/MemberList';
+import NextProblems from './components/NextProblems';
 
 const StudyInfo = () => {
   const { id } = useParams();

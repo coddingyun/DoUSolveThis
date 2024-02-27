@@ -1,9 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import WriteStudyInfo from './steps/WriteStudyInfo';
-import WriteMeetingInfo from './steps/WriteMeetingInfo';
-import AddStudyMember from './steps/AddStudyMember';
-import Completed from './steps/Completed';
+import WriteStudyInfo from './components/steps/WriteStudyInfo';
+import WriteMeetingInfo from './components/steps/WriteMeetingInfo';
+import AddStudyMember from './components/steps/AddStudyMember';
+import Completed from './components/steps/Completed';
 import { useStudyActions } from '../../store/studyStore';
 
 const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
