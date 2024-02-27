@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import useStudyInfo from './hooks/api/useStudyInfo';
 import TopNavigation from '../../shared/layout/TopNavigation';

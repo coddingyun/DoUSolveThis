@@ -1,4 +1,3 @@
-import React from 'react';
 import levelToRank from '../constants/levelToRank';
 import { tierBgColor, tierTextColor } from '../constants/tierColor';
 import { ReactComponent as Delete } from '../../assets/delete.svg';

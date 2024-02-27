@@ -1,4 +1,3 @@
-import React from 'react';
 import { getTierColor } from '../../../shared/utils/tierInfo';
 
 const UserTag = ({ title, tier }) => {

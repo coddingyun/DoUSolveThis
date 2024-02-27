@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StudyCard, LoadingCard } from './components/Card';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import SelectComp from '../../shared/components/Select';

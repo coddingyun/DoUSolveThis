@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../hooks/api/nextProblems/useDeleteNextProblem';

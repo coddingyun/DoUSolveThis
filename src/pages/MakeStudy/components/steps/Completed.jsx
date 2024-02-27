@@ -1,4 +1,3 @@
-import React from 'react';
 import ModalLayout from '../ModalLayout';
 import { ReactComponent as CompletedIcon } from '../../../../assets/completed.svg';
 

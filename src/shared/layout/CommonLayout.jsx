@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CommonLayout = ({ children, title, subTitle }) => {
   return (
     <div className="w-full h-screen grid place-items-center">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import GoogleLoginButton from './components/buttons/GoogleLoginButton';
 import NaverLoginButton from './components/buttons/NaverLoginButton';

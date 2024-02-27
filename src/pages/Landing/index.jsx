@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import { ReactComponent as Export } from '../../assets/export.svg';

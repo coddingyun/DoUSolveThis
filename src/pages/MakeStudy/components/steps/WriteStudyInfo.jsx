@@ -1,4 +1,3 @@
-import React from 'react';
 import SelectComp from '../../../../shared/components/Select';
 import {
   LANG_OPTIONS,

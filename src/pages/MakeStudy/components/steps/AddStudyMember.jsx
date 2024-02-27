@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BaekjoonIdTag } from '../../../../shared/components/Tag';
 import ModalLayout from '../ModalLayout';
 import InputContainer from '../InputContainer';

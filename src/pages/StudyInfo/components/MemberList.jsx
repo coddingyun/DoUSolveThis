@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg';
 import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg';

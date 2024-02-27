@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import WriteStudyInfo from './components/steps/WriteStudyInfo';
 import WriteMeetingInfo from './components/steps/WriteMeetingInfo';

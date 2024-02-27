@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LandingButton = ({ title, clickEvent, bgColor }) => {
   let customColor;
   if (bgColor === 'brand') {

@@ -1,5 +1,4 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 

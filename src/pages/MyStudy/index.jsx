@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Switch } from '@chakra-ui/react';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import StudyCard from './components/Card';
