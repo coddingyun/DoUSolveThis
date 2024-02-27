@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
-import GoogleLogin from './buttons/GoogleLogin';
-import NaverLogin from './buttons/NaverLogin';
+import GoogleLoginButton from './components/buttons/GoogleLoginButton';
+import NaverLoginButton from './components/buttons/NaverLoginButton';
 
 const Login = () => {
   return (
@@ -17,8 +17,8 @@ const Login = () => {
           </div>
         </div>
         <div className="flex gap-4">
-          <GoogleLogin />
-          <NaverLogin />
+          <GoogleLoginButton />
+          <NaverLoginButton />
         </div>
       </div>
     </div>

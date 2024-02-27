@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Switch } from '@chakra-ui/react';
-import TopNavigation from '../../layout/TopNavigation';
-import StudyCard from './Card';
-import useMyStudy from '../../hooks/api/useMyStudy';
+import TopNavigation from '../../shared/layout/TopNavigation';
+import StudyCard from './components/Card';
+import useMyStudy from './hooks/api/useMyStudy';
 
 const MyStudy = () => {
   const { myStudy, isLoading } = useMyStudy();
