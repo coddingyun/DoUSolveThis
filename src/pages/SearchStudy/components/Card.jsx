@@ -32,6 +32,8 @@ export const StudyCard = React.memo(
   },
 );
 
+StudyCard.displayName = 'StudyCard';
+
 export const LoadingCard = idx => {
   return (
     <div
