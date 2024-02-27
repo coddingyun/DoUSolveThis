@@ -30,7 +30,7 @@ export const BottomTag = ({ children }) => {
   );
 };
 
-export const BaekjoonIdTag = ({ children, id }) => {
+export const BaekjoonIdTag = ({ children }) => {
   const { deleteMember } = useStudyActions();
   const handleClickDelete = () => {
     deleteMember(children);
@@ -38,7 +38,6 @@ export const BaekjoonIdTag = ({ children, id }) => {
 
   return (
     <span
-      id={id}
       className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl"
     >
       {children}

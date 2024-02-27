@@ -74,7 +74,7 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
         <div className="flex flex-wrap gap-2">
           {members &&
             members.map((member, idx) => (
-              <BaekjoonIdTag id={`member#${idx}`}>{member}</BaekjoonIdTag>
+              <BaekjoonIdTag key={`member#${idx}`}>{member}</BaekjoonIdTag>
             ))}
         </div>
       </InputContainer>
