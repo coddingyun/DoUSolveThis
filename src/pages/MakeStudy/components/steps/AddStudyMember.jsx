@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BaekjoonIdTag } from '../../../../shared/components/Tag';
-import ModalLayout from '../ModalLayout';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../InputContainer';
 import Input from '../Input';
 import useCheckId from '../../hooks/api/useCheckId';

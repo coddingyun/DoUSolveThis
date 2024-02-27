@@ -2,7 +2,7 @@ import SelectComp from '../../../../shared/components/Select';
 import {
   LANG_OPTIONS,
   PURPOSE_OPTIONS,
-} from '../../../../shared/constants/options'
+} from '../../../../shared/constants/options';
 import {
   useStudyActions,
   useStudyDescription,
@@ -13,7 +13,7 @@ import {
   useStudySolvedProblemNumber,
 } from '../../../../store/studyStore';
 import Input from '../Input';
-import ModalLayout from '../ModalLayout';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../InputContainer';
 
 const WriteStudyInfo = ({ onPrev, onNext }) => {

@@ -1,6 +1,6 @@
 import RegionButton from '../../../../shared/components/RegionButton';
 import SelectComp from '../../../../shared/components/Select';
-import ModalLayout from '../ModalLayout';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../InputContainer';
 import {
   FREQUENCY_NUMBER_OPTIONS,
