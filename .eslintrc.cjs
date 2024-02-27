@@ -13,19 +13,19 @@ module.exports = {
 	"parserOptions": {
     "ecmaVersion": 2020,
   },
-	ignorePatterns: ['dist', '.eslintrc.cjs'],
+	ignorePatterns: ['dist', '.eslintrc.cjs', 'postcss.config.cjs', 'tailwind.config.js'],
   settings: {
-    react: {
-      // Tells eslint-plugin-react to automatically detect the version of React to use.
-      version: 'detect',
-    },
+    // react: {
+    //   // Tells eslint-plugin-react to automatically detect the version of React to use.
+    //   version: 'detect',
+    // },
     // Tells eslint how to resolve imports
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    "import/resolver": {
+      "node": {
+        //"paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       },
-    },
+    }
   },
   rules: {
     // Add your own rules here to override ones from the extended configs.

@@ -2,7 +2,7 @@ import SelectComp from '../../../../shared/components/Select';
 import {
   LANG_OPTIONS,
   PURPOSE_OPTIONS,
-} from '../../../../shared/constants/options';
+} from '../../../../shared/constants/options'
 import {
   useStudyActions,
   useStudyDescription,
