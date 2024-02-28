@@ -80,20 +80,19 @@ const TopNavigation = ({ children }) => {
             <div className="text-gray-900 font-bold">이 문제 푸셨나요?</div>
           </button>
           <Button
-            className={`${curMenu === 1 ? '!text-brand-700' : '!text-gray-500'}
+            className={`${curMenu === 'search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu(1);
+              setCurMenu('search')
               navigate('/search');
             }}
           >
             스터디 찾기
           </Button>
           <Button
-            className={`${curMenu === 2 ? '!text-brand-700' : '!text-gray-500'}
+            className={`${curMenu === 'myStudy' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu(2);
               navigate('/my-study');
             }}
           >
