@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Image, Modal, useDisclosure } from '@chakra-ui/react';
+import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { useAppCurMenu, useAppActions } from '../../store/appStore';
-import { useUserImage } from '../../store/userStore';
 import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
 import { useStudyActions } from '../../store/studyStore';
+import Profile from '../components/Profile';
 
 const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
 
@@ -50,16 +50,10 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
-  const userImage = useUserImage(state => state.userImage);
 
   return (
     <Button className="!bg-transparent !p-0">
-      <Image
-        src={userImage}
-        className="rounded-full"
-        alt="profile"
-        boxSize="32px"
-      />
+      <Profile boxSize="32px"/>
     </Button>
   );
 };

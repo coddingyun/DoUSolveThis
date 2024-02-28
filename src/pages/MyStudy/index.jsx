@@ -29,12 +29,12 @@ const MyStudy = () => {
         <div className="scroll-auto grid grid-cols-3 mt-8 gap-6">
           {!isLoading &&
             myStudy.managements.map(item => (
-              <StudyCard id={item.id} title={item.title} management />
+              <StudyCard key={item.id} id={item.id} title={item.title} management />
             ))}
           {!isLoading &&
             switchStatus === false &&
             myStudy.participations.map(item => (
-              <StudyCard id={item.id} title={item.title} />
+              <StudyCard key={item.id} id={item.id} title={item.title} />
             ))}
         </div>
       </div>
