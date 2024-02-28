@@ -1,7 +1,7 @@
 import { Image } from '@chakra-ui/react';
 import { useUserImage } from '../../store/userStore';
 
-const Profile = ({boxSize}) => {
+const Profile = ({ boxSize }) => {
   const userImage = useUserImage(state => state.userImage);
   return (
     <Image

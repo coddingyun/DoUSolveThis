@@ -37,9 +37,7 @@ export const BaekjoonIdTag = ({ children }) => {
   };
 
   return (
-    <span
-      className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl"
-    >
+    <span className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl">
       {children}
       <Delete onClick={handleClickDelete} />
     </span>

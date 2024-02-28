@@ -20,7 +20,7 @@ const SelectComp = ({
         placeholder={placeholder}
       >
         {options &&
-          options.map((option) => (
+          options.map(option => (
             <option key={option} value={option}>
               {option}
             </option>

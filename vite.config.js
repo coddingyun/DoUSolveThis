@@ -11,20 +11,20 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-			{ find: '@', replacement: '/src' },
-			{
-				find: '@assets',
-				replacement: '/src/assets',
-			},
+      { find: '@', replacement: '/src' },
+      {
+        find: '@assets',
+        replacement: '/src/assets',
+      },
       { find: '@pages', replacement: '/src/pages' },
       { find: '@store', replacement: '/src/store' },
-			{ find: '@Shooks', replacement: '/src/shared/hooks' },
-			{ find: '@Sutils', replacement: '/src/shared/utils' },
-			{
+      { find: '@Shooks', replacement: '/src/shared/hooks' },
+      { find: '@Sutils', replacement: '/src/shared/utils' },
+      {
         find: '@Sconstants',
-				replacement: '/src/shared/constants',
-			},
-			{ find: '@Slayouts', replacement: '/src/shared/layouts' },
-		],
+        replacement: '/src/shared/constants',
+      },
+      { find: '@Slayouts', replacement: '/src/shared/layouts' },
+    ],
   },
 });

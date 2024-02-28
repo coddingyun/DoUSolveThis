@@ -52,12 +52,12 @@ const CreateStudyButton = () => {
 const ProfileButton = () => {
   const navigate = useNavigate();
   const handleNavigateToMyPage = () => {
-    navigate('/my-page')
-  }
+    navigate('/my-page');
+  };
 
   return (
     <Button className="!bg-transparent !p-0" onClick={handleNavigateToMyPage}>
-      <Profile boxSize="32px"/>
+      <Profile boxSize="32px" />
     </Button>
   );
 };
@@ -87,7 +87,7 @@ const TopNavigation = ({ children }) => {
             className={`${curMenu === 'search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu('search')
+              setCurMenu('search');
               navigate('/search');
             }}
           >

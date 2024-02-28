@@ -126,7 +126,7 @@ const RegionButton = ({
                   {area[selectedArea] &&
                     area[selectedArea].map((item, idx) => (
                       <DetailRegionContainer
-                      key={`RegionContainer#${idx}`}
+                        key={`RegionContainer#${idx}`}
                         title={item}
                         selectedDetailArea={selectedDetailArea}
                         setSelectedDetailArea={setSelectedDetailArea}

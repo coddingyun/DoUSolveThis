@@ -1,6 +1,6 @@
-import { useMutation } from "react-query"
-import { api } from "../../../../shared/hooks/api"
-import { useNavigate } from "react-router-dom"
+import { useMutation } from 'react-query';
+import { api } from '../../../../shared/hooks/api';
+import { useNavigate } from 'react-router-dom';
 
 const usePostUserProfile = () => {
   const navigate = useNavigate();
@@ -13,9 +13,9 @@ const usePostUserProfile = () => {
     {
       onSuccess: () => {
         navigate('/search');
-      }
-    }
-  )
-}
+      },
+    },
+  );
+};
 
 export default usePostUserProfile;

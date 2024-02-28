@@ -19,9 +19,7 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
   };
 
   return (
-    <div
-      className="block bg-white border border-gray-200 rounded-lg shadow"
-    >
+    <div className="block bg-white border border-gray-200 rounded-lg shadow">
       <h5 className="p-6 text-3xl font-semibold tracking-tight text-gray-900">
         {title}
       </h5>

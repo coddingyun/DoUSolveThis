@@ -9,7 +9,7 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
         console.log(lang);
         const response = await api.get(`/api/studies`, {
           params: {
-            order_by: orderNum+1,
+            order_by: orderNum + 1,
             term: completedTerm,
             page: pageParam,
             language: lang || 'ALL',

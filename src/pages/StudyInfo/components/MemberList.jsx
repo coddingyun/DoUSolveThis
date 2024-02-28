@@ -23,7 +23,11 @@ const MemberList = ({ studyInfoData }) => {
       {open && (
         <div className="flex flex-row gap-2 pt-8">
           {studyInfoData.solved.map((data, idx) => (
-            <UserTag key={`UserTag#${idx}`} title={data.username} tier={data.rank} />
+            <UserTag
+              key={`UserTag#${idx}`}
+              title={data.username}
+              tier={data.rank}
+            />
           ))}
         </div>
       )}

@@ -60,7 +60,7 @@ const ModalLayout = ({
             {title}
           </ModalHeader>
         )}
-        { closeButton && <ModalCloseButton />}
+        {closeButton && <ModalCloseButton />}
         <ModalBody className="flex flex-col gap-4">{children}</ModalBody>
         <ModalFooter>{renderButton()}</ModalFooter>
       </ModalContent>
