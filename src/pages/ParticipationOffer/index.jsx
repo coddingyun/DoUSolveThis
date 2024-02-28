@@ -9,7 +9,7 @@ const ParticipationOffer = () => {
     <TopNavigation>
       <div className="px-8 py-10">
         <h1>참여 제안 보기</h1>
-        <div>
+        <div className='grid grid-cols-3'>
           {data &&
             data.map((item, idx) => (
               <OfferCard key={`OfferCard#${idx}`} data={item} />

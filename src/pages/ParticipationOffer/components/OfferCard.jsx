@@ -7,7 +7,7 @@ const OfferCard = ({data}) => {
     <div>
       <div className="px-6 py-4 flex justify-between items-center">
         <h2>{data.studyTitle}</h2>
-        <SimpleButton />
+        <SimpleButton title="수락하기"/>
       </div>
       <Line/>
       <div className="px-6 py-6 flex flex-col gap-4">
