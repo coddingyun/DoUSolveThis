@@ -1,5 +1,4 @@
 import Line from '../../shared/components/Line';
-import Profile from '../../shared/components/Profile';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import AccountManagementButton from './components/AccountManagementButton';
 import NavigationSection from './components/sections/NavigationSection';

@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import {
   Modal,
   ModalOverlay,
@@ -8,17 +7,8 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
-import useDeleteAllNextProblems from '../../hooks/api/nextProblems/useDeleteAllNextProblems';
 
-const DeleteModal = ({ isOpen, onClose, title }) => {
-  const { id } = useParams();
-
-  const { deleteAllFetch } = useDeleteAllNextProblems(id);
-
-  const handleClickAllDelete = () => {
-    deleteAllFetch();
-    onClose();
-  };
+const SimpleModal = ({ isOpen, onClose, title, buttonTitle, onClick }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="!w-10">
@@ -38,9 +28,9 @@ const DeleteModal = ({ isOpen, onClose, title }) => {
           </Button>
           <Button
             className="!w-full !bg-brand-600 !rounded-lg !text-white"
-            onClick={handleClickAllDelete}
+            onClick={onClick}
           >
-            전체 삭제
+            {buttonTitle}
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -48,4 +38,4 @@ const DeleteModal = ({ isOpen, onClose, title }) => {
   );
 };
 
-export default DeleteModal;
+export default SimpleModal;
