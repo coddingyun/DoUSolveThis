@@ -50,9 +50,13 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
+  const navigate = useNavigate();
+  const handleNavigateToMyPage = () => {
+    navigate('/my-page')
+  }
 
   return (
-    <Button className="!bg-transparent !p-0">
+    <Button className="!bg-transparent !p-0" onClick={handleNavigateToMyPage}>
       <Profile boxSize="32px"/>
     </Button>
   );
