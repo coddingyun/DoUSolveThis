@@ -21,6 +21,7 @@ const StudyInfo = lazy(() => import('./pages/StudyInfo'));
 const StudyEdit = lazy(() => import('./pages/StudyEdit'));
 const MyStudy = lazy(() => import('./pages/MyStudy'));
 const MyPage = lazy(() => import('./pages/MyPage'));
+const ParticipationOffer = lazy(() => import('./pages/ParticipationOffer'));
 
 const Loading = () => {
   return (
@@ -47,6 +48,11 @@ function App() {
                     <Route path="/edit/:id" exact element={<StudyEdit />} />
                     <Route path="/my-study" exact element={<MyStudy />} />
                     <Route path="/my-page" exact element={<MyPage />} />
+                    <Route
+                      path="/participation-offer"
+                      exact
+                      element={<ParticipationOffer />}
+                    />
                   </Routes>
                 </Suspense>
               </BrowserRouter>
