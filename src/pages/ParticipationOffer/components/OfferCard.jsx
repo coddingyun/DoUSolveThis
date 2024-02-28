@@ -18,7 +18,7 @@ const OfferCard = ({data}) => {
         <div className='flex flex-col gap-1.5'>
           <h3>참여 메시지</h3>
           <div className='px-3.5 py-2.5 border border-solid border-gray-300 shadow-sm rounded-lg'>
-            <h4>{data.messages}</h4>
+            <h4>{data.message}</h4>
           </div>
         </div>
       </div>

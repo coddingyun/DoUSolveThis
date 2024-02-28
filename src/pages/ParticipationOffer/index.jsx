@@ -1,8 +1,9 @@
 import TopNavigation from '../../shared/layout/TopNavigation';
 import OfferCard from './components/OfferCard';
+import useGetParticipationOffer from './hooks/api/useGetParticipationOffer';
 
 const ParticipationOffer = () => {
-  const data = [];
+  const { data } = useGetParticipationOffer();
 
   return (
     <TopNavigation>
