@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { BaekjoonIdTag } from '../../../../shared/components/Tag';
-import ModalLayout from '../ModalLayout';
-import InputContainer from '../InputContainer';
-import Input from '../Input';
-import useCheckId from '../../hooks/api/useCheckId';
-import { useStudyStore } from '../../../../store/studyStore';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
+import InputContainer from '../../../../shared/components/InputContainer';
+import Input from '../../../../shared/components/Input';
+import useCheckId from '../../../../shared/hooks/api/useCheckId';
+import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
 
 const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
@@ -23,7 +23,14 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
     frequencyNumber,
     members,
   } = useStudyStore();
-  const { refetch } = useCheckId(term);
+
+  const { addMember } = useStudyActions();
+  const onCheckIdSuccessCallback = data => {
+    if (data.results.valid) {
+      addMember(data.results.bjanme);
+    }
+  };
+  const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
 
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
@@ -32,11 +39,11 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
     }
   };
 
-  const onSuccessCallback = () => {
+  const onStudySuccessCallback = () => {
     clickHandler(steps[3]);
   };
 
-  const mutation = usePostStudy(onSuccessCallback);
+  const mutation = usePostStudy(onStudySuccessCallback);
 
   // TODO: 실 데이터로 교체
   const onNext = () => {
@@ -74,7 +81,7 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
         <div className="flex flex-wrap gap-2">
           {members &&
             members.map((member, idx) => (
-              <BaekjoonIdTag id={`member#${idx}`}>{member}</BaekjoonIdTag>
+              <BaekjoonIdTag key={`member#${idx}`}>{member}</BaekjoonIdTag>
             ))}
         </div>
       </InputContainer>

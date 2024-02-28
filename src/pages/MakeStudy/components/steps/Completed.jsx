@@ -1,4 +1,4 @@
-import ModalLayout from '../ModalLayout';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
 import { ReactComponent as CompletedIcon } from '../../../../assets/completed.svg';
 
 const Completed = ({ onPrev, onNext }) => {

@@ -1,9 +1,7 @@
 import { useQuery } from 'react-query';
-import { api } from '../../../../shared/hooks/api';
-import { useStudyActions } from '../../../../store/studyStore';
+import { api } from '.';
 
-const useCheckId = id => {
-  const { addMember } = useStudyActions();
+const useCheckId = (id, successCallback) => {
   const { data, isLoading, refetch } = useQuery(
     'checkId',
     async () => {
@@ -13,9 +11,7 @@ const useCheckId = id => {
     {
       enabled: false,
       onSuccess: data => {
-        if (data.results.valid) {
-          addMember(data.results.bjanme);
-        }
+        successCallback(data);
       },
     },
   );

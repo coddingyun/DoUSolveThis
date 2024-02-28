@@ -1,37 +1,28 @@
 import { useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { setCookie } from '../../../../shared/utils/cookie';
 import LoginButton from './LoginButton';
 import { ReactComponent as NaverIcon } from '../../../../assets/naverIcon.svg';
+import usePostLogin from '../../hooks/api/usePostLogin';
 
 const NaverLoginButton = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const state = new URL(window.location.href).searchParams.get('state');
 
   const navigate = useNavigate();
+  const onSuccessCallback = () => {
+    navigate('/search');
+  }
+  const naverLogin = usePostLogin(onSuccessCallback);
 
   useEffect(() => {
     const axiosNaverLogin = async () => {
       if (code && state) {
-        const response = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/api/login`,
-          {
-            authCode: code,
-            authState: state,
-            provider: 'NAVER',
-          },
-        );
-
-        const access = response.headers.get('Gauth');
-        const refresh = response.headers.get('RefreshToken');
-
-        setCookie('Access', access);
-        setCookie('Refresh', refresh);
-
-        const { data } = response;
-        console.log(data.username, data.isFirst, 'naver');
-        navigate('/search');
+        const data = {
+          authCode: code,
+          authState: state,
+          provider: 'NAVER',
+        }
+        naverLogin.mutate(data);
       }
     };
 

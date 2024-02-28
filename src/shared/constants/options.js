@@ -1,5 +1,4 @@
 export const LANG_OPTIONS = [
-  '언어별',
   'Cpp',
   'C',
   'Python',
@@ -10,7 +9,7 @@ export const LANG_OPTIONS = [
   'Ruby',
 ];
 
-export const PURPOSE_OPTIONS = ['목적별', '입문', '취준', '대회'];
+export const PURPOSE_OPTIONS = ['입문', '취준', '대회'];
 export const MEETING_OPTIONS = ['온라인', '오프라인', '온/오프라인 모두'];
 
 export const FREQUENCY_STANDARD_OPTIONS = ['월', '주', '일'];

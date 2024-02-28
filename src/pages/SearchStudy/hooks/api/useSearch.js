@@ -1,32 +1,19 @@
 import { useInfiniteQuery } from 'react-query';
 import { api } from '../../../../shared/hooks/api';
 
-const ORDER_OPTIONS = [1, 2, 3, 4];
-const LANG_OPTIONS = [
-  'ALL',
-  'Cpp',
-  'C',
-  'Python',
-  'Java',
-  'NodeJs',
-  'Kotlin',
-  'Swift',
-  'Ruby',
-];
-const PURPOSE_OPTIONS = ['ALL', 'CONCEPT', 'EMPLOYMENT', 'CONTEST'];
-
 const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
   const { data, isFetching, refetch, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       'search',
       async ({ pageParam = 1 }) => {
+        console.log(lang);
         const response = await api.get(`/api/studies`, {
           params: {
-            order_by: ORDER_OPTIONS[orderNum],
+            order_by: orderNum+1,
             term: completedTerm,
             page: pageParam,
-            language: LANG_OPTIONS[lang],
-            level: PURPOSE_OPTIONS[levelNum],
+            language: lang || 'ALL',
+            level: levelNum || 'ALL',
             area: area.area === '지역' ? 'ALL' : area.area,
             city: area.city === '전체' ? 'ALL' : area.city,
           },

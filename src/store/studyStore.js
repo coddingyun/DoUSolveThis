@@ -4,7 +4,7 @@ const initialState = {
   studyName: '',
   description: '',
   kakaoUrl: '',
-  language: 'Cpp',
+  language: '',
   level: '입문',
   solvedProblemNumber: 0,
   meetingType: '온라인',

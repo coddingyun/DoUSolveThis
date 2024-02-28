@@ -2,7 +2,7 @@ import SelectComp from '../../../../shared/components/Select';
 import {
   LANG_OPTIONS,
   PURPOSE_OPTIONS,
-} from '../../../../shared/constants/options'
+} from '../../../../shared/constants/options';
 import {
   useStudyActions,
   useStudyDescription,
@@ -12,9 +12,9 @@ import {
   useStudyName,
   useStudySolvedProblemNumber,
 } from '../../../../store/studyStore';
-import Input from '../Input';
-import ModalLayout from '../ModalLayout';
-import InputContainer from '../InputContainer';
+import Input from '../../../../shared/components/Input';
+import ModalLayout from '../../../../shared/layout/ModalLayout';
+import InputContainer from '../../../../shared/components/InputContainer';
 
 const WriteStudyInfo = ({ onPrev, onNext }) => {
   const studyName = useStudyName();
@@ -63,16 +63,16 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
       <InputContainer title="주 사용 언어">
         <SelectComp
           value={language}
-          handleChangeValue={e => setLanguage(LANG_OPTIONS[e.target.value + 1])}
-          options={LANG_OPTIONS.slice(1)}
+          handleChangeValue={e => setLanguage(e.target.value)}
+          options={LANG_OPTIONS}
           textClassName="!text-base !font-normal"
         />
       </InputContainer>
       <InputContainer title="목표 레벨">
         <SelectComp
           value={level}
-          handleChangeValue={e => setLevel(PURPOSE_OPTIONS[e.target.value + 1])}
-          options={PURPOSE_OPTIONS.slice(1)}
+          handleChangeValue={e => setLevel(e.target.value)}
+          options={PURPOSE_OPTIONS}
           textClassName="!text-base !font-normal"
         />
       </InputContainer>

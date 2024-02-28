@@ -104,8 +104,9 @@ const RegionButton = ({
               <div>
                 <h4 className="text-gray-700 text-sm font-medium mb-2">지역</h4>
                 <div className="border border-solid border-gray-200 rounded-lg h-[320px] overflow-auto">
-                  {Object.keys(area).map(item => (
+                  {Object.keys(area).map((item, idx) => (
                     <RegionContainer
+                      key={`RegionContainer#${idx}`}
                       title={item}
                       selectedArea={selectedArea}
                       setSelectedArea={setSelectedArea}
@@ -125,8 +126,9 @@ const RegionButton = ({
                     setSelectedDetailArea={setSelectedDetailArea}
                   />
                   {area[selectedArea] &&
-                    area[selectedArea].map(item => (
+                    area[selectedArea].map((item, idx) => (
                       <DetailRegionContainer
+                      key={`RegionContainer#${idx}`}
                         title={item}
                         selectedDetailArea={selectedDetailArea}
                         setSelectedDetailArea={setSelectedDetailArea}
