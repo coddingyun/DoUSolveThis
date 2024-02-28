@@ -9,12 +9,15 @@ import UserInfoSection from './components/sections/UserInfoSection';
 import useGetMyPage from './hooks/api/useGetMyPage';
 import useLogout from './hooks/api/useLogout';
 import useWithdraw from './hooks/api/useWithdraw';
+import { useEffect } from 'react';
+import { useAppActions } from '../../store/appStore';
 
 const MakeStudy = () => {
   const { data } = useGetMyPage();
   const { refetch: refetchLogout } = useLogout();
   const { refetch: refetchWithdraw } = useWithdraw();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { setCurMenu } = useAppActions();
 
   const handleClickLogout = () => {
     refetchLogout();
@@ -29,6 +32,10 @@ const MakeStudy = () => {
   }
 
   const modalTitle = "정말 '이 문제 푸셨나요?'를\n 탈퇴하시겠습니까?";
+
+  useEffect(() => {
+    setCurMenu('myPage');
+  }, []);
 
   return (
     <TopNavigation>
