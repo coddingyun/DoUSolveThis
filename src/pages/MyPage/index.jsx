@@ -3,6 +3,7 @@ import Profile from '../../shared/components/Profile';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import AccountManagementButton from './components/AccountManagementButton';
 import NavigationSection from './components/sections/NavigationSection';
+import ProfileSection from './components/sections/ProfileSection';
 import UserInfoSection from './components/sections/UserInfoSection';
 import useGetMyPage from './hooks/api/useGetMyPage';
 import useLogout from './hooks/api/useLogout';
@@ -29,13 +30,7 @@ const MakeStudy = () => {
     <TopNavigation>
       <div className="w-full py-24 flex flex-col items-center">
         <div className='w-[904px] flex flex-col gap-8'>
-          <div className='flex flex-col items-center gap-8'>
-            <Profile boxSize="96px"/>
-            <div className='flex flex-col items-center'>
-              <h2 className='text-4xl font-semibold text-gray-900'>{data.username}</h2>
-              <h4 className='text-lg font-normal text-gray-500'>@{data.bjname}</h4>
-            </div>
-          </div>
+          <ProfileSection userName={data.username} baekjoonId={data.bjname}/>
           <UserInfoSection
             preferType={data.prefer_type}
             area={data.area}
