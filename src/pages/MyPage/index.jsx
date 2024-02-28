@@ -19,9 +19,9 @@ const MakeStudy = () => {
         <div className='w-[904px] flex flex-col gap-8'>
           <div className='flex flex-col items-center gap-8'>
             <Profile boxSize="96px"/>
-            <div>
-              <h2>{data.username}</h2>
-              <h4>@{data.bjname}</h4>
+            <div className='flex flex-col items-center'>
+              <h2 className='text-4xl font-semibold text-gray-900'>{data.username}</h2>
+              <h4 className='text-lg font-normal text-gray-500'>@{data.bjname}</h4>
             </div>
           </div>
           <UserInfoSection
