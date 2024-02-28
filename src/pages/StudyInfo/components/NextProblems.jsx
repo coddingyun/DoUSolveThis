@@ -100,13 +100,13 @@ const NextProblems = () => {
     );
   };
 
-  const title = '정말 문제를\n전체 삭제 하시겠습니까?😭';
+  const modalTitle = '정말 문제를\n전체 삭제 하시겠습니까?😭';
   const { deleteAllFetch } = useDeleteAllNextProblems();
 
   const handleClickDeleteButton = () => {
     deleteAllFetch();
     onCloseDeleteModal();
-  }
+  };
 
   return (
     <div className="py-8">
@@ -114,7 +114,7 @@ const NextProblems = () => {
       <SimpleModal
         isOpen={isOpenDeleteModal}
         onClose={onCloseDeleteModal}
-        title={title}
+        title={modalTitle}
         buttonTitle="전체 삭제"
         onClick={handleClickDeleteButton}
       />

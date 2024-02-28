@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 
 const SimpleModal = ({ isOpen, onClose, title, buttonTitle, onClick }) => {
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="!w-10">
       <ModalOverlay />
