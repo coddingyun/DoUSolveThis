@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen grid place-items-center">
-      <UserInfoModal isOpen={isOpen} onClose={onClose}/> 
+      <UserInfoModal isOpen={isOpen} onClose={onClose} />
       <div className="grid place-items-center">
         <div className="w-full grid place-items-center mb-14">
           <LogoMark className="w-12 h-12 mb-3" />
@@ -21,8 +21,8 @@ const Login = () => {
           </div>
         </div>
         <div className="flex gap-4">
-          <GoogleLoginButton onOpen={onOpen}/>
-          <NaverLoginButton onOpen={onOpen}/>
+          <GoogleLoginButton onOpen={onOpen} />
+          <NaverLoginButton onOpen={onOpen} />
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const usePostLogin = successCallback => {
       onSuccess: response => {
         const accessToken = response.headers.get('Gauth');
         const refreshToken = response.headers.get('RefreshToken');
-        
+
         setAuthToken(accessToken, refreshToken);
         setUserName(response.data.username);
         setUserId(response.data.userId);

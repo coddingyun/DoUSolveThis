@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Image, Modal, useDisclosure } from '@chakra-ui/react';
+import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { useAppCurMenu, useAppActions } from '../../store/appStore';
-import { useUserImage } from '../../store/userStore';
 import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
 import { useStudyActions } from '../../store/studyStore';
+import Profile from '../components/Profile';
 
 const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
 
@@ -50,16 +50,14 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
-  const userImage = useUserImage(state => state.userImage);
+  const navigate = useNavigate();
+  const handleNavigateToMyPage = () => {
+    navigate('/my-page');
+  };
 
   return (
-    <Button className="!bg-transparent !p-0">
-      <Image
-        src={userImage}
-        className="rounded-full"
-        alt="profile"
-        boxSize="32px"
-      />
+    <Button className="!bg-transparent !p-0" onClick={handleNavigateToMyPage}>
+      <Profile boxSize="32px" />
     </Button>
   );
 };
@@ -86,20 +84,19 @@ const TopNavigation = ({ children }) => {
             <div className="text-gray-900 font-bold">이 문제 푸셨나요?</div>
           </button>
           <Button
-            className={`${curMenu === 1 ? '!text-brand-700' : '!text-gray-500'}
+            className={`${curMenu === 'search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu(1);
+              setCurMenu('search');
               navigate('/search');
             }}
           >
             스터디 찾기
           </Button>
           <Button
-            className={`${curMenu === 2 ? '!text-brand-700' : '!text-gray-500'}
+            className={`${curMenu === 'myStudy' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu(2);
               navigate('/my-study');
             }}
           >

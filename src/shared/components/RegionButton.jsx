@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
 import {
   Modal,
@@ -128,7 +126,7 @@ const RegionButton = ({
                   {area[selectedArea] &&
                     area[selectedArea].map((item, idx) => (
                       <DetailRegionContainer
-                      key={`RegionContainer#${idx}`}
+                        key={`RegionContainer#${idx}`}
                         title={item}
                         selectedDetailArea={selectedDetailArea}
                         setSelectedDetailArea={setSelectedDetailArea}

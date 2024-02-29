@@ -6,7 +6,6 @@ import { CookiesProvider } from 'react-cookie';
 import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Login from './pages/Login';
-import MyStudy from './pages/MyStudy';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,6 +19,9 @@ const Landing = lazy(() => import('./pages/Landing'));
 const SearchStudy = lazy(() => import('./pages/SearchStudy'));
 const StudyInfo = lazy(() => import('./pages/StudyInfo'));
 const StudyEdit = lazy(() => import('./pages/StudyEdit'));
+const MyStudy = lazy(() => import('./pages/MyStudy'));
+const MyPage = lazy(() => import('./pages/MyPage'));
+const ParticipationOffer = lazy(() => import('./pages/ParticipationOffer'));
 
 const Loading = () => {
   return (
@@ -45,6 +47,12 @@ function App() {
                     <Route path="/info/:id" exact element={<StudyInfo />} />
                     <Route path="/edit/:id" exact element={<StudyEdit />} />
                     <Route path="/my-study" exact element={<MyStudy />} />
+                    <Route path="/my-page" exact element={<MyPage />} />
+                    <Route
+                      path="/participation-offer"
+                      exact
+                      element={<ParticipationOffer />}
+                    />
                   </Routes>
                 </Suspense>
               </BrowserRouter>

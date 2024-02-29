@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
-import Card from './Card';
+import Card from '../../../shared/components/Card';
 import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg';
 import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg';
 

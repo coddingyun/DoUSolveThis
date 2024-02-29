@@ -6,6 +6,7 @@ import StudyDetailInfo from './components/StudyDetailInfo';
 import StudyPlan from './components/StudyPlan';
 import MemberList from './components/MemberList';
 import NextProblems from './components/NextProblems';
+import Line from '../../shared/components/Line';
 
 const StudyInfo = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const StudyInfo = () => {
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
           <MemberList studyInfoData={studyInfoData} />
-          <div className="w-full h-[1px] bg-gray-200" />
+          <Line />
           <NextProblems />
         </div>
       </TopNavigation>

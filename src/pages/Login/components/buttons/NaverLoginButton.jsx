@@ -11,7 +11,7 @@ const NaverLoginButton = () => {
   const navigate = useNavigate();
   const onSuccessCallback = () => {
     navigate('/search');
-  }
+  };
   const naverLogin = usePostLogin(onSuccessCallback);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const NaverLoginButton = () => {
           authCode: code,
           authState: state,
           provider: 'NAVER',
-        }
+        };
         naverLogin.mutate(data);
       }
     };

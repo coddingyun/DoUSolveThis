@@ -4,7 +4,6 @@ about: 버그 리포트
 title: ''
 labels: bug
 assignees: coddingyun
-
 ---
 
 ## 어떤 버그인가요?

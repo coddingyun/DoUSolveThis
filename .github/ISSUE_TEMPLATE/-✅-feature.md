@@ -1,10 +1,9 @@
 ---
-name: " ✅ Feature"
+name: ' ✅ Feature'
 about: 추가 기능 요청 템플릿
 title: ''
 labels: ''
 assignees: coddingyun
-
 ---
 
 ## 어떤 기능인가요?
