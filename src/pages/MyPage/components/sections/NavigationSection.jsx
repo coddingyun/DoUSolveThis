@@ -15,15 +15,13 @@ const NavigationSection = () => {
       <NavigationCard
         title="내가 만든 스터디 관리하기"
         onClick={() => {
-          // TODO. 올바른 라우팅
-          navigate('/');
+          navigate('/my-study');
         }}
       />
       <NavigationCard
         title="참여 제안 보기"
         onClick={() => {
-          // TODO. 올바른 라우팅
-          navigate('/');
+          navigate('/participation-offer');
         }}
       />
       <NavigationCard
