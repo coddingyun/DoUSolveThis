@@ -5,7 +5,26 @@ import { defineConfig } from 'vite';
 import svgr from '@svgr/rollup';
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react({
+    babel: {
+      plugins: [
+        'babel-plugin-macros',
+        [
+          '@emotion/babel-plugin-jsx-pragmatic',
+          {
+            export: 'jsx',
+            import: '__cssprop',
+            module: '@emotion/react',
+          },
+        ],
+        [
+          '@babel/plugin-transform-react-jsx',
+          { pragma: '__cssprop' },
+          'twin.macro',
+        ],
+      ],
+    },
+  }), svgr()],
   server: {
     port: 3000,
   },

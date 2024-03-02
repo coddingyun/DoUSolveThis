@@ -40,5 +40,8 @@ module.exports = {
     'no-shadow': 'off',
     'no-return-await': 'off',
     'react/react-in-jsx-scope': 'off',
+    "rules": {
+      "react/no-unknown-property": ["error", { "ignore": ["css"] }]
+    }
   },
 };
