@@ -27,15 +27,16 @@ const MakeStudy = () => {
     refetchWithdraw();
   };
 
-  if (!data) {
-    return null;
-  }
-
+  
   const modalTitle = "정말 '이 문제 푸셨나요?'를\n 탈퇴하시겠습니까?";
-
+  
   useEffect(() => {
     setCurMenu('myPage');
   }, []);
+  
+  if (!data) {
+    return null;
+  }
 
   return (
     <TopNavigation>
