@@ -9,6 +9,7 @@ import {
   useSuggestionStatus,
 } from '../../../../../store/suggestionStore';
 import usePostSuggestion from '../../../hooks/api/usePostSuggestion';
+import tw from 'twin.macro';
 
 const EnterProblem = ({ isOpen, onClose }) => {
   const { id } = useParams();
@@ -124,13 +125,8 @@ const EnterProblem = ({ isOpen, onClose }) => {
   };
 
   const renderFooter = () => {
-    const brandButtonStyle = value ? '!bg-brand-600' : '!bg-brand-200';
     return (
-      <div
-        className={`!w-full ${
-          status === 'not_solved' && 'grid grid-cols-2 gap-3'
-        }`}
-      >
+      <div css={styles.footerButton(status)}>
         {status === 'not_solved' && (
           <Button
             className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
@@ -141,8 +137,9 @@ const EnterProblem = ({ isOpen, onClose }) => {
           </Button>
         )}
         <Button
-          className={`!w-full ${brandButtonStyle} !rounded-lg !text-white`}
+          className="!w-full !rounded-lg !text-white !bg-brand-600"
           onClick={buttonStyles[status].handleClick}
+          isDisabled={!value}
         >
           {buttonStyles[status].title}
         </Button>
@@ -158,6 +155,13 @@ const EnterProblem = ({ isOpen, onClose }) => {
       onClose={onClose}
     />
   );
+};
+
+const styles = {
+  footerButton: status => [
+    tw`!w-full`,
+    status === 'not_solved' && tw`grid grid-cols-2 gap-3`,
+  ],
 };
 
 export default EnterProblem;
