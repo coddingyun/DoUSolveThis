@@ -1,15 +1,15 @@
 import { useInfiniteQuery } from 'react-query';
 import { api } from '../../../../shared/hooks/api';
+import { ORDER_OPTIONS } from '../../../../shared/constants/options';
 
 const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
   const { data, isFetching, refetch, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       'search',
       async ({ pageParam = 1 }) => {
-        console.log(lang);
         const response = await api.get(`/api/studies`, {
           params: {
-            order_by: orderNum + 1,
+            order_by: ORDER_OPTIONS.indexOf(orderNum) + 1,
             term: completedTerm,
             page: pageParam,
             language: lang || 'ALL',
