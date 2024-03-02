@@ -64,13 +64,13 @@ const UserInfoModal = ({ isOpen, onClose }) => {
         closeButton={false}
         onNext={handleClickRegister}
       >
-        <InputContainer title="온/오프라인 여부">
+        <InputContainer title="온·오프라인 여부">
           <SelectComp
             value={meetingType}
             handleChangeValue={e => setMeetingType(e.target.value)}
             options={MEETING_OPTIONS}
             textClassName="!text-base !font-normal"
-            placeholder="온/오프라인 선택"
+            placeholder="온·오프라인 선택"
           />
         </InputContainer>
         <InputContainer title="모임 지역">

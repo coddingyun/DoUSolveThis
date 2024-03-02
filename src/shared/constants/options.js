@@ -10,7 +10,7 @@ export const LANG_OPTIONS = [
 ];
 
 export const PURPOSE_OPTIONS = ['입문', '취준', '대회'];
-export const MEETING_OPTIONS = ['온라인', '오프라인', '온/오프라인 모두'];
+export const MEETING_OPTIONS = ['온라인', '오프라인', '온·오프라인 모두'];
 export const ORDER_OPTIONS = [
   '최신순',
   '인기순',

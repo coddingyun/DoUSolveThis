@@ -39,7 +39,7 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
       onPrev={onPrev}
       onNext={onNext}
     >
-      <InputContainer title="온/오프라인 여부">
+      <InputContainer title="온·오프라인 여부">
         <SelectComp
           value={meetingType}
           handleChangeValue={e => setMeetingType(e.target.value)}
