@@ -26,9 +26,6 @@ const FormNextButton = ({ title, dirtyFieldsCnt, onClick }) => {
   const isDirty = Object.keys(dirtyFields).length === dirtyFieldsCnt ? true : false;
   const isValid = Object.keys(errors).length ? false : true;
 
-  console.log(dirtyFields, dirtyFieldsCnt, errors)
-
-
   return (
     <SimpleButton
       title={title}
