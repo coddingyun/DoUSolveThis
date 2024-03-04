@@ -6,7 +6,7 @@ const initialState = {
   kakaoUrl: '',
   language: '',
   level: '입문',
-  solvedProblemNumber: 0,
+  solvedProblemNumber: '',
   meetingType: '온라인',
   studyArea: {
     area: '서울특별시',

@@ -8,6 +8,8 @@ import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
 import { useStudyActions } from '../../store/studyStore';
 import Profile from '../components/Profile';
+import { Form } from '../components/Form';
+import { studySchema } from '../constants/schema';
 
 const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
 
@@ -31,13 +33,17 @@ const CreateStudyButton = () => {
         }}
         closeOnOverlayClick={false}
       >
-        <MakeStudy
-          steps={steps}
-          clickHandler={clickHandler}
-          Funnel={Funnel}
-          Step={Step}
-          onClose={onClose}
-        />
+        <Form onSubmit={()=>{
+          // Todo. Submit Action 여기로 이동시키기
+        }} schema={studySchema}>
+          <MakeStudy
+            steps={steps}
+            clickHandler={clickHandler}
+            Funnel={Funnel}
+            Step={Step}
+            onClose={onClose}
+          />
+        </Form>
       </Modal>
       <Button
         className="flex items-center gap-1 !bg-brand-600"

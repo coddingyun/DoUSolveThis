@@ -41,6 +41,7 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
             clickHandler(steps[0]);
             reset();
           }}
+          rightButtonType="submit"
           onNext={() => {
             // TODO: 내 스터디로
             navigate('/search');

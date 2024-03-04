@@ -12,9 +12,10 @@ import {
   useStudyName,
   useStudySolvedProblemNumber,
 } from '../../../../store/studyStore';
-import Input from '../../../../shared/components/Input';
+//import Input from '../../../../shared/components/Input';
 import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../../../../shared/components/InputContainer';
+import { Form } from '../../../../shared/components/Form';
 
 const WriteStudyInfo = ({ onPrev, onNext }) => {
   const studyName = useStudyName();
@@ -36,28 +37,33 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
     <ModalLayout
       leftButtonTitle="잠깐만요"
       rightButtonTitle="다음"
+      rightButtonType="next"
+      dirtyFieldsCnt={4}
       onPrev={onPrev}
       onNext={onNext}
     >
       <InputContainer title="모임 이름">
-        <Input
+        <Form.Input
           placeholder="모임 이름을 입력해주세요. (최대 15글자)"
           value={studyName}
           handleChangeValue={e => setStudyName(e.target.value)}
+          errorName="studyName"
         />
       </InputContainer>
       <InputContainer title="모임 설명">
-        <Input
+        <Form.Input
           placeholder="모임 설명을 입력해주세요. (최대 40글자)"
           value={description}
           handleChangeValue={e => setDescription(e.target.value)}
+          errorName="studyDescription"
         />
       </InputContainer>
       <InputContainer title="오픈 채팅방">
-        <Input
+        <Form.Input
           placeholder="오픈 채팅방 링크를 입력해주세요"
           value={kakaoUrl}
           handleChangeValue={e => setKakaoUrl(e.target.value)}
+          errorName="kakaoUrl"
         />
       </InputContainer>
       <InputContainer title="주 사용 언어">
@@ -77,11 +83,12 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
         />
       </InputContainer>
       <InputContainer title="1주일간 푸는 문제 수">
-        <Input
+        <Form.Input
           type="number"
           placeholder="문제 개수를 입력해주세요."
           value={solvedProblemNumber}
           handleChangeValue={e => setSolvedProblemNumber(e.target.value)}
+          errorName="problemNumber"
         />
       </InputContainer>
     </ModalLayout>

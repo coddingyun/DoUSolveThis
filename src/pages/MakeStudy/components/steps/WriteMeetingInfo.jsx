@@ -15,7 +15,7 @@ import {
   useStudyMeetingType,
   useStudyTime,
 } from '../../../../store/studyStore';
-import Input from '../../../../shared/components/Input';
+import { Form } from '../../../../shared/components/Form';
 
 const WriteMeetingInfo = ({ onPrev, onNext }) => {
   const meetingType = useStudyMeetingType();
@@ -36,6 +36,8 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
     <ModalLayout
       leftButtonTitle="이전"
       rightButtonTitle="다음"
+      rightButtonType="next"
+      dirtyFieldsCnt={5}
       onPrev={onPrev}
       onNext={onNext}
     >
@@ -72,10 +74,11 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
         </div>
       </InputContainer>
       <InputContainer title="스터디 시간">
-        <Input
+        <Form.Input
           placeholder="스터디 시간을 입력해주세요. (예. 1시간)"
           value={studyTime}
           handleChangeValue={e => setStudyTime(e.target.value)}
+          errorName="studyTime"
         />
       </InputContainer>
     </ModalLayout>

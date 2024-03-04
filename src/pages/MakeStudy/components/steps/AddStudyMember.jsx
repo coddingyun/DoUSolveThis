@@ -45,7 +45,6 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
 
   const mutation = usePostStudy(onStudySuccessCallback);
 
-  // TODO: 실 데이터로 교체
   const onNext = () => {
     mutation.mutate({
       title: studyName,
@@ -68,6 +67,8 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
     <ModalLayout
       leftButtonTitle="이전"
       rightButtonTitle="다음"
+      rightButtonType="submit"
+      dirtyFieldsCnt={5}
       onPrev={onPrev}
       onNext={onNext}
     >
