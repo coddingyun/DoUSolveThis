@@ -43,3 +43,35 @@ export const BaekjoonIdTag = ({ children }) => {
     </span>
   );
 };
+
+export const ApplyStatusTag = type => {
+
+  const tagStyle = () => {
+    switch (type) {
+      case '대기중':
+        return {
+          textColor: 'text-brand-700',
+          bgColor: 'bg-brand-50',
+          text: '대기중',
+        };
+      case '거절':
+        return {
+          textColor: 'text-error-700',
+          bgColor: 'bg-error-50',
+          text: '거절',
+        };
+      case '승인':
+        return {
+          textColor: 'text-success-50',
+          bgColor: 'bg-success-50',
+          text: '승낙',
+        };
+    }
+  }
+
+  return (
+    <div className={`w-fit px-3 py-1 ${tagStyle.textColor} ${tagStyle.bgColor} text-sm font-medium rounded-2xl`}>
+      {tagStyle.text}
+    </div>
+  )
+};
