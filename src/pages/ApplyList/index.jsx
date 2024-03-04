@@ -2,9 +2,15 @@ import React from 'react';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import ApplyCard from './components/ApplyCard';
 import useGetMyApply from './hooks/api/useGetMyApply';
+import useDeleteMyApply from './hooks/api/useDeleteMyApply';
 
 const ApplyList = () => {
   const { data } = useGetMyApply();
+  const mutation = useDeleteMyApply();
+
+  const handleClickCancel = studyId => {
+    mutation.mutate(studyId);
+  };
 
   return (
     <TopNavigation>
@@ -18,7 +24,7 @@ const ApplyList = () => {
               <ApplyCard
                 key={`ApplyCard#${idx}`}
                 data={item}
-                onClick={() => {}}
+                onClick={() => handleClickCancel(item.studyId)}
               />
             ))}
         </div>
