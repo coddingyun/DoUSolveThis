@@ -22,6 +22,7 @@ const StudyEdit = lazy(() => import('./pages/StudyEdit'));
 const MyStudy = lazy(() => import('./pages/MyStudy'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const ParticipationOffer = lazy(() => import('./pages/ParticipationOffer'));
+const ApplyList = lazy(() => import('./pages/ApplyList'));
 
 const Loading = () => {
   return (
@@ -53,6 +54,7 @@ function App() {
                       exact
                       element={<ParticipationOffer />}
                     />
+                    <Route path="/apply-list" exact element={<ApplyList />} />
                   </Routes>
                 </Suspense>
               </BrowserRouter>
