@@ -12,7 +12,6 @@ import {
   useStudyName,
   useStudySolvedProblemNumber,
 } from '../../../../store/studyStore';
-//import Input from '../../../../shared/components/Input';
 import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../../../../shared/components/InputContainer';
 import { Form } from '../../../../shared/components/Form';
