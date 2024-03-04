@@ -15,7 +15,7 @@ const OfferCard = ({ data, onClick }) => {
       <div className="px-6 py-6 flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <h3 className="text-gray-900 text-2xl font-semibold">
-            {data.userName}
+            {data.username}
           </h3>
           <h4 className="text-gray-500 text-base">{data.userId}</h4>
         </div>
