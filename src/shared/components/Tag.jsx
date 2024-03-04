@@ -44,10 +44,10 @@ export const BaekjoonIdTag = ({ children }) => {
   );
 };
 
-export const ApplyStatusTag = type => {
+export const ApplyStatusTag = ({ state }) => {
 
-  const tagStyle = () => {
-    switch (type) {
+  const tagStyle = (state) => {
+    switch (state) {
       case '대기중':
         return {
           textColor: 'text-brand-700',
@@ -70,8 +70,8 @@ export const ApplyStatusTag = type => {
   }
 
   return (
-    <div className={`w-fit px-3 py-1 ${tagStyle.textColor} ${tagStyle.bgColor} text-sm font-medium rounded-2xl`}>
-      {tagStyle.text}
+    <div className={`w-fit px-3 py-1 ${tagStyle(state).textColor} ${tagStyle(state).bgColor} text-sm font-medium rounded-2xl`}>
+      {tagStyle(state).text}
     </div>
   )
 };

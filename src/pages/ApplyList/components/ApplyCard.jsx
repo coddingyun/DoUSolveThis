@@ -3,14 +3,17 @@ import Line from "../../../shared/components/Line";
 import { ApplyStatusTag } from "../../../shared/components/Tag";
 
 const ApplyCard = ({ data, onClick }) => {
+
   return (
     <div className="shadow-sm border border-solid border-gray-200 rounded-lg">
-      <div className="px-6 py-4 flex justify-between items-center">
-        <ApplyStatusTag type={data.state} />
-        <h2 className="text-gray-900 text-lg font-semibold">
-          {data.studyTitle}
-        </h2>
-        <SimpleButton title="취소하기" onClick={onClick} />
+      <div className="px-6 py-4">
+        <ApplyStatusTag state={data.state} />
+        <div className="flex justify-between items-center">
+          <h2 className="text-gray-900 text-lg font-semibold mt-3">
+            {data.studyTitle}
+          </h2>
+          <SimpleButton title="취소하기" onClick={onClick} />
+        </div>
       </div>
       <Line />
       <div className="px-6 py-6 flex flex-col gap-4">
