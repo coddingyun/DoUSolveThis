@@ -4,41 +4,41 @@ import WriteMeetingInfo from './components/steps/WriteMeetingInfo';
 import AddStudyMember from './components/steps/AddStudyMember';
 import Completed from './components/steps/Completed';
 import { useStudyActions } from '../../store/studyStore';
+import { makeStudyStepTitle } from '../../shared/constants/steps';
 
-const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
+const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const navigate = useNavigate();
   const { reset } = useStudyActions();
 
   return (
     <Funnel>
-      <Step name="스터디 정보 작성">
+      <Step name={makeStudyStepTitle[0]}>
         <WriteStudyInfo
           onPrev={onClose}
-          onNext={() => clickHandler(steps[1])}
+          onNext={() => clickHandler(makeStudyStepTitle[0])}
         />
       </Step>
 
-      <Step name="모임 정보 작성">
+      <Step name={makeStudyStepTitle[1]}>
         <WriteMeetingInfo
-          onPrev={() => clickHandler(steps[0])}
-          onNext={() => clickHandler(steps[2])}
+          onPrev={() => clickHandler(makeStudyStepTitle[0])}
+          onNext={() => clickHandler(makeStudyStepTitle[2])}
         />
       </Step>
 
-      <Step name="스터디원 추가">
+      <Step name={makeStudyStepTitle[2]}>
         <AddStudyMember
-          onPrev={() => clickHandler(steps[1])}
+          onPrev={() => clickHandler(makeStudyStepTitle[0])}
           clickHandler={clickHandler}
-          steps={steps}
         />
       </Step>
 
-      <Step name="종료">
+      <Step name={makeStudyStepTitle[3]}>
         <Completed
           onPrev={() => {
             navigate('/search');
             onClose();
-            clickHandler(steps[0]);
+            clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
           rightButtonType="submit"
@@ -46,7 +46,7 @@ const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
             // TODO: 내 스터디로
             navigate('/search');
             onClose();
-            clickHandler(steps[0]);
+            clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
         />

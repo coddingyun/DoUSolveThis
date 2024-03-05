@@ -42,6 +42,30 @@ export const useStudyStore = create(set => ({
   },
 }));
 
+export const useEditStudyStore = create(set => ({
+  ...initialState,
+
+  actions: {
+    setStudyName: s => set({ studyName: s }),
+    setDescription: s => set({ description: s }),
+    setKakaoUrl: s => set({ kakaoUrl: s }),
+    setLanguage: s => set({ language: s }),
+    setLevel: s => set({ level: s }),
+    setSolvedProblemNumber: s => set({ solvedProblemNumber: s }),
+    setMeetingType: s => set({ meetingType: s }),
+    setStudyArea: area => set({ studyArea: area }),
+    setStudyTime: s => set({ studyTime: s }),
+    setFrequencyStandard: s => set({ frequencyStandard: s }),
+    setFrequencyNumber: s => set({ frequencyNumber: s }),
+    addMember: s => set(state => ({ members: [...state.members, s] })),
+    deleteMember: s =>
+      set(state => ({ members: state.members.filter(member => member !== s) })),
+    reset: () => {
+      set(initialState);
+    },
+  },
+}));
+
 export const useStudyName = () => useStudyStore(state => state.studyName);
 export const useStudyDescription = () =>
   useStudyStore(state => state.description);
@@ -61,3 +85,24 @@ export const useStudyFrequencyNumber = () =>
 export const useStudyMembers = () => useStudyStore(state => state.members);
 
 export const useStudyActions = () => useStudyStore(state => state.actions);
+
+
+export const useEditStudyName = () => useEditStudyStore(state => state.studyName);
+export const useEditStudyDescription = () =>
+  useEditStudyStore(state => state.description);
+export const useEditStudyKakaoUrl = () => useEditStudyStore(state => state.kakaoUrl);
+export const useEditStudyLanguage = () => useEditStudyStore(state => state.language);
+export const useEditStudyLevel = () => useEditStudyStore(state => state.level);
+export const useEditStudySolvedProblemNumber = () =>
+  useEditStudyStore(state => state.solvedProblemNumber);
+export const useEditStudyMeetingType = () =>
+  useEditStudyStore(state => state.meetingType);
+export const useEditStudyArea = () => useEditStudyStore(state => state.studyArea);
+export const useEditStudyTime = () => useEditStudyStore(state => state.studyTime);
+export const useEditStudyFrequencyStandard = () =>
+  useEditStudyStore(state => state.frequencyStandard);
+export const useEditStudyFrequencyNumber = () =>
+  useEditStudyStore(state => state.frequencyNumber);
+export const useEditStudyMembers = () => useEditStudyStore(state => state.members);
+
+export const useEditStudyActions = () => useEditStudyStore(state => state.actions);

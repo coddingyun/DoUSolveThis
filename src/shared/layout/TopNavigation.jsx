@@ -10,12 +10,11 @@ import { useStudyActions } from '../../store/studyStore';
 import Profile from '../components/Profile';
 import { Form } from '../components/Form';
 import { studySchema } from '../constants/schema';
-
-const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
+import { makeStudyStepTitle } from '../constants/steps';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Funnel, Step, setStep } = useFunnel(steps[0]);
+  const { Funnel, Step, setStep } = useFunnel(makeStudyStepTitle[0]);
   const { reset } = useStudyActions();
 
   const clickHandler = nextStep => {
@@ -28,16 +27,18 @@ const CreateStudyButton = () => {
         isOpen={isOpen}
         onClose={() => {
           onClose();
-          clickHandler(steps[0]);
+          clickHandler(makeStudyStepTitle[0]);
           reset();
         }}
         closeOnOverlayClick={false}
       >
-        <Form onSubmit={()=>{
-          // Todo. Submit Action 여기로 이동시키기
-        }} schema={studySchema}>
+        <Form
+          onSubmit={() => {
+            // Todo. Submit Action 여기로 이동시키기
+          }}
+          schema={studySchema}
+        >
           <MakeStudy
-            steps={steps}
             clickHandler={clickHandler}
             Funnel={Funnel}
             Step={Step}
