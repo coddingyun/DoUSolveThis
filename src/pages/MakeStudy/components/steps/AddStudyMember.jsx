@@ -44,7 +44,11 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     clickHandler(makeStudyStepTitle[3]);
   };
 
-  const mutation = usePostStudy(onStudySuccessCallback);
+  const onStudyErrorCallback = () => {
+    clickHandler(makeStudyStepTitle[4]);
+  }
+
+  const mutation = usePostStudy(onStudySuccessCallback, onStudyErrorCallback);
 
   const onNext = () => {
     mutation.mutate({

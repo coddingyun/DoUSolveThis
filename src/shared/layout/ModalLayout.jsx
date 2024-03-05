@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Form } from '../components/Form';
 
-const ModalLayout = ({
+const ModalLayout = React.memo(({
   title = '스터디 만들기',
   children,
   leftButtonTitle,
@@ -79,6 +79,8 @@ const ModalLayout = ({
       </ModalContent>
     </>
   );
-};
+});
+
+ModalLayout.displayName = 'ModalLayout';
 
 export default ModalLayout;

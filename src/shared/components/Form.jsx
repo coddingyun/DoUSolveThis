@@ -22,8 +22,6 @@ const FormNextButton = ({ title, dirtyFieldsCnt, onClick }) => {
   const {
     formState: { errors, dirtyFields },
   } = useFormContext(); // TODO. useFormState로 변경해보기
-
-  console.log(dirtyFieldsCnt)
   
   const isDirty = Object.keys(dirtyFields).length === dirtyFieldsCnt ? true : false;
   const isValid = Object.keys(errors).length ? false : true;
