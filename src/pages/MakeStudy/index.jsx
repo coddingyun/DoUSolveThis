@@ -15,7 +15,7 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       <Step name={makeStudyStepTitle[0]}>
         <WriteStudyInfo
           onPrev={onClose}
-          onNext={() => clickHandler(makeStudyStepTitle[0])}
+          onNext={() => clickHandler(makeStudyStepTitle[1])}
         />
       </Step>
 
@@ -28,7 +28,7 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
 
       <Step name={makeStudyStepTitle[2]}>
         <AddStudyMember
-          onPrev={() => clickHandler(makeStudyStepTitle[0])}
+          onPrev={() => clickHandler(makeStudyStepTitle[1])}
           clickHandler={clickHandler}
         />
       </Step>
