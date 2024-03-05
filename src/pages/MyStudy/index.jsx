@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch } from '@chakra-ui/react';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import StudyCard from './components/Card';
@@ -6,7 +6,8 @@ import useMyStudy from './hooks/api/useMyStudy';
 import { useAppActions } from '../../store/appStore';
 
 const MyStudy = () => {
-  const { myStudy, isLoading, switchStatus, setSwitchStatus } = useMyStudy();
+  const { myStudy, isLoading } = useMyStudy();
+  const [switchStatus, setSwitchStatus] = useState(false);
   const { setCurMenu } = useAppActions();
 
   const handleChangeSwitch = () => {
@@ -32,13 +33,18 @@ const MyStudy = () => {
         </div>
         <div className="scroll-auto grid grid-cols-3 mt-8 gap-6">
           {!isLoading &&
-            myStudy.map(item => (
+            myStudy.managements.map(item => (
               <StudyCard
                 key={item.id}
                 id={item.id}
                 title={item.title}
-                management={'isManagement' in item ? item.isManagment : true}
+                management
               />
+            ))}
+          {!isLoading &&
+            switchStatus === false &&
+            myStudy.participations.map(item => (
+              <StudyCard key={item.id} id={item.id} title={item.title} />
             ))}
         </div>
       </div>
