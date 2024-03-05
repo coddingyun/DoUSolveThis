@@ -6,11 +6,12 @@ import { Form } from '../../../shared/components/Form';
 import EditStudy from '../../../shared/components/editStudy/EditStudy';
 import { editStudyStepTitle } from '../../../shared/constants/steps';
 import { useEditStudyActions } from '../../../store/studyStore';
+import { studySchema } from '../../../shared/constants/schema';
 
 const StudyCard = React.memo(({ id, title, management = false }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Funnel, Step, setStep } = useFunnel();
+  const { Funnel, Step, setStep } = useFunnel(editStudyStepTitle[0]);
   const { reset } = useEditStudyActions();
 
   const clickHandler = nextStep => {
@@ -42,7 +43,12 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
         }}
         closeOnOverlayClick={false}
       >
-        <Form>
+        <Form
+          onSubmit={() => {
+            // Todo. Submit Action 여기로 이동시키기
+          }}
+          schema={studySchema}
+        >
           <EditStudy
             clickHandler={clickHandler}
             Funnel={Funnel}

@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 import ModalLayout from '../../layout/ModalLayout';
 import { editStudyStepTitle } from '../../constants/steps';
 import EditStudyInfo from './steps/EditStudyInfo';
+import EditMeetingInfo from './steps/EditMeetingInfo';
 
 const EditStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const modalStateList = [
@@ -9,6 +10,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       leftButtonTitle: '잠깐만요',
       rightButtonTitle: '다음',
       rightButtonType: 'next',
+      dirtyFieldsCnt: 4,
       onPrev: onClose,
       onNext: () => clickHandler(editStudyStepTitle[1]),
     },
@@ -42,13 +44,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose }) => {
     setModalState: () => {},
   });
 
-  const [modalState, setModalState] = useState({
-    leftButtonTitle: '잠깐만요',
-    rightButtonTitle: '다음',
-    rightButtonType: 'next',
-    onPrev: onClose,
-    onNext: () => clickHandler(editStudyStepTitle[1]),
-  });
+  const [modalState, setModalState] = useState(modalStateList[0]);
 
   return (
     <EditContext.Provider value={{ modalState, setModalState }}>
@@ -65,7 +61,9 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose }) => {
           <Step name={editStudyStepTitle[0]}>
             <EditStudyInfo />
           </Step>
-          <Step name={editStudyStepTitle[1]}></Step>
+          <Step name={editStudyStepTitle[1]}>
+            <EditMeetingInfo />
+          </Step>
           <Step name={editStudyStepTitle[2]}></Step>
           <Step name={editStudyStepTitle[3]}></Step>
         </Funnel>
