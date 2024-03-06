@@ -54,6 +54,7 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
             Funnel={Funnel}
             Step={Step}
             onClose={onClose}
+            editId={id}
           />
         </Form>
       </Modal>
