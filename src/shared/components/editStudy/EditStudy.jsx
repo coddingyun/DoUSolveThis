@@ -9,6 +9,7 @@ import useStudyInfo from '../../hooks/api/useStudyInfo';
 import { useEditStudyActions, useEditStudyStore } from '../../../store/studyStore';
 import EditCompleted from './steps/EditCompleted';
 import usePutStudyInfo from '../../hooks/api/usePutStudyInfo';
+import StudyModalError from '../StudyModalError';
 
 const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
   const [modalState, setModalState] = useState(0);
@@ -145,6 +146,17 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
           navigate('/my-study')
         },
       },
+      {
+        title: null,
+        buttonTitle: "확인",
+        prevNext: false,
+        onNext: () => {
+          setModalState(0);
+          onClose();
+          clickHandler(editStudyStepTitle[0]);
+          navigate('/my-study')
+        },
+      },
     ],
     [studyInfoData],
   );
@@ -175,6 +187,9 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
         </Step>
         <Step name={editStudyStepTitle[3]}>
           <EditCompleted />
+        </Step>
+        <Step name={editStudyStepTitle[4]}>
+          <StudyModalError />
         </Step>
       </Funnel>
     </ModalLayout>

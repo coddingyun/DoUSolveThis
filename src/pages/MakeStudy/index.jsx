@@ -5,6 +5,7 @@ import AddStudyMember from './components/steps/AddStudyMember';
 import Completed from './components/steps/Completed';
 import { useStudyActions } from '../../store/studyStore';
 import { makeStudyStepTitle } from '../../shared/constants/steps';
+import ModalLayout from '../../shared/layout/ModalLayout';
 
 const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       <Step name={makeStudyStepTitle[2]}>
         <AddStudyMember
           onPrev={() => clickHandler(makeStudyStepTitle[1])}
+          rightButtonType="submit"
           clickHandler={clickHandler}
         />
       </Step>
@@ -41,7 +43,6 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
             clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
-          rightButtonType="submit"
           onNext={() => {
             navigate('/my-study');
             onClose();
@@ -49,6 +50,21 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
             reset();
           }}
         />
+      </Step>
+      <Step name={makeStudyStepTitle[4]}>
+        <ModalLayout
+          title={null}
+          buttonTitle= "확인"
+          prevNext={false}
+          onNext={() => {
+            navigate('/my-study');
+            onClose();
+            clickHandler(makeStudyStepTitle[0]);
+            reset();
+          }}
+        >
+          <Completed />
+        </ModalLayout>
       </Step>
     </Funnel>
   );
