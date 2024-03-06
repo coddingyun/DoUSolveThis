@@ -28,7 +28,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
     if (data.results.valid) {
-      addMember(data.results.bjanme);
+      addMember(data.results.bjname);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);

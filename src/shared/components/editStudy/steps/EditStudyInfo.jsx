@@ -28,6 +28,7 @@ const EditStudyInfo = () => {
     setLevel,
     setSolvedProblemNumber,
   } = useEditStudyActions();
+
   return (
     <>
       <InputContainer title="모임 이름">

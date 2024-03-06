@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import InputContainer from '../../InputContainer';
 import Input from '../../Input';
-import { useEditStudyActions, useStudyMembers } from '../../../../store/studyStore';
+import { useEditStudyActions, useEditStudyMembers } from '../../../../store/studyStore';
 import useCheckId from '../../../hooks/api/useCheckId';
 import { BaekjoonIdTag } from '../../Tag';
 
 const EditStudyMember = () => {
   const [term, setTerm] = useState('');
-  const members = useStudyMembers();
+  const members = useEditStudyMembers();
   const { addMember } = useEditStudyActions();
-  
+
   const onCheckIdSuccessCallback = data => {
     if (data.results.valid) {
-      addMember(data.results.bjanme);
+      addMember(data.results.bjname);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
@@ -35,7 +35,7 @@ const EditStudyMember = () => {
       <div className="flex flex-wrap gap-2">
         {members &&
           members.map((member, idx) => (
-            <BaekjoonIdTag key={`member#${idx}`}>{member}</BaekjoonIdTag>
+            <BaekjoonIdTag key={`member#${idx}`} type="edit">{member}</BaekjoonIdTag>
           ))}
       </div>
     </InputContainer>
