@@ -12,7 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import useCheckId from '../../../shared/hooks/api/useCheckId';
 import usePostUserProfile from '../hooks/api/usePostUserProfile';
-import useGetUserInfo from '../../../shared/hooks/api/useGetUserInfo';
+import { useUserName } from '../../../store/userStore';
 
 const UserInfoModal = ({ isOpen, onClose }) => {
   const [meetingType, setMeetingType] = useState();
@@ -22,16 +22,15 @@ const UserInfoModal = ({ isOpen, onClose }) => {
   });
   const [language, setLanguage] = useState();
   const [baekjoonId, setBaekjoonId] = useState();
+  const username = useUserName();
 
   const navigate = useNavigate();
-
-  const userInfo = useGetUserInfo();
   const mutation = usePostUserProfile();
 
   const onSuccessCallback = data => {
     if (data.results.valid) {
       mutation.mutate({
-        username: userInfo.data.username,
+        username: username,
         bjname: baekjoonId,
         prefer_type: meetingType,
         area: studyArea.area,

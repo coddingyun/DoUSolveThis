@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import useStudyInfo from './hooks/api/useStudyInfo';
+import useStudyInfo from '../../shared/hooks/api/useStudyInfo';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import Header from './components/Header';
 import StudyDetailInfo from './components/StudyDetailInfo';
