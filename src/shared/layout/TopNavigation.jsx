@@ -102,7 +102,7 @@ const TopNavigation = ({ children }) => {
           >
             스터디 찾기
           </Button>
-          <Button
+          {getAccessToken() && <Button
             className={`${curMenu === 'myStudy' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
@@ -110,7 +110,7 @@ const TopNavigation = ({ children }) => {
             }}
           >
             내 스터디
-          </Button>
+          </Button>}
         </div>
         <div className="pr-20 flex gap-8 items-center">
           <CreateStudyButton />
