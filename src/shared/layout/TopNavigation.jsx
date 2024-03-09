@@ -11,6 +11,7 @@ import Profile from '../components/Profile';
 import { Form } from '../components/Form';
 import { studySchema } from '../constants/schema';
 import { makeStudyStepTitle } from '../constants/steps';
+import { getAccessToken } from '../utils/auth';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -113,7 +114,7 @@ const TopNavigation = ({ children }) => {
         </div>
         <div className="pr-20 flex gap-8 items-center">
           <CreateStudyButton />
-          <ProfileButton />
+          {getAccessToken() && <ProfileButton />}
         </div>
       </div>
       <div className="px-20">{children}</div>
