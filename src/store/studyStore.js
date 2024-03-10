@@ -9,7 +9,7 @@ const initialState = {
   solvedProblemNumber: '',
   meetingType: '온라인',
   studyArea: {
-    area: '서울특별시',
+    area: '전국',
     city: '전체',
   },
   studyTime: '',

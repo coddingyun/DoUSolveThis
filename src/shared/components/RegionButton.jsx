@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -61,15 +61,9 @@ const RegionButton = ({
   disabled = false,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedArea, setSelectedArea] = useState('서울특별시');
+  const [selectedArea, setSelectedArea] = useState('전국');
   const [selectedDetailArea, setSelectedDetailArea] = useState('전체');
 
-  useEffect(() => {
-    setStudyArea({
-      area: '지역',
-      city: '전체',
-    });
-  }, []);
 
   const handleClickApply = () => {
     setStudyArea({

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const useFilterStore = create(set => ({
   studyArea: {
-    area: '지역',
+    area: '전국',
     city: '전체',
   },
 
