@@ -13,7 +13,7 @@ const usePostLogin = successCallback => {
     },
     {
       onSuccess: response => {
-        const accessToken = response.headers.get('Gauth');
+        const accessToken = response.headers.get('Access');
         const refreshToken = response.headers.get('RefreshToken');
 
         setAuthToken(accessToken, refreshToken);
