@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Modal } from '@chakra-ui/react';
-import Input from '../../../shared/components/Input';
 import ModalLayout from '../../../shared/layout/ModalLayout';
 import InputContainer from '../../../shared/components/InputContainer';
 import SelectComp from '../../../shared/components/Select';
@@ -13,15 +12,18 @@ import { useNavigate } from 'react-router-dom';
 import useCheckId from '../../../shared/hooks/api/useCheckId';
 import usePostUserProfile from '../hooks/api/usePostUserProfile';
 import { useUserName } from '../../../store/userStore';
+import { Form } from '../../../shared/components/Form';
+import { userSchema } from '../../../shared/constants/schema';
 
 const UserInfoModal = ({ isOpen, onClose }) => {
-  const [meetingType, setMeetingType] = useState();
+  const [meetingType, setMeetingType] = useState('온·오프라인 모두');
   const [studyArea, setStudyArea] = useState({
-    area: '',
-    city: '',
+    area: '전국',
+    city: '전체',
   });
-  const [language, setLanguage] = useState();
+  const [language, setLanguage] = useState('Python');
   const [baekjoonId, setBaekjoonId] = useState();
+  const [isValidBaekjoonId, setIsValidBaekjoonId] = useState(true);
   const username = useUserName();
 
   const navigate = useNavigate();
@@ -37,8 +39,9 @@ const UserInfoModal = ({ isOpen, onClose }) => {
         city: studyArea.city,
         language,
       });
+    } else {
+      setIsValidBaekjoonId(false);
     }
-    // TODO else 시 오류 표시
   };
   const { refetch } = useCheckId(baekjoonId, onSuccessCallback);
 
@@ -56,49 +59,54 @@ const UserInfoModal = ({ isOpen, onClose }) => {
       }}
       closeOnOverlayClick={false}
     >
-      <ModalLayout
-        title="정보 입력"
-        buttonTitle="등록하기"
-        prevNext={false}
-        closeButton={false}
-        onNext={handleClickRegister}
-      >
-        <InputContainer title="온·오프라인 여부">
-          <SelectComp
-            value={meetingType}
-            handleChangeValue={e => setMeetingType(e.target.value)}
-            options={MEETING_OPTIONS}
-            textClassName="!text-base !font-normal"
-            placeholder="온·오프라인 선택"
-          />
-        </InputContainer>
-        <InputContainer title="모임 지역">
-          <RegionButton
-            studyArea={studyArea}
-            setStudyArea={setStudyArea}
-            className="!w-full text-base !font-normal !text-left"
-            disabled={meetingType === '온라인'}
-          />
-        </InputContainer>
-        <InputContainer title="주 사용 언어">
-          <SelectComp
-            value={language}
-            handleChangeValue={e => setLanguage(e.target.value)}
-            options={LANG_OPTIONS}
-            textClassName="!text-base !font-normal"
-            placeholder="언어 선택"
-          />
-        </InputContainer>
-        <InputContainer title="백준 ID">
-          <Input
-            placeholder="백준 ID 입력"
-            value={baekjoonId}
-            handleChangeValue={e => {
-              setBaekjoonId(e.target.value);
-            }}
-          />
-        </InputContainer>
-      </ModalLayout>
+      <Form schema={userSchema}>
+        <ModalLayout
+          title="정보 입력"
+          buttonTitle="등록하기"
+          prevNext={false}
+          closeButton={false}
+          dirtyFieldsCnt={1}
+          onNext={handleClickRegister}
+        >
+          <InputContainer title="온·오프라인 여부">
+            <SelectComp
+              value={meetingType}
+              handleChangeValue={e => setMeetingType(e.target.value)}
+              options={MEETING_OPTIONS}
+              textClassName="!text-base !font-normal"
+              placeholder="온·오프라인 선택"
+            />
+          </InputContainer>
+          <InputContainer title="모임 지역">
+            <RegionButton
+              studyArea={studyArea}
+              setStudyArea={setStudyArea}
+              className="!w-full text-base !font-normal !text-left"
+              disabled={meetingType === '온라인'}
+            />
+          </InputContainer>
+          <InputContainer title="주 사용 언어">
+            <SelectComp
+              value={language}
+              handleChangeValue={e => setLanguage(e.target.value)}
+              options={LANG_OPTIONS}
+              textClassName="!text-base !font-normal"
+              placeholder="언어 선택"
+            />
+          </InputContainer>
+          <InputContainer title="백준 ID">
+            <Form.Input
+              placeholder="백준 ID 입력"
+              value={baekjoonId}
+              handleChangeValue={e => {
+                setBaekjoonId(e.target.value);
+              }}
+              errorName="baekjoonId"
+              isValidBaekjoonId={isValidBaekjoonId}
+            />
+          </InputContainer>
+        </ModalLayout>
+      </Form>
     </Modal>
   );
 };

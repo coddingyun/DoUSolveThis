@@ -4,10 +4,10 @@ const initialState = {
   studyName: '',
   description: '',
   kakaoUrl: '',
-  language: '',
+  language: 'Python',
   level: '입문',
   solvedProblemNumber: '',
-  meetingType: '온라인',
+  meetingType: '온·오프라인 모두',
   studyArea: {
     area: '전국',
     city: '전체',

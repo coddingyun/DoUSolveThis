@@ -60,6 +60,7 @@ const FormInput = ({
   handleChangeValue,
   handleKeyDown,
   errorName,
+  isValidBaekjoonId = true,
 }) => {
   const {
     register,
@@ -68,7 +69,7 @@ const FormInput = ({
 
   const errMsg = errors[errorName]?.message;
 
-  const borderStyle = errors[errorName]
+  const borderStyle = errors[errorName] || !isValidBaekjoonId
     ? 'border-error-300'
     : 'border-gray-300';
 
@@ -84,6 +85,9 @@ const FormInput = ({
       />
       {errMsg && (
         <span className="text-sm text-error-500">{errMsg}</span>
+      )}
+      {!isValidBaekjoonId && (
+        <span className="text-sm text-error-500">일치하는 ID가 없습니다</span>
       )}
     </>
   );
