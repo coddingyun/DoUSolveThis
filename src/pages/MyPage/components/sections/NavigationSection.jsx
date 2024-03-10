@@ -13,7 +13,7 @@ const NavigationSection = () => {
         }}
       />
       <NavigationCard
-        title="내가 만든 스터디 관리하기"
+        title="내가 관리하는 스터디 바로가기"
         onClick={() => {
           navigate('/my-study');
         }}

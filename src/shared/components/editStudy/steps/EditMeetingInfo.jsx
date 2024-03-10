@@ -1,28 +1,28 @@
-import RegionButton from '../../../../shared/components/RegionButton';
-import SelectComp from '../../../../shared/components/Select';
-import ModalLayout from '../../../../shared/layout/ModalLayout';
-import InputContainer from '../../../../shared/components/InputContainer';
+import React from 'react';
+import InputContainer from '../../InputContainer';
+import SelectComp from '../../Select';
+import RegionButton from '../../RegionButton';
+import { Form } from '../../Form';
 import {
+  useEditStudyActions,
+  useEditStudyArea,
+  useEditStudyFrequencyNumber,
+  useEditStudyFrequencyStandard,
+  useEditStudyMeetingType,
+  useEditStudyTime,
+} from '../../../../store/studyStore';
+import {
+  MEETING_OPTIONS,
   FREQUENCY_NUMBER_OPTIONS,
   FREQUENCY_STANDARD_OPTIONS,
-  MEETING_OPTIONS,
-} from '../../../../shared/constants/options';
-import {
-  useStudyActions,
-  useStudyArea,
-  useStudyFrequencyNumber,
-  useStudyFrequencyStandard,
-  useStudyMeetingType,
-  useStudyTime,
-} from '../../../../store/studyStore';
-import { Form } from '../../../../shared/components/Form';
+} from '../../../constants/options';
 
-const WriteMeetingInfo = ({ onPrev, onNext }) => {
-  const meetingType = useStudyMeetingType();
-  const studyArea = useStudyArea();
-  const studyTime = useStudyTime();
-  const frequencyStandard = useStudyFrequencyStandard();
-  const frequencyNumber = useStudyFrequencyNumber();
+const EditMeetingInfo = () => {
+  const meetingType = useEditStudyMeetingType();
+  const studyArea = useEditStudyArea();
+  const studyTime = useEditStudyTime();
+  const frequencyStandard = useEditStudyFrequencyStandard();
+  const frequencyNumber = useEditStudyFrequencyNumber();
 
   const {
     setMeetingType,
@@ -30,17 +30,9 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
     setStudyTime,
     setFrequencyStandard,
     setFrequencyNumber,
-  } = useStudyActions();
-
+  } = useEditStudyActions();
   return (
-    <ModalLayout
-      leftButtonTitle="이전"
-      rightButtonTitle="다음"
-      rightButtonType="next"
-      dirtyFieldsCnt={5}
-      onPrev={onPrev}
-      onNext={onNext}
-    >
+    <>
       <InputContainer title="온·오프라인 여부">
         <SelectComp
           value={meetingType}
@@ -81,8 +73,8 @@ const WriteMeetingInfo = ({ onPrev, onNext }) => {
           errorName="studyTime"
         />
       </InputContainer>
-    </ModalLayout>
+    </>
   );
 };
 
-export default WriteMeetingInfo;
+export default EditMeetingInfo;

@@ -7,14 +7,16 @@ import SearchInput from './components/SearchInput';
 import useSearch from './hooks/api/useSearch';
 import RegionButton from '../../shared/components/RegionButton';
 import { useFilterStudyArea, useFilterActions } from '../../store/filterStore';
-import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../shared/constants/options';
-
-const ORDER_OPTIONS = ['최신순', '인기순', '평균 티어 순', '평균 푼 문제 수'];
+import {
+  LANG_OPTIONS,
+  PURPOSE_OPTIONS,
+  ORDER_OPTIONS,
+} from '../../shared/constants/options';
 
 const SearchStudy = () => {
-  const [order, setOrder] = useState(0);
-  const [lang, setLang] = useState(0);
-  const [level, setLevel] = useState(0);
+  const [order, setOrder] = useState('최신순');
+  const [lang, setLang] = useState('');
+  const [level, setLevel] = useState('');
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
   // eslint-disable-next-line no-unused-vars

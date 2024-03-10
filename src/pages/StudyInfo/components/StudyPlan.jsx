@@ -24,7 +24,7 @@ const StudyPlan = ({ studyInfoData }) => {
       {open && (
         <div className="grid grid-cols-4 gap-8 pt-8">
           <Card title="지역" content={studyInfoData.area} />
-          <Card title="온/오프라인 여부" content={studyInfoData.meeting_type} />
+          <Card title="온·오프라인 여부" content={studyInfoData.meeting_type} />
           <Card
             title="모임 빈도"
             content={`${studyInfoData.period} ${studyInfoData.frequency}`}

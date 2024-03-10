@@ -13,7 +13,8 @@ export const noAuthApi = axios.create({
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 10 * 1000,
+  timeout: import Header from 'src/pages/StudyInfo/components/Header';
+10 * 1000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -50,8 +51,8 @@ const onResponseRejected = async error => {
       refresh: refreshToken,
     });
 
-    const newAccessToken = response.data.result.GAuth;
-    const newRefreshToken = response.data.result.RefreshToken;
+    const newAccessToken = (await response).headers.get('Access');
+    const newRefreshToken = (await response).headers.get('RefreshToken');
 
     setCookie('Access', newAccessToken);
     setCookie('Refresh', newRefreshToken);

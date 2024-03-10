@@ -8,12 +8,14 @@ import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
 import { useStudyActions } from '../../store/studyStore';
 import Profile from '../components/Profile';
-
-const steps = ['스터디 정보 작성', '모임 정보 작성', '스터디원 추가', '종료'];
+import { Form } from '../components/Form';
+import { studySchema } from '../constants/schema';
+import { makeStudyStepTitle } from '../constants/steps';
+import { getAccessToken } from '../utils/auth';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Funnel, Step, setStep } = useFunnel(steps[0]);
+  const { Funnel, Step, setStep } = useFunnel(makeStudyStepTitle[0]);
   const { reset } = useStudyActions();
 
   const clickHandler = nextStep => {
@@ -26,18 +28,24 @@ const CreateStudyButton = () => {
         isOpen={isOpen}
         onClose={() => {
           onClose();
-          clickHandler(steps[0]);
+          clickHandler(makeStudyStepTitle[0]);
           reset();
         }}
         closeOnOverlayClick={false}
       >
-        <MakeStudy
-          steps={steps}
-          clickHandler={clickHandler}
-          Funnel={Funnel}
-          Step={Step}
-          onClose={onClose}
-        />
+        <Form
+          onSubmit={() => {
+            // Todo. Submit Action 여기로 이동시키기
+          }}
+          schema={studySchema}
+        >
+          <MakeStudy
+            clickHandler={clickHandler}
+            Funnel={Funnel}
+            Step={Step}
+            onClose={onClose}
+          />
+        </Form>
       </Modal>
       <Button
         className="flex items-center gap-1 !bg-brand-600"
@@ -94,7 +102,7 @@ const TopNavigation = ({ children }) => {
           >
             스터디 찾기
           </Button>
-          <Button
+          {getAccessToken() && <Button
             className={`${curMenu === 'myStudy' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
@@ -102,11 +110,11 @@ const TopNavigation = ({ children }) => {
             }}
           >
             내 스터디
-          </Button>
+          </Button>}
         </div>
         <div className="pr-20 flex gap-8 items-center">
           <CreateStudyButton />
-          <ProfileButton />
+          {getAccessToken() && <ProfileButton />}
         </div>
       </div>
       <div className="px-20">{children}</div>

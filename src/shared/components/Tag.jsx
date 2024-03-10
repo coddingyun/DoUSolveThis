@@ -1,7 +1,7 @@
 import levelToRank from '../constants/levelToRank';
 import { tierBgColor, tierTextColor } from '../constants/tierColor';
 import { ReactComponent as Delete } from '../../assets/delete.svg';
-import { useStudyActions } from '../../store/studyStore';
+import { useEditStudyActions, useStudyActions } from '../../store/studyStore';
 
 export const RankTag = ({ children }) => {
   const tierText = levelToRank[children];
@@ -30,10 +30,16 @@ export const BottomTag = ({ children }) => {
   );
 };
 
-export const BaekjoonIdTag = ({ children }) => {
+export const BaekjoonIdTag = ({ children, type }) => {
   const { deleteMember } = useStudyActions();
+  const { deleteMember: deleteMemberEdit } = useEditStudyActions();
+  
   const handleClickDelete = () => {
-    deleteMember(children);
+    if (type == 'edit') {
+      deleteMemberEdit(children);
+    } else {
+      deleteMember(children);
+    }
   };
 
   return (
@@ -41,5 +47,38 @@ export const BaekjoonIdTag = ({ children }) => {
       {children}
       <Delete onClick={handleClickDelete} />
     </span>
+  );
+};
+
+export const ApplyStatusTag = ({ state }) => {
+  const tagStyle = state => {
+    switch (state) {
+      case '대기중':
+        return {
+          textColor: 'text-brand-700',
+          bgColor: 'bg-brand-50',
+          text: '대기중',
+        };
+      case '거절':
+        return {
+          textColor: 'text-error-700',
+          bgColor: 'bg-error-50',
+          text: '거절',
+        };
+      case '승인':
+        return {
+          textColor: 'text-success-50',
+          bgColor: 'bg-success-50',
+          text: '승낙',
+        };
+    }
+  };
+
+  return (
+    <div
+      className={`w-fit px-3 py-1 ${tagStyle(state).textColor} ${tagStyle(state).bgColor} text-sm font-medium rounded-2xl`}
+    >
+      {tagStyle(state).text}
+    </div>
   );
 };

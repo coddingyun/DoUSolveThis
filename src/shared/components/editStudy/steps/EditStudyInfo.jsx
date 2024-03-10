@@ -1,28 +1,25 @@
-import SelectComp from '../../../../shared/components/Select';
+import React from 'react';
+import InputContainer from '../../InputContainer';
+import SelectComp from '../../Select';
+import { Form } from '../../Form';
 import {
-  LANG_OPTIONS,
-  PURPOSE_OPTIONS,
-} from '../../../../shared/constants/options';
-import {
-  useStudyActions,
-  useStudyDescription,
-  useStudyKakaoUrl,
-  useStudyLanguage,
-  useStudyLevel,
-  useStudyName,
-  useStudySolvedProblemNumber,
+  useEditStudyActions,
+  useEditStudyDescription,
+  useEditStudyKakaoUrl,
+  useEditStudyLanguage,
+  useEditStudyLevel,
+  useEditStudyName,
+  useEditStudySolvedProblemNumber,
 } from '../../../../store/studyStore';
-import ModalLayout from '../../../../shared/layout/ModalLayout';
-import InputContainer from '../../../../shared/components/InputContainer';
-import { Form } from '../../../../shared/components/Form';
+import { LANG_OPTIONS, PURPOSE_OPTIONS } from '../../../constants/options';
 
-const WriteStudyInfo = ({ onPrev, onNext }) => {
-  const studyName = useStudyName();
-  const description = useStudyDescription();
-  const kakaoUrl = useStudyKakaoUrl();
-  const language = useStudyLanguage();
-  const level = useStudyLevel();
-  const solvedProblemNumber = useStudySolvedProblemNumber();
+const EditStudyInfo = () => {
+  const studyName = useEditStudyName();
+  const description = useEditStudyDescription();
+  const kakaoUrl = useEditStudyKakaoUrl();
+  const language = useEditStudyLanguage();
+  const level = useEditStudyLevel();
+  const solvedProblemNumber = useEditStudySolvedProblemNumber();
   const {
     setStudyName,
     setDescription,
@@ -30,17 +27,10 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
     setLanguage,
     setLevel,
     setSolvedProblemNumber,
-  } = useStudyActions();
+  } = useEditStudyActions();
 
   return (
-    <ModalLayout
-      leftButtonTitle="잠깐만요"
-      rightButtonTitle="다음"
-      rightButtonType="next"
-      dirtyFieldsCnt={4}
-      onPrev={onPrev}
-      onNext={onNext}
-    >
+    <>
       <InputContainer title="모임 이름">
         <Form.Input
           placeholder="모임 이름을 입력해주세요. (최대 15글자)"
@@ -90,8 +80,8 @@ const WriteStudyInfo = ({ onPrev, onNext }) => {
           errorName="problemNumber"
         />
       </InputContainer>
-    </ModalLayout>
+    </>
   );
 };
 
-export default WriteStudyInfo;
+export default EditStudyInfo;

@@ -6,8 +6,9 @@ import Input from '../../../../shared/components/Input';
 import useCheckId from '../../../../shared/hooks/api/useCheckId';
 import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
+import { makeStudyStepTitle } from '../../../../shared/constants/steps';
 
-const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
+const AddStudyMember = ({ onPrev, clickHandler }) => {
   const [term, setTerm] = useState('');
   const {
     studyName,
@@ -27,7 +28,7 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
     if (data.results.valid) {
-      addMember(data.results.bjanme);
+      addMember(data.results.bjname);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
@@ -40,12 +41,15 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
   };
 
   const onStudySuccessCallback = () => {
-    clickHandler(steps[3]);
+    clickHandler(makeStudyStepTitle[3]);
   };
 
-  const mutation = usePostStudy(onStudySuccessCallback);
+  const onStudyErrorCallback = () => {
+    clickHandler(makeStudyStepTitle[4]);
+  }
 
-  // TODO: 실 데이터로 교체
+  const mutation = usePostStudy(onStudySuccessCallback, onStudyErrorCallback);
+
   const onNext = () => {
     mutation.mutate({
       title: studyName,
@@ -68,6 +72,8 @@ const AddStudyMember = ({ onPrev, clickHandler, steps }) => {
     <ModalLayout
       leftButtonTitle="이전"
       rightButtonTitle="다음"
+      rightButtonType="submit"
+      dirtyFieldsCnt={5}
       onPrev={onPrev}
       onNext={onNext}
     >

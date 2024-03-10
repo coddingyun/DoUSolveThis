@@ -4,51 +4,67 @@ import WriteMeetingInfo from './components/steps/WriteMeetingInfo';
 import AddStudyMember from './components/steps/AddStudyMember';
 import Completed from './components/steps/Completed';
 import { useStudyActions } from '../../store/studyStore';
+import { makeStudyStepTitle } from '../../shared/constants/steps';
+import ModalLayout from '../../shared/layout/ModalLayout';
 
-const MakeStudy = ({ steps, clickHandler, Funnel, Step, onClose }) => {
+const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const navigate = useNavigate();
   const { reset } = useStudyActions();
 
   return (
     <Funnel>
-      <Step name="스터디 정보 작성">
+      <Step name={makeStudyStepTitle[0]}>
         <WriteStudyInfo
           onPrev={onClose}
-          onNext={() => clickHandler(steps[1])}
+          onNext={() => clickHandler(makeStudyStepTitle[1])}
         />
       </Step>
 
-      <Step name="모임 정보 작성">
+      <Step name={makeStudyStepTitle[1]}>
         <WriteMeetingInfo
-          onPrev={() => clickHandler(steps[0])}
-          onNext={() => clickHandler(steps[2])}
+          onPrev={() => clickHandler(makeStudyStepTitle[0])}
+          onNext={() => clickHandler(makeStudyStepTitle[2])}
         />
       </Step>
 
-      <Step name="스터디원 추가">
+      <Step name={makeStudyStepTitle[2]}>
         <AddStudyMember
-          onPrev={() => clickHandler(steps[1])}
+          onPrev={() => clickHandler(makeStudyStepTitle[1])}
+          rightButtonType="submit"
           clickHandler={clickHandler}
-          steps={steps}
         />
       </Step>
 
-      <Step name="종료">
+      <Step name={makeStudyStepTitle[3]}>
         <Completed
           onPrev={() => {
             navigate('/search');
             onClose();
-            clickHandler(steps[0]);
+            clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
           onNext={() => {
-            // TODO: 내 스터디로
-            navigate('/search');
+            navigate('/my-study');
             onClose();
-            clickHandler(steps[0]);
+            clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
         />
+      </Step>
+      <Step name={makeStudyStepTitle[4]}>
+        <ModalLayout
+          title={null}
+          buttonTitle= "확인"
+          prevNext={false}
+          onNext={() => {
+            navigate('/my-study');
+            onClose();
+            clickHandler(makeStudyStepTitle[0]);
+            reset();
+          }}
+        >
+          <Completed />
+        </ModalLayout>
       </Step>
     </Funnel>
   );

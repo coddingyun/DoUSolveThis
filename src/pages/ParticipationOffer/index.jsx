@@ -20,7 +20,7 @@ const ParticipationOffer = () => {
         <h1 className="text-gray-900 text-4xl font-bold mb-12">
           참여 제안 보기
         </h1>
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 gap-6">
           {data &&
             data.map((item, idx) => (
               <OfferCard

@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { api } from '../../../../shared/hooks/api';
+import { api } from '.';
 
 const useStudyInfo = id => {
   const { data, isLoading } = useQuery('studyInfo', async () => {
