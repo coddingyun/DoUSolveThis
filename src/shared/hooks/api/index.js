@@ -13,8 +13,7 @@ export const noAuthApi = axios.create({
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: import Header from 'src/pages/StudyInfo/components/Header';
-10 * 1000,
+  timeout: 10 * 1000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
