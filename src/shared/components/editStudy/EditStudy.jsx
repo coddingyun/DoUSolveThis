@@ -125,7 +125,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
             main_language: language,
             level,
             members,
-            area: studyArea.area === '지역' ? 'ALL' : studyArea.area,
+            area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
             city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
             how_many: solvedProblemNumber,
             meeting_type: meetingType,
