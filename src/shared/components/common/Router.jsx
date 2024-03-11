@@ -2,6 +2,7 @@ import { lazy, useEffect } from 'react';
 import useGetUserInfo from '../../hooks/api/useGetUserInfo';
 import { useUserActions } from '../../../store/userStore';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { getAccessToken } from '../../utils/auth';
 
 const Landing = lazy(() => import('../../../pages/Landing'));
 const Login = lazy(() => import('../../../pages/Login'));
@@ -20,7 +21,9 @@ const Router = () => {
   const { data: userInfo, refetch } = useGetUserInfo();
 
   useEffect(() => {
-    refetch();
+    if (getAccessToken()) {
+      refetch();
+    }
   }, []);
 
   useEffect(() => {
