@@ -1,20 +1,10 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as GoogleIcon } from '../../../../assets/googleIcon.svg';
 import LoginButton from './LoginButton';
 import usePostLogin from '../../hooks/api/usePostLogin';
 
 const GoogleLoginButton = ({ onOpen }) => {
-  const navigate = useNavigate();
-
-  const onSuccessCallback = response => {
-    if (response.data.isFirst) {
-      onOpen();
-    } else {
-      navigate('/search');
-    }
-  };
-  const googleLogin = usePostLogin(onSuccessCallback);
+  const googleLogin = usePostLogin(onOpen);
 
   const handleClickGoogleLogin = useGoogleLogin({
     onSuccess: async credentialResponse => {
