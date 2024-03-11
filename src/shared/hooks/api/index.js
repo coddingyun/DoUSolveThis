@@ -43,6 +43,7 @@ const onResponseRejected = async error => {
   if (error.response?.status === 401) {
     // TODO: refresh token 으로 access token 받아오기
     const requestConfig = error.config;
+    if (!requestConfig) return Promise.reject(error);
 
     const refreshToken = getCookie('Refresh');
 
@@ -57,6 +58,7 @@ const onResponseRejected = async error => {
     setCookie('Refresh', newRefreshToken);
 
     requestConfig.headers.Access = newAccessToken;
+    return api(requestConfig);
   }
 };
 
