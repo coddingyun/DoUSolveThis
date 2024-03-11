@@ -14,7 +14,7 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
             page: pageParam,
             language: lang || 'ALL',
             level: levelNum || 'ALL',
-            area: area.area === '지역' ? 'ALL' : area.area,
+            area: area.area === '전국' ? 'ALL' : area.area,
             city: area.city === '전체' ? 'ALL' : area.city,
           },
         });
