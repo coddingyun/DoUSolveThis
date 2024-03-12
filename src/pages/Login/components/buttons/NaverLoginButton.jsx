@@ -10,7 +10,6 @@ const NaverLoginButton = ({ onOpen }) => {
   const naverLogin = usePostLogin(onOpen);
 
   useEffect(() => {
-    console.log('hi')
     const axiosNaverLogin = async () => {
       if (code && state) {
         const data = {
