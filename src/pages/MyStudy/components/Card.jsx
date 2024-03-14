@@ -1,31 +1,30 @@
 import React from 'react';
-import { Button, Modal, useDisclosure } from '@chakra-ui/react';
+import { Button, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import useFunnel from '../../../shared/hooks/useFunnel';
-import { Form } from '../../../shared/components/Form';
-import EditStudy from '../../../shared/components/editStudy/EditStudy';
-import { editStudyStepTitle } from '../../../shared/constants/steps';
-import { useEditStudyActions } from '../../../store/studyStore';
-import { studySchema } from '../../../shared/constants/schema';
+import EditModal from './modals/EditModal';
+import ExitModal from './modals/ExitModal';
 
 const StudyCard = React.memo(({ id, title, management = false }) => {
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Funnel, Step, setStep } = useFunnel(editStudyStepTitle[0]);
-  const { reset } = useEditStudyActions();
-
-  const clickHandler = nextStep => {
-    setStep(nextStep);
-  };
+  const {
+    isOpen: isExitModalOpen,
+    onOpen: onExitModalOpen,
+    onClose: onExitModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isEditModalOpen,
+    onOpen: onEditModalOpen,
+    onClose: onEditModalClose,
+  } = useDisclosure();
 
   const url = `/info/${id}`;
 
   const handleExit = () => {
-    // TODO exit api
+    onExitModalOpen();
   };
 
   const handleEdit = () => {
-    onOpen();
+    onEditModalOpen();
   };
 
   const handleNavigate = () => {
@@ -34,30 +33,16 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={() => {
-          onClose();
-          clickHandler(editStudyStepTitle[0]);
-          reset();
-        }}
-        closeOnOverlayClick={false}
-      >
-        <Form
-          onSubmit={() => {
-            // Todo. Submit Action 여기로 이동시키기
-          }}
-          schema={studySchema}
-        >
-          <EditStudy
-            clickHandler={clickHandler}
-            Funnel={Funnel}
-            Step={Step}
-            onClose={onClose}
-            editId={id}
-          />
-        </Form>
-      </Modal>
+      <EditModal
+        isEditModalOpen={isEditModalOpen}
+        onEditModalClose={onEditModalClose}
+        id={id}
+      />
+      <ExitModal
+        isExitModalOpen={isExitModalOpen}
+        onExitModalClose={onExitModalClose}
+        id={id}
+      />
       <div className="block bg-white border border-gray-200 rounded-lg shadow">
         <h5 className="p-6 text-3xl font-semibold tracking-tight text-gray-900">
           {title}

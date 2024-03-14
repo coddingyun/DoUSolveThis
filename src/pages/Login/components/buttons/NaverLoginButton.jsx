@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import LoginButton from './LoginButton';
 import { ReactComponent as NaverIcon } from '../../../../assets/naverIcon.svg';
 import usePostLogin from '../../hooks/api/usePostLogin';
 
-const NaverLoginButton = () => {
+const NaverLoginButton = ({ onOpen }) => {
   const code = new URL(window.location.href).searchParams.get('code');
   const state = new URL(window.location.href).searchParams.get('state');
 
-  const navigate = useNavigate();
-  const onSuccessCallback = () => {
-    navigate('/search');
-  };
-  const naverLogin = usePostLogin(onSuccessCallback);
+  const naverLogin = usePostLogin(onOpen);
 
   useEffect(() => {
     const axiosNaverLogin = async () => {

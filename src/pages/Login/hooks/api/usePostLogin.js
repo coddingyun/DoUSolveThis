@@ -2,9 +2,11 @@ import { useMutation } from 'react-query';
 import { api } from '../../../../shared/hooks/api';
 import { setAuthToken } from '../../../../shared/utils/auth';
 import { useUserActions } from '../../../../store/userStore';
+import { useNavigate } from 'react-router-dom';
 
-const usePostLogin = successCallback => {
+const usePostLogin = onOpen => {
   const { setUserName, setUserId, setUserImage } = useUserActions();
+  const navigate = useNavigate();
 
   return useMutation(
     async data => {
@@ -20,7 +22,12 @@ const usePostLogin = successCallback => {
         setUserName(response.data.username);
         setUserId(response.data.userId);
         setUserImage(response.data.imageUrl);
-        successCallback(response);
+
+        if (response.data.isFirst) {
+          onOpen();
+        } else {
+          navigate('/search');
+        }
       },
     },
   );

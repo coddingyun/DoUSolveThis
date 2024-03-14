@@ -78,7 +78,7 @@ const ModalLayout = React.memo(
         <ModalOverlay />
         <ModalContent>
           {title && (
-            <ModalHeader className="text-center text-grey-900 text-2xl font-semibold">
+            <ModalHeader className="text-center text-grey-900 text-2xl font-semibold whitespace-pre-line">
               {title}
             </ModalHeader>
           )}
