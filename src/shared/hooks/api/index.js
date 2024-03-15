@@ -47,12 +47,12 @@ const onResponseRejected = async error => {
 
     const refreshToken = getCookie('Refresh');
 
-    const response = api.post('/api/update/token', {
+    const response = await api.post('/api/update/token', {
       refresh: refreshToken,
     });
 
-    const newAccessToken = (await response).headers.get('Access');
-    const newRefreshToken = (await response).headers.get('RefreshToken');
+    const newAccessToken = response.headers.get('Access');
+    const newRefreshToken = response.headers.get('RefreshToken');
 
     setCookie('Access', newAccessToken);
     setCookie('Refresh', newRefreshToken);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg';
 import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg';
-import UserTag from './UserTag';
+import { UserTag } from '../../../shared/components/Tag';
 
 const MemberList = ({ studyInfoData }) => {
   const [open, setOpen] = useState(true);

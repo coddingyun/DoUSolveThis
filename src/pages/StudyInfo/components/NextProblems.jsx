@@ -1,8 +1,7 @@
 import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../hooks/api/nextProblems/useDeleteNextProblem';
-import { RankTag } from '../../../shared/components/Tag';
-import UserTag from './UserTag';
+import { RankTag, UserTag } from '../../../shared/components/Tag';
 import useGetNextProblems from '../hooks/api/nextProblems/useGetNextProblems';
 import { ReactComponent as Trash } from '../../../assets/trash.svg';
 import { useNextProbs } from '../../../store/nextProbStore';
