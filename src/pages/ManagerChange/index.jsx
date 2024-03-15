@@ -19,6 +19,7 @@ const ManagerChange = () => {
             data.map((item, idx) => (
               <StudyCardForManagerChange
                 key={`StudyCardForManagerChange#${idx}`}
+                id={item.id}
                 title={item.title}
                 description={item.description}
               />
