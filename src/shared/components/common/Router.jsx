@@ -15,6 +15,7 @@ const ParticipationOffer = lazy(
   () => import('../../../pages/ParticipationOffer'),
 );
 const ApplyList = lazy(() => import('../../../pages/ApplyList'));
+const ManagerChange = lazy(() => import('../../../pages/ManagerChange'));
 
 const Router = () => {
   const { setUserName, setUserId, setUserImage } = useUserActions();
@@ -50,6 +51,7 @@ const Router = () => {
           element={<ParticipationOffer />}
         />
         <Route path="/apply-list" exact element={<ApplyList />} />
+        <Route path="/manager-change" exact element={<ManagerChange />} />
       </Routes>
     </BrowserRouter>
   );
