@@ -7,13 +7,13 @@ const useWithdraw = () => {
   const navigate = useNavigate();
   const onSuccessCallback = data => {
     if (data) {
-      // TODO. 스터디 탈퇴 시 스터디장 지정 페이지로 이동
-      // navigate('/')
+      navigate('/manager-change');
     } else {
-      navigate('/')
+      navigate('/');
     }
-  }
-  const { refetch: refetchGetManagementStudy } = useGetManagementStudy(onSuccessCallback);
+  };
+  const { refetch: refetchGetManagementStudy } =
+    useGetManagementStudy(onSuccessCallback);
 
   return useQuery('withdraw', async () => api.get('/api/withdraw'), {
     enabled: false,
