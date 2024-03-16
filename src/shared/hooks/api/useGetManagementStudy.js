@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { api } from '.';
 
-const useGetManagementStudy = successCallback => {
+const useGetManagementStudy = (successCallback, enabled = false) => {
   return useQuery(
     'managementStudy',
     async () => {
@@ -9,8 +9,8 @@ const useGetManagementStudy = successCallback => {
       return response.data;
     },
     {
-      enabled: false,
-      onSuccess: successCallback
+      enabled: enabled,
+      onSuccess: successCallback,
     },
   );
 };
