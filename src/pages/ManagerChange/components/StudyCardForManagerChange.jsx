@@ -7,6 +7,7 @@ import SelectComp from '../../../shared/components/Select';
 import useStudyInfo from '../../../shared/hooks/api/useStudyInfo';
 import usePutStudyManager from '../../../shared/hooks/api/usePutStudyManager';
 import { useUserName } from '../../../store/userStore';
+import { useWithdrawActions } from '../../../store/withdrawStore';
 
 const StudyCardForManagerChange = ({ title, description, id }) => {
   const [isChanged, setIsChanged] = useState(false);
@@ -14,10 +15,12 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
     username: '',
     userId: 0,
   });
+  const { setManagerChangedId } = useWithdrawActions();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onSuccessCallBack = () => {
     setIsChanged(true);
+    setManagerChangedId(id);
     onClose();
   };
 
@@ -72,7 +75,6 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
           <SelectComp
             value={manager.username}
             handleChangeValue={e => {
-              console.log(e.target.value);
               const pickedManager = members.filter(member => {
                 if (member.username === e.target.value) {
                   return member;
