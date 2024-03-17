@@ -52,7 +52,7 @@ const onResponseRejected = async error => {
     });
 
     const newAccessToken = response.headers.get('Access');
-    const newRefreshToken = response.headers.get('RefreshToken');
+    const newRefreshToken = response.headers.get('Refreshtoken');
 
     setCookie('Access', newAccessToken);
     setCookie('Refresh', newRefreshToken);

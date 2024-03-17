@@ -16,7 +16,7 @@ const usePostLogin = onOpen => {
     {
       onSuccess: response => {
         const accessToken = response.headers.get('Access');
-        const refreshToken = response.headers.get('RefreshToken');
+        const refreshToken = response.headers.get('Refreshtoken');
 
         setAuthToken(accessToken, refreshToken);
         setUserName(response.data.username);
