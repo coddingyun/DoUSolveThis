@@ -8,14 +8,26 @@ import ProfileSection from './components/sections/ProfileSection';
 import UserInfoSection from './components/sections/UserInfoSection';
 import useGetMyPage from './hooks/api/useGetMyPage';
 import useLogout from './hooks/api/useLogout';
-import useWithdraw from './hooks/api/useWithdraw';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppActions } from '../../store/appStore';
+import useGetManagementStudy from '../../shared/hooks/api/useGetManagementStudy';
+import useWithdraw from './hooks/api/useWithdraw';
 
 const MakeStudy = () => {
   const { data } = useGetMyPage();
   const { refetch: refetchLogout } = useLogout();
   const { refetch: refetchWithdraw } = useWithdraw();
+  const navigate = useNavigate();
+  const onSuccessCallback = data => {
+    if (data) {
+      navigate('/manager-change');
+    } else {
+      refetchWithdraw();
+    }
+  };
+  const { refetch: refetchGetManagementStudy } =
+    useGetManagementStudy(onSuccessCallback);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { setCurMenu } = useAppActions();
 
@@ -24,16 +36,15 @@ const MakeStudy = () => {
   };
 
   const handleClickWithdraw = () => {
-    refetchWithdraw();
+    refetchGetManagementStudy();
   };
 
-  
   const modalTitle = "정말 '이 문제 푸셨나요?'를\n 탈퇴하시겠습니까?";
-  
+
   useEffect(() => {
     setCurMenu('myPage');
   }, []);
-  
+
   if (!data) {
     return null;
   }

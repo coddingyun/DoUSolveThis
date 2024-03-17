@@ -5,10 +5,11 @@ import {
   ModalHeader,
   ModalFooter,
   ModalCloseButton,
+  ModalBody,
   Button,
 } from '@chakra-ui/react';
 
-const SimpleModal = ({ isOpen, onClose, title, buttonTitle, onClick }) => {
+const SimpleModal = ({ isOpen, onClose, title, buttonTitle, onClick, children }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="!w-10">
       <ModalOverlay />
@@ -17,6 +18,7 @@ const SimpleModal = ({ isOpen, onClose, title, buttonTitle, onClick }) => {
           {title}
         </ModalHeader>
         <ModalCloseButton />
+        <ModalBody className="flex flex-col gap-4">{children}</ModalBody>
         <ModalFooter className="!w-full grid grid-cols-2 gap-3">
           <Button
             className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
