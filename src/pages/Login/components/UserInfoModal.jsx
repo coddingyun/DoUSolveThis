@@ -30,7 +30,7 @@ const UserInfoModal = ({ isOpen, onClose }) => {
   const mutation = usePostUserProfile();
 
   const onSuccessCallback = data => {
-    if (data.results.valid) {
+    if (data.valid) {
       mutation.mutate({
         username: username,
         bjname: baekjoonId,
