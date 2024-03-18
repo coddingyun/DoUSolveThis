@@ -20,6 +20,7 @@ const Header = ({ studyInfoData, studyId }) => {
       />
     );
   };
+  
   return (
     <>
       <div className="py-5 flex justify-between items-start">
