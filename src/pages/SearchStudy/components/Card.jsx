@@ -12,7 +12,7 @@ export const StudyCard = React.memo(({ item }) => {
     >
       <div className="px-6 pt-4 mb-2 flex items-start justify-between">
         <RecruitingTag isRecruiting={item.recruiting}/>
-        <RankTag>{item.tier}</RankTag>
+        <RankTag>{item.avg_rank}</RankTag>
       </div>
       <h5 className="px-6 mb-2 text-3xl font-semibold tracking-tight text-gray-900">
         {item.title}

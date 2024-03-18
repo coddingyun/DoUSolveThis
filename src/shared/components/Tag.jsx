@@ -9,8 +9,8 @@ export const RankTag = ({ children }) => {
   let bgColor = '';
   let textColor = '';
   if (children === 0) {
-    bgColor = 'bg-grey-600';
-    textColor = 'text-white';
+    bgColor = 'bg-blue-gray-50';
+    textColor = 'text-blue-gray-700';
   } else {
     const idx = parseInt((children - 1) / 5, 10);
     bgColor = tierBgColor[idx];
@@ -18,8 +18,9 @@ export const RankTag = ({ children }) => {
   }
   return (
     <span
-      className={`${bgColor} ${textColor} text-sm font-medium me-2 px-2.5 py-0.5 rounded-2xl`}
+      className={`flex gap-2 ${bgColor} ${textColor} text-sm font-semibold me-2 px-3 py-1 rounded-2xl`}
     >
+      <img src={`badge/${tierText}.png`} width="16"/>
       {tierText}
     </span>
   );

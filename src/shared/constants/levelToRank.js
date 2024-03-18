@@ -1,35 +1,35 @@
 const levelToRank = [
   'Unrated',
-  '브론즈 Ⅴ', // 1~5
-  '브론즈 Ⅳ',
-  '브론즈 Ⅲ',
-  '브론즈 Ⅱ',
-  '브론즈 Ⅰ',
-  '실버 Ⅴ', // 6~10
-  '실버 Ⅳ',
-  '실버 Ⅲ',
-  '실버 Ⅱ',
-  '실버 I',
-  '골드 Ⅴ', // 11~15
-  '골드 Ⅳ',
-  '골드 Ⅲ',
-  '골드 Ⅱ',
-  '골드 I',
-  '플레 Ⅴ', // 16~ Ⅱ0
-  '플레 Ⅳ',
-  '플레 Ⅲ',
-  '플레 Ⅱ',
-  '플레 I',
-  '다이아 Ⅴ', //  Ⅱ1~ Ⅱ5
-  '다이아 Ⅳ',
-  '다이아 Ⅲ',
-  '다이아 Ⅱ',
-  '다이아 I',
-  '루비 Ⅴ', //  Ⅱ6~30
-  '루비 Ⅳ',
-  '루비 Ⅲ',
-  '루비 Ⅱ',
-  '루비 I',
+  'Bronze Ⅴ', // 1~5
+  'Bronze Ⅳ',
+  'Bronze Ⅲ',
+  'Bronze Ⅱ',
+  'Bronze Ⅰ',
+  'Silver Ⅴ', // 6~10
+  'Silver Ⅳ',
+  'Silver Ⅲ',
+  'Silver Ⅱ',
+  'Silver I',
+  'Gold Ⅴ', // 11~15
+  'Gold Ⅳ',
+  'Gold Ⅲ',
+  'Gold Ⅱ',
+  'Gold I',
+  'Platinum Ⅴ', // 16~ Ⅱ0
+  'Platinum Ⅳ',
+  'Platinum Ⅲ',
+  'Platinum Ⅱ',
+  'Platinum I',
+  'Diamond Ⅴ', //  Ⅱ1~ Ⅱ5
+  'Diamond Ⅳ',
+  'Diamond Ⅲ',
+  'Diamond Ⅱ',
+  'Diamond I',
+  'Ruby Ⅴ', //  Ⅱ6~30
+  'Ruby Ⅳ',
+  'Ruby Ⅲ',
+  'Ruby Ⅱ',
+  'Ruby I',
 ];
 
 export default levelToRank;
