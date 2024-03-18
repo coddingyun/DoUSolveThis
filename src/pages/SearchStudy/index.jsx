@@ -13,6 +13,8 @@ import {
   ORDER_OPTIONS,
 } from '../../shared/constants/options';
 import CheckBoxButton from './components/CheckBoxButton';
+import { Button } from '@chakra-ui/react';
+import { ReactComponent as Rotate } from '../../assets/rotate-cw.svg';
 
 const SearchStudy = () => {
   const [order, setOrder] = useState('최신순');
@@ -63,6 +65,20 @@ const SearchStudy = () => {
     setIsRecruiting(prev => !prev);
   };
 
+  const handleClickInitButton = () => {
+    setOrder('최신순');
+    setLang('');
+    setLevel('');
+    setTerm('');
+    setCompletedTerm('');
+    setIsOnline(false);
+    setIsRecruiting(true);
+    setStudyArea({
+      area: '전국',
+      city: '전체',
+    });
+  };
+
   return (
     <TopNavigation>
       <div>
@@ -96,6 +112,13 @@ const SearchStudy = () => {
               isSelected={isRecruiting}
               onClick={handleChangeIsRecruting}
             />
+            <Button
+              className="flex gap-2 !bg-transparent border !border-transparent !text-gray-500 !text-xs"
+              onClick={handleClickInitButton}
+            >
+              <Rotate />
+              초기화
+            </Button>
           </div>
           <SelectComp
             value={order}
@@ -104,7 +127,7 @@ const SearchStudy = () => {
             className="w-32"
           />
         </div>
-        <div className="scroll-auto mt-6 grid grid-cols-3 gap-6">
+        <div className="scroll-auto mt-8 grid grid-cols-3 gap-6">
           {isFetching &&
             Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
           {!isFetching &&
