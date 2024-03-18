@@ -22,9 +22,9 @@ const StudyInfo = () => {
           />
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
-          <MemberList studyInfoData={studyInfoData} />
+          {studyInfoData.participated && <MemberList studyInfoData={studyInfoData} />}
           <Line />
-          <NextProblems />
+          {studyInfoData.participated && <NextProblems />}
         </div>
       </TopNavigation>
     )

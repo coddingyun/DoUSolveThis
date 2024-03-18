@@ -4,11 +4,11 @@ import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 import { RankTag, RecruitingTag } from '../../../shared/components/Tag';
 
-const Header = ({ studyInfoData, studyId, participated = true }) => {
+const Header = ({ studyInfoData, studyId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const renderModal = () => {
-    if (participated) {
+    if (studyInfoData.participated) {
       return <EnterProblem isOpen={isOpen} onClose={onClose} />;
     }
     return (
@@ -48,7 +48,7 @@ const Header = ({ studyInfoData, studyId, participated = true }) => {
           <Button className="!bg-brand-50 !text-brand-700 rounded-lg text-color font-semibold text-sm">
             현재 참여 인원 {studyInfoData.members.length}명
           </Button>
-          {!participated && (
+          {!studyInfoData.participated && (
             <Button
               onClick={onOpen}
               className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
