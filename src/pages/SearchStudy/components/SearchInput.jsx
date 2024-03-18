@@ -2,7 +2,7 @@ import { ReactComponent as Search } from '../../../assets/search.svg';
 
 const SearchInput = ({ value, handleChangeValue }) => {
   return (
-    <div className="my-10 w-full grid place-items-center">
+    <div className="my-10">
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-grey-500">
           <Search strokeWidth="2" className="w-5 h-5" />
