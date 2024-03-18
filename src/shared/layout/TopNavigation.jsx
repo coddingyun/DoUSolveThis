@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
@@ -12,6 +12,7 @@ import { Form } from '../components/Form';
 import { studySchema } from '../constants/schema';
 import { makeStudyStepTitle } from '../constants/steps';
 import { getAccessToken } from '../utils/auth';
+import ProfileModal from '../components/ProfileModal';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,15 +60,18 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
-  const navigate = useNavigate();
-  const handleNavigateToMyPage = () => {
-    navigate('/my-page');
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClickProfile = () => {
+    setIsOpen(prev => !prev);
   };
 
   return (
-    <Button className="!bg-transparent !p-0" onClick={handleNavigateToMyPage}>
-      <Profile boxSize="32px" />
-    </Button>
+    <div className='relative'>
+      <Button className="!bg-transparent !p-0" onClick={handleClickProfile}>
+        <Profile boxSize="32px" />
+      </Button>
+      {isOpen && <ProfileModal />}
+    </div>
   );
 };
 
