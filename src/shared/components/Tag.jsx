@@ -1,24 +1,14 @@
 import levelToRank from '../constants/levelToRank';
-import { tierBgColor, tierTextColor } from '../constants/tierColor';
 import { ReactComponent as Delete } from '../../assets/delete.svg';
 import { useEditStudyActions, useStudyActions } from '../../store/studyStore';
 import { getTierColor } from '../utils/tierInfo';
 
 export const RankTag = ({ children }) => {
   const tierText = levelToRank[children];
-  let bgColor = '';
-  let textColor = '';
-  if (children === 0) {
-    bgColor = 'bg-blue-gray-50';
-    textColor = 'text-blue-gray-700';
-  } else {
-    const idx = parseInt((children - 1) / 5, 10);
-    bgColor = tierBgColor[idx];
-    textColor = tierTextColor[idx];
-  }
+  const tierColor = getTierColor(children);
   return (
     <span
-      className={`flex gap-2 ${bgColor} ${textColor} text-sm font-semibold me-2 px-3 py-1 rounded-2xl`}
+      className={`flex gap-2 ${tierColor.bgColor} ${tierColor.textColor} text-sm font-semibold me-2 px-3 py-1 rounded-2xl`}
     >
       <img src={`/badge/${tierText}.png`} width="16" />
       {tierText}

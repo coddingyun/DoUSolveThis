@@ -7,8 +7,8 @@ export const getTierColor = tier => {
   let bgColor = '';
   let textColor = '';
   if (tier === 0) {
-    bgColor = 'bg-grey-600';
-    textColor = 'text-white';
+    bgColor = 'bg-blue-gray-50';
+    textColor = 'text-blue-gray-700';
   } else {
     const idx = parseInt((tier - 1) / 5, 10);
     bgColor = tierBgColor[idx];
