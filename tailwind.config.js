@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         'brand-50': '#F9F5FF',
         'brand-200': '#E9D7FE',
+        'brand-300': '#D6BBFB',
         'brand-600': '#7F56D9',
         'brand-700': '#6941C6',
         naver: '#03C75A',
