@@ -21,7 +21,7 @@ const SearchStudy = () => {
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
   const [isOnline, setIsOnline] = useState(false);
-  const [isRecruting, setIsRecruting] = useState(true);
+  const [isRecruiting, setIsRecruiting] = useState(true);
   const studyArea = useFilterStudyArea();
   const { setStudyArea } = useFilterActions();
 
@@ -31,6 +31,8 @@ const SearchStudy = () => {
     lang,
     level,
     studyArea,
+    isOnline,
+    isRecruiting,
   );
 
   const handleSearch = () => {
@@ -58,7 +60,7 @@ const SearchStudy = () => {
   };
 
   const handleChangeIsRecruting = () => {
-    setIsRecruting(prev => !prev);
+    setIsRecruiting(prev => !prev);
   };
 
   return (
@@ -91,7 +93,7 @@ const SearchStudy = () => {
             />
             <CheckBoxButton
               title="모집 중만 보기"
-              isSelected={isRecruting}
+              isSelected={isRecruiting}
               onClick={handleChangeIsRecruting}
             />
           </div>
