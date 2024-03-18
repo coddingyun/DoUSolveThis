@@ -22,7 +22,7 @@ const StudyPlan = ({ studyInfoData }) => {
         </Button>
       </div>
       {open && (
-        <div className="grid grid-cols-4 gap-8 pt-8">
+        <div className="grid grid-cols-5 gap-8 pt-8">
           <Card title="지역" content={studyInfoData.area} />
           <Card title="온·오프라인 여부" content={studyInfoData.meeting_type} />
           <Card
@@ -30,6 +30,7 @@ const StudyPlan = ({ studyInfoData }) => {
             content={`${studyInfoData.period} ${studyInfoData.frequency}`}
           />
           <Card title="스터디 시간" content={studyInfoData.study_time} />
+          <Card title="주간 문제 수" content={studyInfoData.how_many} />
         </div>
       )}
     </div>
