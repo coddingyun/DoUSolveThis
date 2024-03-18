@@ -7,16 +7,12 @@ import NavigationSection from './components/sections/NavigationSection';
 import ProfileSection from './components/sections/ProfileSection';
 import UserInfoSection from './components/sections/UserInfoSection';
 import useGetMyPage from './hooks/api/useGetMyPage';
-import useLogout from './hooks/api/useLogout';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppActions } from '../../store/appStore';
 import useGetManagementStudy from '../../shared/hooks/api/useGetManagementStudy';
 import useWithdraw from './hooks/api/useWithdraw';
 
 const MakeStudy = () => {
   const { data } = useGetMyPage();
-  const { refetch: refetchLogout } = useLogout();
   const { refetch: refetchWithdraw } = useWithdraw();
   const navigate = useNavigate();
   const onSuccessCallback = data => {
@@ -29,21 +25,12 @@ const MakeStudy = () => {
   const { refetch: refetchGetManagementStudy } =
     useGetManagementStudy(onSuccessCallback);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setCurMenu } = useAppActions();
-
-  const handleClickLogout = () => {
-    refetchLogout();
-  };
 
   const handleClickWithdraw = () => {
     refetchGetManagementStudy();
   };
 
   const modalTitle = "정말 '이 문제 푸셨나요?'를\n 탈퇴하시겠습니까?";
-
-  useEffect(() => {
-    setCurMenu('myPage');
-  }, []);
 
   if (!data) {
     return null;
@@ -69,11 +56,7 @@ const MakeStudy = () => {
           <Line />
           <NavigationSection />
           <Line />
-          <div className="flex justify-end gap-3">
-            <AccountManagementButton
-              title="로그아웃"
-              onClick={handleClickLogout}
-            />
+          <div className="flex justify-end">
             <AccountManagementButton title="탈퇴하기" onClick={onOpen} />
           </div>
         </div>

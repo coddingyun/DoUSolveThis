@@ -1,22 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Switch } from '@chakra-ui/react';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import StudyCard from './components/Card';
 import useMyStudy from './hooks/api/useMyStudy';
-import { useAppActions } from '../../store/appStore';
 
 const MyStudy = () => {
   const { myStudy, isLoading } = useMyStudy();
   const [switchStatus, setSwitchStatus] = useState(false);
-  const { setCurMenu } = useAppActions();
 
   const handleChangeSwitch = () => {
     setSwitchStatus(prev => !prev);
   };
-
-  useEffect(() => {
-    setCurMenu('myStudy');
-  }, []);
 
   return (
     <TopNavigation>

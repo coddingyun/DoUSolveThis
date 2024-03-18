@@ -1,9 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
-import { useAppCurMenu, useAppActions } from '../../store/appStore';
 import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
 import { useStudyActions } from '../../store/studyStore';
@@ -12,6 +11,7 @@ import { Form } from '../components/Form';
 import { studySchema } from '../constants/schema';
 import { makeStudyStepTitle } from '../constants/steps';
 import { getAccessToken } from '../utils/auth';
+import ProfileModal from '../components/ProfileModal';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,23 +59,24 @@ const CreateStudyButton = () => {
 };
 
 const ProfileButton = () => {
-  const navigate = useNavigate();
-  const handleNavigateToMyPage = () => {
-    navigate('/my-page');
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClickProfile = () => {
+    setIsOpen(prev => !prev);
   };
 
   return (
-    <Button className="!bg-transparent !p-0" onClick={handleNavigateToMyPage}>
-      <Profile boxSize="32px" />
-    </Button>
+    <div className='relative'>
+      <Button className="!bg-transparent !p-0" onClick={handleClickProfile}>
+        <Profile boxSize="32px" />
+      </Button>
+      {isOpen && <ProfileModal />}
+    </div>
   );
 };
 
 const TopNavigation = ({ children }) => {
   const navigate = useNavigate();
-
-  const curMenu = useAppCurMenu();
-  const { setCurMenu } = useAppActions();
+  const { pathname } = useLocation();
 
   const menuStyle = '!text-base !font-semibold !bg-transparent !px-0';
   return (
@@ -93,17 +94,16 @@ const TopNavigation = ({ children }) => {
             <div className="text-gray-900 font-bold">이 문제 푸셨나요?</div>
           </button>
           <Button
-            className={`${curMenu === 'search' ? '!text-brand-700' : '!text-gray-500'}
+            className={`${pathname === '/search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              setCurMenu('search');
               navigate('/search');
             }}
           >
             스터디 찾기
           </Button>
           {getAccessToken() && <Button
-            className={`${curMenu === 'myStudy' ? '!text-brand-700' : '!text-gray-500'}
+            className={`${pathname === '/my-study' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
               navigate('/my-study');

@@ -52,6 +52,7 @@ const Header = ({ studyInfoData, studyId }) => {
             <Button
               onClick={onOpen}
               className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
+              isDisabled={!studyInfoData.recruiting}
             >
               참여하기
             </Button>
