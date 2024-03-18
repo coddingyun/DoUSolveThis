@@ -12,6 +12,7 @@ import {
   PURPOSE_OPTIONS,
   ORDER_OPTIONS,
 } from '../../shared/constants/options';
+import CheckBoxButton from './components/CheckBoxButton';
 
 const SearchStudy = () => {
   const [order, setOrder] = useState('최신순');
@@ -19,13 +20,18 @@ const SearchStudy = () => {
   const [level, setLevel] = useState('');
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
+  const [isOnline, setIsOnline] = useState(false);
+  const [isRecruting, setIsRecruting] = useState(true);
   const studyArea = useFilterStudyArea();
   const { setStudyArea } = useFilterActions();
 
-  const {
-    searchData: data,
-    isFetching,
-  } = useSearch(order, completedTerm, lang, level, studyArea);
+  const { searchData: data, isFetching } = useSearch(
+    order,
+    completedTerm,
+    lang,
+    level,
+    studyArea,
+  );
 
   const handleSearch = () => {
     setCompletedTerm(term);
@@ -46,6 +52,15 @@ const SearchStudy = () => {
   const handleChangeTerm = e => {
     setTerm(e.target.value);
   };
+
+  const handleChangeIsOneline = () => {
+    setIsOnline(prev => !prev);
+  };
+
+  const handleChangeIsRecruting = () => {
+    setIsRecruting(prev => !prev);
+  };
+
   return (
     <TopNavigation>
       <div>
@@ -69,6 +84,16 @@ const SearchStudy = () => {
               placeholder="목적별"
             />
             <RegionButton studyArea={studyArea} setStudyArea={setStudyArea} />
+            <CheckBoxButton
+              title="온라인만 보기"
+              isSelected={isOnline}
+              onClick={handleChangeIsOneline}
+            />
+            <CheckBoxButton
+              title="모집 중만 보기"
+              isSelected={isRecruting}
+              onClick={handleChangeIsRecruting}
+            />
           </div>
           <SelectComp
             value={order}
