@@ -94,3 +94,29 @@ export const ApplyStatusTag = ({ state }) => {
     </div>
   );
 };
+
+export const RecruitingTag = ({ isRecruiting }) => {
+  const tagStyle = () => {
+    if (isRecruiting) {
+      return {
+        textColor: 'text-brand-700',
+        bgColor: 'bg-brand-50',
+        text: '모집 중',
+      };
+    } else {
+      return {
+        textColor: 'text-gray-500',
+        bgColor: 'bg-gray-50',
+        text: '모집 완료',
+      };
+    }
+  };
+
+  return (
+    <div
+      className={`w-fit px-3 py-1 ${tagStyle().textColor} ${tagStyle().bgColor} text-sm font-medium rounded-2xl`}
+    >
+      {tagStyle().text}
+    </div>
+  );
+};

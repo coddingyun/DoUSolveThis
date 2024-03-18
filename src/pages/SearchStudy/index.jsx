@@ -133,14 +133,7 @@ const SearchStudy = () => {
           {!isFetching &&
             data?.pages?.[0]?.data?.map(item => (
               <StudyCard
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                tier={item.avg_rank}
-                lang={item.language}
-                area={item.area}
-                level={item.level}
-                meetingType={item.meeting_type}
+                item={item}
               />
             ))}
         </div>
