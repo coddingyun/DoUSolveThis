@@ -2,14 +2,27 @@ import React from 'react';
 import useGetNotices from '../../hooks/api/useGetNotices';
 import { ReactComponent as Trash } from '../../../assets/trash.svg';
 import Line from '../Line';
+import useDeleteNotices from '../../hooks/api/useDeleteNotices';
+import { useNavigate } from 'react-router-dom';
 
 const NoticeContent = ({ data }) => {
-  const handleClickNotice = () => {};
+  const navigate = useNavigate();
+  const mutation = useDeleteNotices(data.id);
 
-  const handleClickDelete = () => {};
+  const handleClickNotice = () => {
+    navigate('/participation-offer');
+  };
+
+  const handleClickDelete = e => {
+    e.stopPropagation();
+    mutation.mutate();
+  };
 
   return (
-    <div className="cursor-pointer p-4 flex flex-col gap-4 !items-start !bg-white" onClick={handleClickNotice}>
+    <div
+      className="cursor-pointer p-4 flex flex-col gap-4 !items-start !bg-white"
+      onClick={handleClickNotice}
+    >
       <div className="w-full flex justify-between">
         <h3 className="text-brand-700 text-base font-semibold">
           스터디 참여 신청
@@ -28,7 +41,7 @@ const NoticeModal = () => {
   const { data } = useGetNotices();
 
   return (
-    <div className="w-[435px] max-h-[75vh] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 z-10">
+    <div className="w-[435px] max-h-[75vh] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 !bg-white z-10">
       {data &&
         data.map((item, idx) => (
           <>
