@@ -3,13 +3,7 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 
-const Header = ({
-  title,
-  description,
-  peopleNum,
-  studyId,
-  participated = true,
-}) => {
+const Header = ({ studyInfoData, studyId, participated = true }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const renderModal = () => {
@@ -20,7 +14,7 @@ const Header = ({
       <ParticipateModal
         isOpen={isOpen}
         onClose={onClose}
-        title={title}
+        title={studyInfoData.title}
         studyId={studyId}
       />
     );
@@ -30,13 +24,22 @@ const Header = ({
       <div className="py-5 flex justify-between items-start">
         <div>
           <h1 className="!p-0 !mb-1 text-gray-900 text-4xl font-semibold">
-            {title}
+            {studyInfoData.title}
           </h1>
-          <h4 className="text-gray-500 text-base font-normal">{description}</h4>
+          <h4 className="text-gray-500 text-base font-normal">
+            {studyInfoData.description} <br />
+            오픈 채팅방:{' '}
+            <a
+              href={studyInfoData.openchat}
+              className="border-b border-gray-500"
+            >
+              {studyInfoData.openchat}
+            </a>
+          </h4>
         </div>
         <div className="flex gap-3">
           <Button className="!bg-brand-50 !text-brand-700 rounded-lg text-color font-semibold text-sm">
-            현재 참여 인원 {peopleNum}명
+            현재 참여 인원 {studyInfoData.members.length}명
           </Button>
           {!participated && (
             <Button

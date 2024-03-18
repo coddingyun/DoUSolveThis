@@ -17,9 +17,7 @@ const StudyInfo = () => {
       <TopNavigation>
         <div className="h-full scroll-auto py-10 px-8">
           <Header
-            title={studyInfoData.title}
-            description={studyInfoData.description}
-            peopleNum={studyInfoData.members.length}
+            studyInfoData={studyInfoData}
             studyId={id}
           />
           <StudyDetailInfo studyInfoData={studyInfoData} />
