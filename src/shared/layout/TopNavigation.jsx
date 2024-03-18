@@ -12,6 +12,7 @@ import { studySchema } from '../constants/schema';
 import { makeStudyStepTitle } from '../constants/steps';
 import { getAccessToken } from '../utils/auth';
 import ProfileModal from '../components/ProfileModal';
+import NoticeButton from '../components/notice/NoticeButton';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -112,8 +113,9 @@ const TopNavigation = ({ children }) => {
             내 스터디
           </Button>}
         </div>
-        <div className="pr-20 flex gap-8 items-center">
+        <div className="pr-20 flex gap-6 items-center">
           <CreateStudyButton />
+          {getAccessToken() && <NoticeButton />}
           {getAccessToken() && <ProfileButton />}
         </div>
       </div>
