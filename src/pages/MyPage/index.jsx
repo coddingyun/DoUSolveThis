@@ -8,8 +8,6 @@ import ProfileSection from './components/sections/ProfileSection';
 import UserInfoSection from './components/sections/UserInfoSection';
 import useGetMyPage from './hooks/api/useGetMyPage';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppActions } from '../../store/appStore';
 import useGetManagementStudy from '../../shared/hooks/api/useGetManagementStudy';
 import useWithdraw from './hooks/api/useWithdraw';
 
@@ -27,17 +25,12 @@ const MakeStudy = () => {
   const { refetch: refetchGetManagementStudy } =
     useGetManagementStudy(onSuccessCallback);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setCurMenu } = useAppActions();
 
   const handleClickWithdraw = () => {
     refetchGetManagementStudy();
   };
 
   const modalTitle = "정말 '이 문제 푸셨나요?'를\n 탈퇴하시겠습니까?";
-
-  useEffect(() => {
-    setCurMenu('myPage');
-  }, []);
 
   if (!data) {
     return null;
