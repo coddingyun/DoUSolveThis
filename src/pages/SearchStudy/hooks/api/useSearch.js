@@ -5,7 +5,7 @@ import { ORDER_OPTIONS } from '../../../../shared/constants/options';
 const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
   const { data, isFetching, refetch, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
-      'search',
+      ['search', orderNum, completedTerm, lang, levelNum, area],
       async ({ pageParam = 1 }) => {
         const response = await api.get(`/api/studies`, {
           params: {

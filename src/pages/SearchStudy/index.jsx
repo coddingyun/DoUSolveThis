@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StudyCard, LoadingCard } from './components/Card';
 import TopNavigation from '../../shared/layout/TopNavigation';
 import SelectComp from '../../shared/components/Select';
@@ -19,19 +19,13 @@ const SearchStudy = () => {
   const [level, setLevel] = useState('');
   const [term, setTerm] = useState('');
   const [completedTerm, setCompletedTerm] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const studyArea = useFilterStudyArea();
   const { setStudyArea } = useFilterActions();
 
   const {
     searchData: data,
     isFetching,
-    refetch,
   } = useSearch(order, completedTerm, lang, level, studyArea);
-
-  useEffect(() => {
-    refetch();
-  }, [order, lang, level, completedTerm, studyArea]);
 
   const handleSearch = () => {
     setCompletedTerm(term);
