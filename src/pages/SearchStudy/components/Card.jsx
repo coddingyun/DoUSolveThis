@@ -1,36 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RankTag, BottomTag } from '../../../shared/components/Tag';
+import { RankTag, BottomTag, RecruitingTag } from '../../../shared/components/Tag';
 
-export const StudyCard = React.memo(
-  ({ id, title, description, tier, lang, area, level, meetingType }) => {
-    const url = `/info/${id}`;
-    return (
-      <Link
-        key={id}
-        to={url}
-        className="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
-      >
-        <div className="px-4 pt-4 mb-2 flex items-start justify-between">
-          <h5 className="text-3xl font-semibold tracking-tight text-gray-900">
-            {title}
-          </h5>
-          <RankTag>{tier}</RankTag>
-        </div>
-        <p className="px-4 pb-6 font-medium text-sm text-gray-700 dark:text-gray-400">
-          {description}
-        </p>
-        <hr />
-        <div className="px-4 py-3 flex gap-2">
-          <BottomTag>{lang}</BottomTag>
-          <BottomTag>{area}</BottomTag>
-          <BottomTag>{level}</BottomTag>
-          <BottomTag>{meetingType}</BottomTag>
-        </div>
-      </Link>
-    );
-  },
-);
+export const StudyCard = React.memo(({ item }) => {
+  const url = `/info/${item.id}`;
+  return (
+    <Link
+      key={item.id}
+      to={url}
+      className="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
+    >
+      <div className="px-6 pt-4 mb-2 flex items-start justify-between">
+        <RecruitingTag isRecruiting={item.recruiting}/>
+        <RankTag>{item.avg_rank}</RankTag>
+      </div>
+      <h5 className="px-6 mb-2 text-3xl font-semibold tracking-tight text-gray-900">
+        {item.title}
+      </h5>
+      <p className="px-6 pb-6 font-medium text-sm text-gray-700 dark:text-gray-400">
+        {item.description}
+      </p>
+      <hr />
+      <div className="px-6 py-3 flex gap-2">
+        <BottomTag>{item.language}</BottomTag>
+        <BottomTag>{item.area}</BottomTag>
+        <BottomTag>{item.level}</BottomTag>
+        <BottomTag>{item.meeting_type}</BottomTag>
+      </div>
+    </Link>
+  );
+});
 
 StudyCard.displayName = 'StudyCard';
 

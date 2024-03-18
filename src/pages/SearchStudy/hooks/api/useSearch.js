@@ -2,10 +2,10 @@ import { useInfiniteQuery } from 'react-query';
 import { api } from '../../../../shared/hooks/api';
 import { ORDER_OPTIONS } from '../../../../shared/constants/options';
 
-const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
+const useSearch = (orderNum, completedTerm, lang, levelNum, area, isOnline, isRecruiting) => {
   const { data, isFetching, refetch, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
-      'search',
+      ['search', orderNum, completedTerm, lang, levelNum, area, isOnline, isRecruiting],
       async ({ pageParam = 1 }) => {
         const response = await api.get(`/api/studies`, {
           params: {
@@ -16,6 +16,8 @@ const useSearch = (orderNum, completedTerm, lang, levelNum, area) => {
             level: levelNum || 'ALL',
             area: area.area === '전국' ? 'ALL' : area.area,
             city: area.city === '전체' ? 'ALL' : area.city,
+            onlineOnly: isOnline,
+            recruitingOnly: isRecruiting,
           },
         });
         return response;
