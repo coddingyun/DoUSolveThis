@@ -20,7 +20,7 @@ export const RankTag = ({ children }) => {
     <span
       className={`flex gap-2 ${bgColor} ${textColor} text-sm font-semibold me-2 px-3 py-1 rounded-2xl`}
     >
-      <img src={`badge/${tierText}.png`} width="16"/>
+      <img src={`/badge/${tierText}.png`} width="16" />
       {tierText}
     </span>
   );

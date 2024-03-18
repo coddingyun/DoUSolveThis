@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
+import { RankTag, RecruitingTag } from '../../../shared/components/Tag';
 
 const Header = ({ studyInfoData, studyId, participated = true }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,6 +24,12 @@ const Header = ({ studyInfoData, studyId, participated = true }) => {
     <>
       <div className="py-5 flex justify-between items-start">
         <div>
+          <div className='flex gap-4 mb-4'>
+            <RecruitingTag isRecruiting={studyInfoData.recruiting}/>
+            <RankTag>
+              {studyInfoData.avg_rank}
+            </RankTag>
+          </div>
           <h1 className="!p-0 !mb-1 text-gray-900 text-4xl font-semibold">
             {studyInfoData.title}
           </h1>
