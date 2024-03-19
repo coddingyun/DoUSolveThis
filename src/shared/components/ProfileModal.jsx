@@ -35,7 +35,7 @@ const ProfileModal = () => {
   };
 
   return (
-    <div className="w-[280px] rounded-lg border border-gray-300 absolute top-12 right-0 !bg-white z-10">
+    <div className="w-[280px] rounded-lg border border-gray-300 absolute top-12 right-0 !bg-white z-10 shadow-sm">
       <div className="px-[14px] py-[10px] flex gap-4 items-center">
         <Profile boxSize="40px" />
         <div>
