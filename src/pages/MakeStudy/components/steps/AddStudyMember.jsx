@@ -7,6 +7,7 @@ import useCheckId from '../../../../shared/hooks/api/useCheckId';
 import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
 import { makeStudyStepTitle } from '../../../../shared/constants/steps';
+import { useQueryClient } from 'react-query';
 
 const AddStudyMember = ({ onPrev, clickHandler }) => {
   const [term, setTerm] = useState('');
@@ -41,13 +42,16 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     }
   };
 
+  const queryClient = useQueryClient();
+
   const onStudySuccessCallback = () => {
     clickHandler(makeStudyStepTitle[3]);
+    queryClient.invalidateQueries('search');
   };
 
   const onStudyErrorCallback = () => {
     clickHandler(makeStudyStepTitle[4]);
-  }
+  };
 
   const mutation = usePostStudy(onStudySuccessCallback, onStudyErrorCallback);
 
