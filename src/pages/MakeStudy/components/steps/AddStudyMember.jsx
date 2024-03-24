@@ -27,14 +27,15 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
 
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
-    if (data.results.valid) {
-      addMember(data.results.bjname);
+    if (data.valid) {
+      addMember(data.bjname);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
 
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       refetch();
       setTerm('');
     }
@@ -79,7 +80,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     >
       <InputContainer title="스터디원 추가(선택)">
         <Input
-          placeholder="스터디원 백준 ID 등록하기"
+          placeholder="스터디원 백준 ID 등록하려면 입력 후 엔터"
           value={term}
           handleChangeValue={e => setTerm(e.target.value)}
           handleKeyDown={handleKeyDown}
