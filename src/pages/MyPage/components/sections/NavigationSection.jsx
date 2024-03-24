@@ -15,7 +15,7 @@ const NavigationSection = () => {
       <NavigationCard
         title="내가 관리하는 스터디 바로가기"
         onClick={() => {
-          navigate('/my-study');
+          navigate('/my-study?managed=true');
         }}
       />
       <NavigationCard

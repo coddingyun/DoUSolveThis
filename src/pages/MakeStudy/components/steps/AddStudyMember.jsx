@@ -7,6 +7,7 @@ import useCheckId from '../../../../shared/hooks/api/useCheckId';
 import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
 import { makeStudyStepTitle } from '../../../../shared/constants/steps';
+import { useQueryClient } from 'react-query';
 
 const AddStudyMember = ({ onPrev, clickHandler }) => {
   const [term, setTerm] = useState('');
@@ -27,26 +28,30 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
 
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
-    if (data.results.valid) {
-      addMember(data.results.bjname);
+    if (data.valid) {
+      addMember(data.bjname);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
 
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       refetch();
       setTerm('');
     }
   };
 
+  const queryClient = useQueryClient();
+
   const onStudySuccessCallback = () => {
     clickHandler(makeStudyStepTitle[3]);
+    queryClient.invalidateQueries('search');
   };
 
   const onStudyErrorCallback = () => {
     clickHandler(makeStudyStepTitle[4]);
-  }
+  };
 
   const mutation = usePostStudy(onStudySuccessCallback, onStudyErrorCallback);
 
@@ -79,7 +84,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     >
       <InputContainer title="스터디원 추가(선택)">
         <Input
-          placeholder="스터디원 백준 ID 등록하기"
+          placeholder="스터디원 백준 ID 등록하려면 입력 후 엔터"
           value={term}
           handleChangeValue={e => setTerm(e.target.value)}
           handleKeyDown={handleKeyDown}
