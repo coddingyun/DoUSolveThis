@@ -4,6 +4,7 @@ import { ReactComponent as Trash } from '../../../assets/trash.svg';
 import Line from '../Line';
 import useDeleteNotices from '../../hooks/api/useDeleteNotices';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../utils/formatDate';
 
 const NoticeContent = ({ data }) => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const NoticeContent = ({ data }) => {
       <h4 className="text-gray-900">
         {data.username}가 {data.title}에 스터디 참여 신청을 보냈습니다.
       </h4>
-      <h5 className="text-gray-500">{data.noticeTime}</h5>
+      <h5 className="text-gray-500">{formatDate(data.noticeTime)}</h5>
     </div>
   );
 };
