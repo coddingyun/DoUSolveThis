@@ -98,7 +98,11 @@ const TopNavigation = ({ children }) => {
             className={`${pathname === '/search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              navigate('/search');
+              if (getAccessToken()) {
+                navigate('/search');
+              } else {
+                navigate('/login')
+              }
             }}
           >
             스터디 찾기
