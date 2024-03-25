@@ -3,7 +3,6 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
 import { RankTag, RecruitingTag } from '../../../shared/components/Tag';
-import { get } from 'react-hook-form';
 import { getAccessToken } from '../../../shared/utils/auth';
 
 const Header = ({ studyInfoData, studyId }) => {
