@@ -35,8 +35,8 @@ const UserInfoModal = ({ isOpen, onClose }) => {
         username: username,
         bjname: baekjoonId,
         prefer_type: meetingType,
-        area: studyArea.area,
-        city: studyArea.city,
+        area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
+        city: studyArea.city === '전국' ? 'ALL' : studyArea.city,
         language,
       });
     } else {
