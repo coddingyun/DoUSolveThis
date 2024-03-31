@@ -19,6 +19,8 @@ const CreateStudyButton = () => {
   const { Funnel, Step, setStep } = useFunnel(makeStudyStepTitle[0]);
   const { reset } = useStudyActions();
 
+  const navigate = useNavigate();
+
   const clickHandler = nextStep => {
     setStep(nextStep);
   };
@@ -50,7 +52,13 @@ const CreateStudyButton = () => {
       </Modal>
       <Button
         className="flex items-center gap-1 !bg-brand-600"
-        onClick={onOpen}
+        onClick={() => {
+          if (getAccessToken()) {
+            onOpen();
+          } else {
+            navigate('/login');
+          }
+        }}
       >
         <Plus />
         <div className="text-white font-semibold text-base">스터디 만들기</div>
@@ -66,7 +74,7 @@ const ProfileButton = () => {
   };
 
   return (
-    <div className='relative'>
+    <div className="relative">
       <Button className="!bg-transparent !p-0" onClick={handleClickProfile}>
         <Profile boxSize="32px" />
       </Button>
@@ -98,24 +106,22 @@ const TopNavigation = ({ children }) => {
             className={`${pathname === '/search' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
             onClick={() => {
-              if (getAccessToken()) {
-                navigate('/search');
-              } else {
-                navigate('/login')
-              }
+              navigate('/search');
             }}
           >
             스터디 찾기
           </Button>
-          {getAccessToken() && <Button
-            className={`${pathname === '/my-study' ? '!text-brand-700' : '!text-gray-500'}
+          {getAccessToken() && (
+            <Button
+              className={`${pathname === '/my-study' ? '!text-brand-700' : '!text-gray-500'}
             ${menuStyle}`}
-            onClick={() => {
-              navigate('/my-study');
-            }}
-          >
-            내 스터디
-          </Button>}
+              onClick={() => {
+                navigate('/my-study');
+              }}
+            >
+              내 스터디
+            </Button>
+          )}
         </div>
         <div className="pr-20 flex gap-6 items-center">
           <CreateStudyButton />
