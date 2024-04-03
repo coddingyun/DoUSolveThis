@@ -5,6 +5,7 @@ import { CookiesProvider } from 'react-cookie';
 import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Router from './shared/components/common/Router';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +31,9 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <ChakraProvider>
               <Suspense fallback={<Loading />}>
-                <Router />
+                <BrowserRouter>
+                  <Router />
+                </BrowserRouter>
               </Suspense>
             </ChakraProvider>
           </QueryClientProvider>

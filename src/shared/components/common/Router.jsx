@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
 import useGetUserInfo from '../../hooks/api/useGetUserInfo';
 import { useUserActions } from '../../../store/userStore';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { getAccessToken } from '../../utils/auth';
 
 const Landing = lazy(() => import('../../../pages/Landing'));
@@ -36,7 +36,7 @@ const Router = () => {
   }, [userInfo]);
 
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -53,7 +53,7 @@ const Router = () => {
         <Route path="/apply-list" exact element={<ApplyList />} />
         <Route path="/manager-change" exact element={<ManagerChange />} />
       </Routes>
-    </BrowserRouter>
+    
   );
 };
 

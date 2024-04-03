@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BaekjoonIdTag } from '../../../../shared/components/Tag';
 import ModalLayout from '../../../../shared/layout/ModalLayout';
 import InputContainer from '../../../../shared/components/InputContainer';
 import Input from '../../../../shared/components/Input';
 import useCheckId from '../../../../shared/hooks/api/useCheckId';
-import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
+import { useStudyStore } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
 import { makeStudyStepTitle } from '../../../../shared/constants/steps';
 import { useQueryClient } from 'react-query';
+import useSearchUserId from '../../../../shared/hooks/api/useSearchUserId';
 
 const AddStudyMember = ({ onPrev, clickHandler }) => {
   const [term, setTerm] = useState('');
+  const [bjId, setBjId] = useState('')
   const {
     studyName,
     description,
@@ -26,12 +28,19 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     members,
   } = useStudyStore();
 
-  const { addMember } = useStudyActions();
+  const { refetch: refetchSearchUserId } = useSearchUserId(bjId)
   const onCheckIdSuccessCallback = data => {
     if (data.valid) {
-      addMember(data.bjname);
+      setBjId(data.bjname)
     }
   };
+
+  useEffect(() => {
+    if (bjId) {
+      refetchSearchUserId();
+    }
+  }, [bjId])
+  
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
 
   const handleKeyDown = e => {
@@ -62,7 +71,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       openchat: kakaoUrl,
       main_language: language,
       level,
-      members,
+      members: members.map(item => item.userId),
       area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
       city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
       how_many: solvedProblemNumber,
@@ -92,7 +101,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
         <div className="flex flex-wrap gap-2">
           {members &&
             members.map((member, idx) => (
-              <BaekjoonIdTag key={`member#${idx}`}>{member}</BaekjoonIdTag>
+              <BaekjoonIdTag key={`member#${idx}`}>{member.bjId}</BaekjoonIdTag>
             ))}
         </div>
       </InputContainer>
