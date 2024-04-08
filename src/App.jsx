@@ -5,6 +5,7 @@ import { CookiesProvider } from 'react-cookie';
 import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Router from './shared/components/common/Router';
+import theme from './shared/layout/theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,7 @@ function App() {
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <CookiesProvider>
           <QueryClientProvider client={queryClient}>
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
               <Suspense fallback={<Loading />}>
                 <Router />
               </Suspense>
