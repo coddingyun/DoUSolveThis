@@ -36,6 +36,9 @@ module.exports = {
         'rose-500': '#F63D68',
         'rose-700': '#C01048',
       },
+      fontFamily: {
+        sans: ["Inter", "Arial", "sans-serif"]
+      }
     },
   },
   plugins: [],
