@@ -1,4 +1,4 @@
-import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
+import { ReactComponent as LogoMark } from '../../assets/logo-h.svg';
 import UserInfoModal from './components/UserInfoModal';
 import GoogleLoginButton from './components/buttons/GoogleLoginButton';
 import NaverLoginButton from './components/buttons/NaverLoginButton';
@@ -12,7 +12,7 @@ const Login = () => {
       <UserInfoModal isOpen={isOpen} onClose={onClose} />
       <div className="grid place-items-center">
         <div className="w-full grid place-items-center mb-14">
-          <LogoMark className="w-12 h-12 mb-3" />
+          <LogoMark className="mb-8" />
           <div className="text-3xl font-semibold text-gray-900 text-center">
             로그인
           </div>

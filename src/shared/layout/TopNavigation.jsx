@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Modal, useDisclosure } from '@chakra-ui/react';
-import { ReactComponent as LogoMark } from '../../assets/logomark.svg';
+import { ReactComponent as LogoMark } from '../../assets/logo-h.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import MakeStudy from '../../pages/MakeStudy';
 import useFunnel from '../hooks/useFunnel';
@@ -91,8 +91,7 @@ const TopNavigation = ({ children }) => {
               navigate('/');
             }}
           >
-            <LogoMark className="w-8 h-8" />
-            <div className="text-gray-900 font-bold">이 문제 푸셨나요?</div>
+            <LogoMark />
           </button>
           <Button
             className={`${pathname === '/search' ? '!text-brand-700' : '!text-gray-500'}
