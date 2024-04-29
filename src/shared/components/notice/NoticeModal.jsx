@@ -5,6 +5,7 @@ import Line from '../Line';
 import useDeleteNotices from '../../hooks/api/useDeleteNotices';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
+import { ReactComponent as Bell } from '../../../assets/bell.svg';
 
 const NoticeContent = ({ data }) => {
   const navigate = useNavigate();
@@ -42,14 +43,26 @@ const NoticeModal = () => {
   const { data } = useGetNotices();
 
   return (
-    <div className="w-[435px] max-h-[75vh] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 !bg-white z-10">
+    <div className="w-[435px] h-[712px] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 !bg-white z-10">
       {data &&
+        data.length >= 1 &&
         data.map((item, idx) => (
           <>
             <NoticeContent key={`notice#${item.id}`} data={item} />
             {data.length - 1 !== idx && <Line />}
           </>
         ))}
+      {data && data.length === 0 && (
+        <div className="h-full flex flex-col gap-2 justify-center items-center">
+          <Bell width={40} height={40} stroke="#98A2B3" />
+          <h3 className="text-gray-900 text-xl font-bold">
+            새로운 알림이 없습니다.
+          </h3>
+          <h4 className="text-gray-500">
+            다양한 알림을 이곳에서 모아볼 수 있어요.
+          </h4>
+        </div>
+      )}
     </div>
   );
 };
