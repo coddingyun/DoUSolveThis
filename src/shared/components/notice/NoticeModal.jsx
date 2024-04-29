@@ -42,7 +42,7 @@ const NoticeModal = () => {
   const { data } = useGetNotices();
 
   return (
-    <div className="w-[435px] max-h-[75vh] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 !bg-white z-10">
+    <div className="w-[435px] h-[712px] overflow-y-auto p-4 rounded-lg border border-gray-200 shadow-sm absolute top-12 right-0 !bg-white z-10">
       {data &&
         data.map((item, idx) => (
           <>
