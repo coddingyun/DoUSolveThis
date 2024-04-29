@@ -5,7 +5,7 @@ const UserInfoSection = ({ preferType, area, languages }) => {
     <div className="grid grid-cols-3 gap-8">
       <Card title="온·오프라인" content={preferType} />
       <Card title="지역" content={area} />
-      <Card title="언어" content={languages.join(', ')} />
+      <Card title="언어" content={languages} />
     </div>
   );
 };
