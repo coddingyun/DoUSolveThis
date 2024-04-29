@@ -39,11 +39,20 @@ const onRequestRejected = error => {
 
 const onResponseFulfilled = response => response;
 
+let isTokenRefreshAttempted = false;
+
 const onResponseRejected = async error => {
   if (error.response?.status === 401) {
     // TODO: refresh token 으로 access token 받아오기
     const requestConfig = error.config;
     if (!requestConfig) return Promise.reject(error);
+
+    if (isTokenRefreshAttempted) {
+      window.location.href = '/login';
+      return Promise.reject(error);
+    }
+
+    isTokenRefreshAttempted = true;
 
     const refreshToken = getCookie('Refresh');
 
