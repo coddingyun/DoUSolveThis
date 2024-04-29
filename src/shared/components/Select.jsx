@@ -17,8 +17,10 @@ const SelectComp = ({
         }`}
         value={value}
         onChange={handleChangeValue}
-        placeholder={placeholder}
       >
+        <option value="placeholder" disabled hidden selected>
+          {placeholder}
+        </option>
         {options &&
           options.map(option => (
             <option key={option} value={option}>
