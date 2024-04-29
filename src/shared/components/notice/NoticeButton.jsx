@@ -17,7 +17,7 @@ const NoticeButton = () => {
         className={`!p-0 rounded-lg ${clicked ? '!bg-brand-50' : '!bg-white'}`}
         onClick={handleClickNoticeButton}
       >
-        {clicked ? <ClickedBell /> : <Bell />}
+        {clicked ? <ClickedBell /> : <Bell width={20} height={20} stroke="#667085"/>}
       </Button>
       {clicked && <NoticeModal />}
     </div>
