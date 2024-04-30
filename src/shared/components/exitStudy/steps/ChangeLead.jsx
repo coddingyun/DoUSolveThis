@@ -1,14 +1,12 @@
 import { useExitActions, useExitLead } from '../../../../store/studyStore';
 import { useUserName } from '../../../../store/userStore';
-import useStudyInfo from '../../../hooks/api/useStudyInfo';
 import InputContainer from '../../InputContainer';
 import SelectComp from '../../Select';
 
-const ChangeLead = ({ id }) => {
+const ChangeLead = ({ studyInfoData }) => {
   const lead = useExitLead();
   const { setLead } = useExitActions();
 
-  const { studyInfoData } = useStudyInfo(id);
   const userName = useUserName();
   const members = studyInfoData
     ? studyInfoData.members.map(member => {

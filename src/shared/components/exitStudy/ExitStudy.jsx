@@ -6,24 +6,29 @@ import ChangeLead from './steps/ChangeLead';
 import usePostStudyOut from '../../hooks/api/usePostStudyOut';
 import usePutStudyManager from '../../hooks/api/usePutStudyManager';
 import { useExitLead } from '../../../store/studyStore';
+import useStudyInfo from '../../hooks/api/useStudyInfo';
+import { useQueryClient } from 'react-query';
 
 const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
   const [modalState, setModalState] = useState(0);
   const lead = useExitLead();
+  const { studyInfoData } = useStudyInfo(id);
+  const queryClient = useQueryClient();
 
-  const onExitSuccessCallback = (data) => {
-    if (data.isManager) {
+  const onExitSuccessCallback = data => {
+    if (data.isManager && studyInfoData.members.length > 1) {
       setModalState(1);
       clickHandler(exitStudyStepTitle[1]);
     } else {
       onClose();
       setModalState(0);
-      //TODO. invalidate 내 스터디 정보
+      queryClient.invalidateQueries('myStudy');
     }
-  }
+  };
   const onManagerSuccessCallback = () => {
+    queryClient.invalidateQueries('myStudy');
     onClose();
-  }
+  };
   const exitMutation = usePostStudyOut(id, onExitSuccessCallback);
   const managerMutation = usePutStudyManager(id, onManagerSuccessCallback);
 
@@ -46,7 +51,7 @@ const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
       rightButtonType: 'next',
       onPrev: onClose,
       onNext: () => {
-        managerMutation.mutate(lead[0].userId)
+        managerMutation.mutate(lead[0].userId);
       },
     },
   ]);
@@ -68,7 +73,7 @@ const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
           <CheckExit />
         </Step>
         <Step name={exitStudyStepTitle[1]}>
-          <ChangeLead id={id} />
+          <ChangeLead studyInfoData={studyInfoData} />
         </Step>
       </Funnel>
     </ModalLayout>
