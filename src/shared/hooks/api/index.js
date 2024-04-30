@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCookie, setCookie } from '../../utils/cookie';
+import { removeAuthToken } from '../../utils/auth';
 
 export const noAuthApi = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -48,6 +49,7 @@ const onResponseRejected = async error => {
     if (!requestConfig) return Promise.reject(error);
 
     if (isTokenRefreshAttempted) {
+      removeAuthToken();
       window.location.href = '/login';
       return Promise.reject(error);
     }
