@@ -81,7 +81,7 @@ const UserInfoModal = ({ isOpen, onClose }) => {
             <RegionButton
               studyArea={studyArea}
               setStudyArea={setStudyArea}
-              className="!w-full text-base !font-normal !text-left"
+              className="!w-full text-base !font-normal !flex !justify-start"
               disabled={meetingType === '온라인'}
             />
           </InputContainer>
