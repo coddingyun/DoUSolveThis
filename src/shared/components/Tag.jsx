@@ -8,7 +8,7 @@ export const RankTag = ({ children }) => {
   const tierColor = getTierColor(children);
   return (
     <span
-      className={`flex gap-2 ${tierColor.bgColor} ${tierColor.textColor} text-sm font-semibold me-2 px-3 py-1 rounded-2xl`}
+      className={`flex gap-2 ${tierColor.bgColor} ${tierColor.textColor} text-sm font-semibold px-3 py-1 rounded-2xl`}
     >
       <img src={`/badge/${tierText}.png`} width="16" />
       {tierText}
