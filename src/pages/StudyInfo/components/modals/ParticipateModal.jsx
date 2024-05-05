@@ -30,7 +30,7 @@ const ParticipateModal = ({ isOpen, onClose, title, studyId }) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <h4 className="text-gray-700 text-[14px] font-medium">
+            <h4 className="text-gray-700 text-[14px] font-medium mb-1.5">
               참여 메시지
             </h4>
             <Textarea
@@ -38,6 +38,7 @@ const ParticipateModal = ({ isOpen, onClose, title, studyId }) => {
               className="!w-full !h-[108px]"
               value={inputValue}
               onChange={handleChange}
+              placeholder="스터디장에게 할 메시지를 입력해주세요."
             />
           </ModalBody>
           <ModalFooter className="!w-full grid grid-cols-2 gap-3">
