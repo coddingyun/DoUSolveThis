@@ -101,7 +101,11 @@ const SearchStudy = () => {
               className="w-24"
               placeholder="목적별"
             />
-            <RegionButton studyArea={studyArea} setStudyArea={setStudyArea} />
+            <RegionButton
+              studyArea={studyArea}
+              setStudyArea={setStudyArea}
+              disabled={isOnline === true}
+            />
             <CheckBoxButton
               title="온라인만 보기"
               isSelected={isOnline}
@@ -131,11 +135,7 @@ const SearchStudy = () => {
           {isFetching &&
             Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
           {!isFetching &&
-            data?.pages?.[0]?.data?.map(item => (
-              <StudyCard
-                item={item}
-              />
-            ))}
+            data?.pages?.[0]?.data?.map(item => <StudyCard item={item} />)}
         </div>
       </div>
     </TopNavigation>

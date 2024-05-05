@@ -23,7 +23,7 @@ const FormNextButton = ({ title, dirtyFieldsCnt, onClick }) => {
     formState: { errors, dirtyFields },
   } = useFormContext(); // TODO. useFormState로 변경해보기
   
-  const isDirty = Object.keys(dirtyFields).length === dirtyFieldsCnt ? true : false;
+  const isDirty = Object.keys(dirtyFields).length >= dirtyFieldsCnt ? true : false;
   const isValid = Object.keys(errors).length ? false : true;
 
   return (
@@ -40,7 +40,7 @@ const FormSumbitButton = ({ title, dirtyFieldsCnt, onClick }) => {
     formState: { errors, dirtyFields },
   } = useFormContext(); // TODO. useFormState로 변경해보기
 
-  const isDirty = Object.keys(dirtyFields).length === dirtyFieldsCnt ? true : false;
+  const isDirty = Object.keys(dirtyFields).length >= dirtyFieldsCnt ? true : false;
   const isValid = Object.keys(errors).length ? false : true;
 
   return (
