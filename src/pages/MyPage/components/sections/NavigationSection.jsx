@@ -27,8 +27,7 @@ const NavigationSection = () => {
       <NavigationCard
         title="신청 목록 보기"
         onClick={() => {
-          // TODO. 올바른 라우팅
-          navigate('/');
+          navigate('/apply-list');
         }}
       />
     </div>
