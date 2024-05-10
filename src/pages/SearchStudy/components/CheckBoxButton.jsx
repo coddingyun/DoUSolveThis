@@ -9,7 +9,7 @@ const CheckBoxButton = ({ title, isSelected, onClick }) => {
   };
   return (
     <Button
-      className={`flex gap-2 !p border !text-xs !font-semibold rounded-lg ${isSelected ? style.selected : style.notSelected}`}
+      className={`flex gap-2 !p border !text-sm !font-semibold rounded-lg ${isSelected ? style.selected : style.notSelected}`}
       onClick={onClick}
     >
       {isSelected ? <Checked /> : <NotChecked />}

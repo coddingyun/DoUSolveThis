@@ -117,7 +117,7 @@ const SearchStudy = () => {
               onClick={handleChangeIsRecruting}
             />
             <Button
-              className="flex gap-2 !bg-transparent border !border-transparent !text-gray-500 !text-xs"
+              className="flex gap-2 !bg-transparent border !border-transparent !text-gray-500 !text-sm"
               onClick={handleClickInitButton}
             >
               <Rotate />
