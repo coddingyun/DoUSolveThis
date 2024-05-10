@@ -87,7 +87,10 @@ const TopNavigation = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const menuStyle = '!text-base !font-semibold !bg-transparent !px-0';
+  const menuStyle = '!text-base !bg-transparent !px-0';
+  const selectedStyle = '!text-brand-700 !font-bold'
+  const notSelectedStyle = '!text-gray-500 !font-semibold'
+
   return (
     <div className="w-full h-screen">
       <div className="h-16 flex justify-between items-center border border-gray-100 border-b-gray-100">
@@ -102,7 +105,7 @@ const TopNavigation = ({ children }) => {
             <LogoMark />
           </button>
           <Button
-            className={`${pathname === '/search' ? '!text-brand-700' : '!text-gray-500'}
+            className={`${pathname === '/search' ? selectedStyle : notSelectedStyle}
             ${menuStyle}`}
             onClick={() => {
               navigate('/search');
@@ -112,7 +115,7 @@ const TopNavigation = ({ children }) => {
           </Button>
           {getAccessToken() && (
             <Button
-              className={`${pathname === '/my-study' ? '!text-brand-700' : '!text-gray-500'}
+              className={`${pathname === '/my-study' ? selectedStyle : notSelectedStyle}
             ${menuStyle}`}
               onClick={() => {
                 navigate('/my-study');

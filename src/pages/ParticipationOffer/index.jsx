@@ -26,7 +26,8 @@ const ParticipationOffer = () => {
               <OfferCard
                 key={`OfferCard#${idx}`}
                 data={item}
-                onClick={() => handleClickApprove(item.participationId, true)}
+                onApproveClick={() => handleClickApprove(item.participationId, true)}
+                onRejectClick={() => handleClickApprove(item.participationId, false)}
               />
             ))}
         </div>

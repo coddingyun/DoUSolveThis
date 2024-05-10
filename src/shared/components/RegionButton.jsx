@@ -77,7 +77,7 @@ const RegionButton = ({
       <Button
         onClick={onOpen}
         className={`h-9 border !border-gray-300 !bg-white !text-gray-700 rounded-lg ${
-          className || '!text-xs text-center font-semibold'
+          className || '!text-sm text-center font-semibold'
         }`}
         isDisabled={disabled}
       >

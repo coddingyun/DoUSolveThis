@@ -13,7 +13,7 @@ const SelectComp = ({
       <Select
         id="order"
         className={`h-9 border !border-gray-300 text-gray-700 font-semibold rounded-lg ${
-          textClassName || '!text-xs'
+          textClassName || '!text-sm'
         }`}
         value={value}
         onChange={handleChangeValue}
