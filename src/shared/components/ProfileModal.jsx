@@ -14,7 +14,7 @@ const ProfileModalButton = ({ title, Icon, onClick }) => {
       onClick={onClick}
     >
       <Icon />
-      <div className="text-gray-900">{title}</div>
+      <div className="text-gray-900 font-medium">{title}</div>
     </Button>
   );
 };
