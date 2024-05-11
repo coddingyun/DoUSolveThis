@@ -40,7 +40,7 @@ const ProfileModal = () => {
         <Profile boxSize="40px" />
         <div className="flex-1 min-w-0">
           <h3 className="text-gray-900 font-semibold text-lg whitespace-nowrap overflow-hidden overflow-ellipsis">{userName}</h3>
-          <h5 className="text-gray-500">{userId}</h5>
+          <h5 className="text-gray-500 whitespace-nowrap overflow-hidden overflow-ellipsis">{userId}</h5>
         </div>
       </div>
       <Line />

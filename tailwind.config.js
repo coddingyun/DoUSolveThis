@@ -1,7 +1,14 @@
-/** @type {import('tailwindcss').Config} */
+import { typography } from "./src/shared/constants/typography";
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   // eslint-disable-next-line prettier/prettier
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  plugins: [
+		plugin(({ addComponents }) => {
+			addComponents(typography);
+		})
+	],
   theme: {
     extend: {
       colors: {
