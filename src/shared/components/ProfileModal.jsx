@@ -35,16 +35,16 @@ const ProfileModal = () => {
   };
 
   return (
-    <div className="w-[280px] rounded-lg border border-gray-300 absolute top-12 right-0 !bg-white z-10 shadow-sm">
-      <div className="px-[14px] py-[10px] flex gap-4 items-center">
+    <div className="min-w-[280px] max-w-fit rounded-lg border border-gray-300 absolute top-12 right-0 !bg-white z-10 shadow-sm">
+      <div className="max-w-fit px-[14px] py-[10px] flex gap-4 items-center">
         <Profile boxSize="40px" />
-        <div>
-          <h3 className="text-gray-900 font-semibold text-lg">{userName}</h3>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-gray-900 font-semibold text-lg whitespace-nowrap overflow-hidden overflow-ellipsis">{userName}</h3>
           <h5 className="text-gray-500">{userId}</h5>
         </div>
       </div>
       <Line />
-      <div className='flex flex-col items-start'>
+      <div className="flex flex-col items-start">
         <ProfileModalButton
           title="나의 정보"
           Icon={User}
