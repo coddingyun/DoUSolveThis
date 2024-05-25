@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logo-h.svg';
@@ -69,13 +69,23 @@ const CreateStudyButton = () => {
 
 const ProfileButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropMenuRef = useRef();
   const handleClickProfile = () => {
     setIsOpen(prev => !prev);
   };
 
+  useEffect(() => {
+    const handleOutsideClose = (e) => {
+      if(isOpen && (!dropMenuRef.current.contains(e.target))) setIsOpen(false);
+    };
+    document.addEventListener('click', handleOutsideClose);
+    
+    return () => document.removeEventListener('click', handleOutsideClose);
+  }, [isOpen]);
+
   return (
     <div className="relative">
-      <Button className="!bg-transparent !p-0" onClick={handleClickProfile}>
+      <Button className="!bg-transparent !p-0" ref={dropMenuRef} onClick={handleClickProfile}>
         <Profile boxSize="32px" />
       </Button>
       {isOpen && <ProfileModal />}
