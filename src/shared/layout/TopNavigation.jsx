@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Modal, useDisclosure } from '@chakra-ui/react';
 import { ReactComponent as LogoMark } from '../../assets/logo-h.svg';
@@ -67,29 +67,46 @@ const CreateStudyButton = () => {
   );
 };
 
-const ProfileButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClickProfile = () => {
-    setIsOpen(prev => !prev);
+const ProfileButton = ({ isOpenMenu, setIsOpenMenu }) => {
+  const dropMenuRef = useRef();
+  const handleClickProfile = e => {
+    e.stopPropagation();
+    setIsOpenMenu(prev => (prev === 'profile' ? null : 'profile'));
   };
+
+  useEffect(() => {
+    const handleOutsideClose = e => {
+      if (isOpenMenu === 'profile' && !dropMenuRef.current.contains(e.target)) {
+        setIsOpenMenu(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClose);
+
+    return () => document.removeEventListener('click', handleOutsideClose);
+  }, [isOpenMenu]);
 
   return (
     <div className="relative">
       <Button className="!bg-transparent !p-0" onClick={handleClickProfile}>
         <Profile boxSize="32px" />
       </Button>
-      {isOpen && <ProfileModal />}
+      {isOpenMenu === 'profile' && (
+        <div ref={dropMenuRef}>
+          <ProfileModal />
+        </div>
+      )}
     </div>
   );
 };
 
 const TopNavigation = ({ children }) => {
   const navigate = useNavigate();
+  const [isOpenMenu, setIsOpenMenu] = useState(null);
   const { pathname } = useLocation();
 
   const menuStyle = '!text-base !bg-transparent !px-0';
-  const selectedStyle = '!text-brand-700 !font-bold'
-  const notSelectedStyle = '!text-gray-500 !font-semibold'
+  const selectedStyle = '!text-brand-700 !font-bold';
+  const notSelectedStyle = '!text-gray-500 !font-semibold';
 
   return (
     <div className="w-full h-screen">
@@ -127,8 +144,18 @@ const TopNavigation = ({ children }) => {
         </div>
         <div className="pr-20 flex gap-6 items-center">
           <CreateStudyButton />
-          {getAccessToken() && <NoticeButton />}
-          {getAccessToken() && <ProfileButton />}
+          {getAccessToken() && (
+            <NoticeButton
+              isOpenMenu={isOpenMenu}
+              setIsOpenMenu={setIsOpenMenu}
+            />
+          )}
+          {getAccessToken() && (
+            <ProfileButton
+              isOpenMenu={isOpenMenu}
+              setIsOpenMenu={setIsOpenMenu}
+            />
+          )}
         </div>
       </div>
       <div className="px-20">{children}</div>

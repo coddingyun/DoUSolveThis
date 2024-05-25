@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import spinner from './assets/spinner.gif';
 import Router from './shared/components/common/Router';
 import theme from './shared/layout/theme';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,9 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <ChakraProvider theme={theme}>
               <Suspense fallback={<Loading />}>
-                <Router />
+                <BrowserRouter>
+                  <Router />
+                </BrowserRouter>
               </Suspense>
             </ChakraProvider>
           </QueryClientProvider>

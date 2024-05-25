@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
 import useGetUserInfo from '../../hooks/api/useGetUserInfo';
 import { useUserActions } from '../../../store/userStore';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { getAccessToken } from '../../utils/auth';
 
 const Landing = lazy(() => import('../../../pages/Landing'));
@@ -20,6 +20,7 @@ const ManagerChange = lazy(() => import('../../../pages/ManagerChange'));
 const Router = () => {
   const { setUserName, setUserId, setUserImage } = useUserActions();
   const { data: userInfo, refetch } = useGetUserInfo();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -32,28 +33,27 @@ const Router = () => {
       setUserName(userInfo.username);
       setUserId(userInfo.email);
       setUserImage(userInfo.imageUrl);
+      navigate('/search');
     }
   }, [userInfo]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/search" element={<SearchStudy />} />
-        <Route path="/info/:id" exact element={<StudyInfo />} />
-        <Route path="/edit/:id" exact element={<StudyEdit />} />
-        <Route path="/my-study" exact element={<MyStudy />} />
-        <Route path="/my-page" exact element={<MyPage />} />
-        <Route
-          path="/participation-offer"
-          exact
-          element={<ParticipationOffer />}
-        />
-        <Route path="/apply-list" exact element={<ApplyList />} />
-        <Route path="/manager-change" exact element={<ManagerChange />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/search" element={<SearchStudy />} />
+      <Route path="/info/:id" exact element={<StudyInfo />} />
+      <Route path="/edit/:id" exact element={<StudyEdit />} />
+      <Route path="/my-study" exact element={<MyStudy />} />
+      <Route path="/my-page" exact element={<MyPage />} />
+      <Route
+        path="/participation-offer"
+        exact
+        element={<ParticipationOffer />}
+      />
+      <Route path="/apply-list" exact element={<ApplyList />} />
+      <Route path="/manager-change" exact element={<ManagerChange />} />
+    </Routes>
   );
 };
 

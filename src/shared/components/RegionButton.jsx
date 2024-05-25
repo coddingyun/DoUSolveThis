@@ -64,7 +64,6 @@ const RegionButton = ({
   const [selectedArea, setSelectedArea] = useState('전국');
   const [selectedDetailArea, setSelectedDetailArea] = useState('전체');
 
-
   const handleClickApply = () => {
     setStudyArea({
       area: selectedArea,
@@ -81,7 +80,7 @@ const RegionButton = ({
         }`}
         isDisabled={disabled}
       >
-        {`${studyArea.area} ${studyArea.city}`}
+        {`${studyArea.area === 'ALL' ? '전국' : studyArea.area} ${studyArea.city === 'ALL' ? '전체' : studyArea.city}`}
       </Button>
 
       <Modal isOpen={isOpen} size="xl" onClose={onClose}>
