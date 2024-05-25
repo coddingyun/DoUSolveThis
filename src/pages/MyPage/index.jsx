@@ -51,6 +51,7 @@ const MakeStudy = () => {
           <UserInfoSection
             preferType={data.prefer_type}
             area={data.area}
+            city={data.city}
             language={data.language}
           />
           <Line />
