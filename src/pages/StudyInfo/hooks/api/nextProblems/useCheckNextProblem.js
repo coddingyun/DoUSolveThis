@@ -14,7 +14,7 @@ const useCheckNextProblem = (id, problem) => {
     {
       enabled: false,
       onSuccess: data => {
-        if (data.isExist) {
+        if (data.exist) {
           if (data.whoSolved && data.whoSolved.length > 0) {
             setStatus('solved');
             setSolvePeople(data.whoSolved);
