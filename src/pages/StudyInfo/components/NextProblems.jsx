@@ -35,20 +35,23 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="max-w-[388px] p-6 shadow-sm rounded-xl border border-solid border-gray-200">
-      <div className="flex justify-between items-start">
-        <RankTag>{data.rank}</RankTag>
-        <Trash onClick={handleDelete} className="cursor-pointer" />
+    <div className="w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200">
+      <div>
+        <div className="flex justify-between items-start">
+          <RankTag>{data.rank}</RankTag>
+          <Trash onClick={handleDelete} className="cursor-pointer" />
+        </div>
+        <h2 className="text-2xl font-semibold text-gray-900 mt-2 mb-5">
+          {data.title}
+        </h2>
+        <div className="flex flex-wrap gap-2">
+          {data.types &&
+            data.types.map((type, idx) => (
+              <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
+            ))}
+        </div>
       </div>
-      <h2 className="text-2xl font-semibold text-gray-900 mt-2 mb-5">
-        {data.title}
-      </h2>
-      <div className="flex flex-wrap gap-2 mb-8">
-        {data.types &&
-          data.types.map((type, idx) => (
-            <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
-          ))}
-      </div>
+
       <div className="w-full flex gap-3">
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-white"

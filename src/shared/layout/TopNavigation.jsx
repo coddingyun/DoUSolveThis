@@ -110,7 +110,7 @@ const TopNavigation = ({ children }) => {
 
   return (
     <div className="w-full h-screen">
-      <div className="h-16 flex justify-between items-center border border-gray-100 border-b-gray-100">
+      <div className="h-16 flex justify-between items-center border border-gray-100 border-b-gray-100 fixed top-0 left-0 w-full bg-white z-10">
         <div className="pl-20 flex items-center gap-10">
           <button
             type="button"
@@ -158,7 +158,7 @@ const TopNavigation = ({ children }) => {
           )}
         </div>
       </div>
-      <div className="px-20">{children}</div>
+      <div className="pt-16 px-20">{children}</div>
     </div>
   );
 };
