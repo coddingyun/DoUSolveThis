@@ -2,6 +2,7 @@ import levelToRank from '../constants/levelToRank';
 import { ReactComponent as Delete } from '../../assets/delete.svg';
 import { useEditStudyActions, useStudyActions } from '../../store/studyStore';
 import { getTierColor } from '../utils/tierInfo';
+import { useUserName } from '../../store/userStore';
 
 export const RankTag = ({ children }) => {
   const tierText = levelToRank[children];
@@ -33,9 +34,10 @@ export const BottomTag = ({ children }) => {
   );
 };
 
-export const BaekjoonIdTag = ({ children, type }) => {
+export const BaekjoonIdTag = ({ children, type, member }) => {
   const { deleteMember } = useStudyActions();
   const { deleteMember: deleteMemberEdit } = useEditStudyActions();
+  const userName = useUserName();
 
   const handleClickDelete = () => {
     if (type == 'edit') {
@@ -48,7 +50,7 @@ export const BaekjoonIdTag = ({ children, type }) => {
   return (
     <span className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl">
       {children}
-      <Delete onClick={handleClickDelete} />
+      {member !== userName && <Delete onClick={handleClickDelete} />}
     </span>
   );
 };
