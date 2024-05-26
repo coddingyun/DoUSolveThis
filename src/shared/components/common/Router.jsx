@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
 import useGetUserInfo from '../../hooks/api/useGetUserInfo';
 import { useUserActions } from '../../../store/userStore';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { getAccessToken } from '../../utils/auth';
 
 const Landing = lazy(() => import('../../../pages/Landing'));
@@ -21,6 +21,7 @@ const Router = () => {
   const { setUserName, setUserId, setUserImage } = useUserActions();
   const { data: userInfo, refetch } = useGetUserInfo();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -33,7 +34,9 @@ const Router = () => {
       setUserName(userInfo.username);
       setUserId(userInfo.email);
       setUserImage(userInfo.imageUrl);
-      navigate('/search');
+      if (location.pathname === '/') {
+        navigate('/search');
+      }
     }
   }, [userInfo]);
 
