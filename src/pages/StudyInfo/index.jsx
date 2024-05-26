@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import useStudyInfo from '../../shared/hooks/api/useStudyInfo';
 import TopNavigation from '../../shared/layout/TopNavigation';
@@ -16,15 +17,16 @@ const StudyInfo = () => {
     !isLoading && (
       <TopNavigation>
         <div className="h-full scroll-auto py-10 px-8">
-          <Header
-            studyInfoData={studyInfoData}
-            studyId={id}
-          />
+          <Header studyInfoData={studyInfoData} studyId={id} />
           <StudyDetailInfo studyInfoData={studyInfoData} />
           <StudyPlan studyInfoData={studyInfoData} />
-          {studyInfoData.participated && <MemberList studyInfoData={studyInfoData} />}
-          <Line />
-          {studyInfoData.participated && <NextProblems />}
+          {studyInfoData.participated && (
+            <>
+              <MemberList studyInfoData={studyInfoData} />
+              <Line />
+              <NextProblems />
+            </>
+          )}
         </div>
       </TopNavigation>
     )
