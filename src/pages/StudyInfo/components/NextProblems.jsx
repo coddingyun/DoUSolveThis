@@ -53,7 +53,7 @@ const Card = ({ data }) => {
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-white"
           onClick={handleClickOpenLink}
-        >{`/<>${data.probNum}: ${data.title}`}</Button>
+        >{`/<>${data.problemId}: ${data.title}`}</Button>
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-brand-50"
           onClick={handleClickCopyLink}
