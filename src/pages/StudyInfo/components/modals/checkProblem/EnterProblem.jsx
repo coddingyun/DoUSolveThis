@@ -44,7 +44,9 @@ const EnterProblem = ({ isOpen, onClose }) => {
       text:
         solvePeople &&
         solvePeople.length > 0 &&
-        `${solvePeople[0].username}님 외 ${1}명이 풀었습니다.`,
+        (solvePeople.length === 1
+          ? `${solvePeople[0].username}님이 풀었습니다.`
+          : `${solvePeople[0].username}님 외 ${solvePeople.length - 1}명이 풀었습니다.`),
     },
     not_solved: {
       bgColor: 'bg-success-50',
