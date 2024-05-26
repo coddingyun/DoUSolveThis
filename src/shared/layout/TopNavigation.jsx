@@ -116,7 +116,7 @@ const TopNavigation = ({ children }) => {
             type="button"
             className="flex items-center gap-2"
             onClick={() => {
-              navigate('/');
+              navigate('/search');
             }}
           >
             <LogoMark />
