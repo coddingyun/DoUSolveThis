@@ -5,6 +5,7 @@ import CheckProblemModal from './CheckProblemModal';
 import { ReactComponent as Search } from '../../../../../assets/search.svg';
 import useCheckNextProblem from '../../../hooks/api/nextProblems/useCheckNextProblem';
 import {
+  useSuggestionActions,
   useSuggestionSolvePeople,
   useSuggestionStatus,
 } from '../../../../../store/suggestionStore';
@@ -23,6 +24,7 @@ const EnterProblem = ({ isOpen, onClose }) => {
   };
   const mutation = usePostSuggestion(onSuccessCallback);
   const status = useSuggestionStatus();
+  const { setStatus } = useSuggestionActions();
   const solvePeople = useSuggestionSolvePeople();
 
   const submitAction = () => {
@@ -63,7 +65,9 @@ const EnterProblem = ({ isOpen, onClose }) => {
   const buttonStyles = {
     solved: {
       title: '다른 문제 검색',
-      handleClick: submitAction,
+      handleClick: () => {
+        setStatus(null);
+      },
     },
     not_solved: {
       title: '이 문제 어때요',
@@ -71,7 +75,9 @@ const EnterProblem = ({ isOpen, onClose }) => {
     },
     not_existed: {
       title: '다른 문제 검색',
-      handleClick: submitAction,
+      handleClick: () => {
+        setStatus(null);
+      },
     },
     null: {
       title: '문제 검색',
@@ -133,7 +139,10 @@ const EnterProblem = ({ isOpen, onClose }) => {
           <Button
             className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
             variant="outlined"
-            onClick={submitAction}
+            onClick={() => {
+              setStatus(null);
+              setValue('');
+            }}
           >
             다른 문제 검색
           </Button>
