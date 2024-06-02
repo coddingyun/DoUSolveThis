@@ -35,7 +35,7 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200">
+    <div className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200">
       <div>
         <div className="flex justify-between items-start">
           <RankTag>{data.rank}</RankTag>
@@ -69,7 +69,7 @@ const Card = ({ data }) => {
 };
 
 const LoadingCard = () => (
-  <div className="w-[388px] h-[240px] border border-solid border-gray-200 shadow-sm" />
+  <div className="min-w-[388px] h-[240px] border border-solid border-gray-200 shadow-sm" />
 );
 
 const NextProblems = () => {
@@ -96,9 +96,11 @@ const NextProblems = () => {
     }
 
     return (
-      nextProbs &&
-      nextProbs.length > 0 &&
-      nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)
+      <div className='grid grid-cols-3 gap-6'>
+        {nextProbs &&
+        nextProbs.length > 0 &&
+        nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
+      </div>
     );
   };
 
