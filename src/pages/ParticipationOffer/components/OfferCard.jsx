@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/react';
 
 const OfferCard = ({ data, onApproveClick, onRejectClick }) => {
   return (
-    <div className="shadow-sm border border-solid border-gray-200 rounded-lg">
+    <div className="min-w-[388px] shadow-sm border border-solid border-gray-200 rounded-lg">
       <div className="px-6 py-4 flex justify-between items-center">
         <h2 className="text-gray-900 text-lg font-semibold">
           {data.studyTitle}

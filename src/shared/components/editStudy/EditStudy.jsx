@@ -76,6 +76,26 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
     }
   }, [studyInfoData])
 
+  useEffect(() => {
+    if (modalState === 3) {
+      mutation.mutate({
+        title: studyName,
+        description,
+        openchat: kakaoUrl,
+        main_language: language,
+        level,
+        members,
+        area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
+        city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
+        how_many: solvedProblemNumber,
+        meeting_type: meetingType,
+        period: frequencyStandard,
+        frequency: frequencyNumber,
+        study_time: studyTime,
+      })
+    }
+  }, [modalState])
+
   const modalStateList = useMemo(
     () => [
       {
@@ -117,22 +137,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
         },
         onNext: () => {
           setModalState(3);
-          //Todo. useEditStudy api 연동
-          mutation.mutate({
-            title: studyName,
-            description,
-            openchat: kakaoUrl,
-            main_language: language,
-            level,
-            members,
-            area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
-            city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
-            how_many: solvedProblemNumber,
-            meeting_type: meetingType,
-            period: frequencyStandard,
-            frequency: frequencyNumber,
-            study_time: studyTime,
-          })
+          //mutation.mutate(putData)
         },
       },
       {

@@ -16,7 +16,7 @@ import { Form } from '../../../shared/components/Form';
 import { userSchema } from '../../../shared/constants/schema';
 
 const UserInfoModal = ({ isOpen, onClose }) => {
-  const [meetingType, setMeetingType] = useState('온·오프라인 모두');
+  const [meetingType, setMeetingType] = useState('온·오프라인');
   const [studyArea, setStudyArea] = useState({
     area: '전국',
     city: '전체',

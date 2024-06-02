@@ -17,6 +17,7 @@ const StudyInfoCard = ({ people, lang, tier, solved, id }) => {
   const navigate = useNavigate();
   const tierText = getTierText(tier);
   const tierColor = getTierColor(tier);
+  
   return (
     <div className="border border-gray-200 rounded-lg shadow p-2">
       <div className="flex justify-between">
