@@ -20,7 +20,7 @@ const usePostLogin = onOpen => {
 
         setAuthToken(accessToken, refreshToken);
         setUserName(response.data.username);
-        setUserId(response.data.userId);
+        setUserId(response.data.email);
         setUserImage(response.data.imageUrl);
 
         if (response.data.isFirst) {

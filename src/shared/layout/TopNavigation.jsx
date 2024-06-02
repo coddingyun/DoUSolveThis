@@ -76,7 +76,7 @@ const ProfileButton = ({ isOpenMenu, setIsOpenMenu }) => {
 
   useEffect(() => {
     const handleOutsideClose = e => {
-      if (isOpenMenu === 'profile' && !dropMenuRef.current.contains(e.target)) {
+      if (isOpenMenu === 'profile' && dropMenuRef.current && !dropMenuRef.current.contains(e.target)) {
         setIsOpenMenu(null);
       }
     };
