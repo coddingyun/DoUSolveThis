@@ -56,7 +56,7 @@ const Card = ({ data }) => {
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-white"
           onClick={handleClickOpenLink}
-        >{`/<>${data.probNum}: ${data.title}`}</Button>
+        >문제 바로 가기</Button>
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-brand-50"
           onClick={handleClickCopyLink}
