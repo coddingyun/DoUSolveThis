@@ -20,20 +20,46 @@ const NoticeContent = ({ data }) => {
     mutation.mutate();
   };
 
+  let alarmContents;
+  let alarmTitle;
+
+  switch (data.noticeType) {
+    case 1:
+      alarmTitle = '스터디 참여 신청';
+      alarmContents = `${data.username}가 ${data.title}에 스터디 참여 신청을 보냈습니다.`;
+      break;
+    case 2:
+      alarmTitle = '스터디 참여 거절';
+      alarmContents = `${data.title}에 스터디 참여를 거절 당했습니다.`;
+      break;
+    case 3:
+      alarmTitle = '스터디 참여 승인';
+      alarmContents = `${data.title}에 스터디 참여가 승인되었습니다.`;
+      break;
+    case 4:
+      alarmTitle = '스터디원 변경';
+      alarmContents = `${data.username}가 ${data.title}에서 나갔습니다.`;
+      break;
+    case 5:
+      alarmTitle = '스터디장 변경';
+      alarmContents = `${data.title}의 스터디장이 ${data.username}로 변경되었습니다.`;
+      break;
+    case 6:
+      alarmTitle = '스터디 삭제';
+      alarmContents = `${data.title}이 삭제되었습니다.`;
+      break;
+  }
+
   return (
     <div
       className="cursor-pointer p-4 flex flex-col gap-4 !items-start !bg-white"
       onClick={handleClickNotice}
     >
       <div className="w-full flex justify-between">
-        <h3 className="text-brand-700 text-base font-semibold">
-          스터디 참여 신청
-        </h3>
+        <h3 className="text-brand-700 text-base font-semibold">{alarmTitle}</h3>
         <Trash onClick={handleClickDelete} />
       </div>
-      <h4 className="text-gray-900">
-        {data.username}가 {data.title}에 스터디 참여 신청을 보냈습니다.
-      </h4>
+      <h4 className="text-gray-900">{alarmContents}</h4>
       <h5 className="text-gray-500">{formatDate(data.noticeTime)}</h5>
     </div>
   );
