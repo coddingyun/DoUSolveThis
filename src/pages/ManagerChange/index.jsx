@@ -39,7 +39,7 @@ const ManagerChange = () => {
                   탈퇴 취소
                 </div>
               </Button>
-              <SimpleButton title="탈퇴하기" onClick={handleClickWithdraw} isDisabled={managerChangedId && managerChangedId.length !== data.length}/>
+              <SimpleButton title="탈퇴하기" onClick={handleClickWithdraw} isDisabled={!data || (managerChangedId && (data && managerChangedId.length !== data.length))}/>
             </div>
           </div>
           <h2 className="text-base text-gray-500">
