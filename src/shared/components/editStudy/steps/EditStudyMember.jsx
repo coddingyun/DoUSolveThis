@@ -27,7 +27,7 @@ const EditStudyMember = () => {
   return (
     <InputContainer title="스터디원 추가(선택)">
       <Input
-        placeholder="스터디원 백준 ID 등록하기"
+        placeholder="스터디원 사용자 ID 등록하기"
         value={term}
         handleChangeValue={e => setTerm(e.target.value)}
         handleKeyDown={handleKeyDown}
