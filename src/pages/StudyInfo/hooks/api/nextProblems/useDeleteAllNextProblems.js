@@ -1,9 +1,9 @@
-import { useQuery } from 'react-query';
-import { useNextProbsActions } from '../../../../../store/nextProbStore';
+import { useQuery, useQueryClient } from 'react-query';
 import { api } from '../../../../../shared/hooks/api';
 
 const useDeleteAllNextProblems = id => {
-  const { deleteAllNextProbs } = useNextProbsActions();
+  const queryClient = useQueryClient();
+
   const { data, refetch } = useQuery(
     'deleteAllNextProblems',
     async () => {
@@ -13,7 +13,7 @@ const useDeleteAllNextProblems = id => {
     {
       enabled: false,
       onSuccess: () => {
-        deleteAllNextProbs();
+        queryClient.invalidateQueries('getNextProblems');
       },
     },
   );

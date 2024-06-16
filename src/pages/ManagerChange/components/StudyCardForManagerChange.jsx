@@ -41,7 +41,7 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
       return (
         <div className="flex justify-between items-center">
           <h6 className="text-gray-500 text-sm">새로운 스터디장</h6>
-          <UserTag title={manager[0].username} tier={6} />
+          <UserTag title={manager.username} tier={6} />
         </div>
       );
     } else {
@@ -59,7 +59,7 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
   };
 
   const onClickEdit = () => {
-    mutation.mutate(manager[0].userId);
+    mutation.mutate(manager.userId);
   };
 
   return (
@@ -80,7 +80,11 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
                   return member;
                 }
               });
-              setManager(pickedManager);
+
+              setManager({
+                username: pickedManager[0].username,
+                userId: pickedManager[0].userId,
+              });
             }}
             options={members.map(member => member.username)}
           />
