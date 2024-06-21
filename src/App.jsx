@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="h-screen w-full grid place-items-center">
       <img src={spinner} width="50" alt="로딩 중" />
