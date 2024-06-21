@@ -37,14 +37,12 @@ const Card = ({ data }) => {
   return (
     <div className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200">
       <div>
-        <div className="flex justify-between items-start">
-          <RankTag>{data.rank}</RankTag>
+        <div className="flex justify-between items-start mb-5">
+          <h2 className="text-2xl font-semibold text-gray-900">{data.title}</h2>
           <Trash onClick={handleDelete} className="cursor-pointer" />
         </div>
-        <h2 className="text-2xl font-semibold text-gray-900 mt-2 mb-5">
-          {data.title}
-        </h2>
-        <div className="flex flex-wrap gap-2">
+        <RankTag>{data.rank}</RankTag>
+        <div className="flex flex-wrap gap-2 mt-2">
           {data.types &&
             data.types.map((type, idx) => (
               <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
@@ -56,7 +54,9 @@ const Card = ({ data }) => {
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-white"
           onClick={handleClickOpenLink}
-        >문제 바로 가기</Button>
+        >
+          문제 바로 가기
+        </Button>
         <Button
           className="w-full py-2.5 !text-brand-700 !bg-brand-50"
           onClick={handleClickCopyLink}
@@ -96,10 +96,10 @@ const NextProblems = () => {
     }
 
     return (
-      <div className='grid grid-cols-3 gap-6'>
+      <div className="grid grid-cols-3 gap-6">
         {nextProbs &&
-        nextProbs.length > 0 &&
-        nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
+          nextProbs.length > 0 &&
+          nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
       </div>
     );
   };
