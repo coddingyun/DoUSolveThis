@@ -94,9 +94,9 @@ const UserInfoModal = ({ isOpen, onClose }) => {
               placeholder="언어 선택"
             />
           </InputContainer>
-          <InputContainer title="사용자 ID">
+          <InputContainer title="백준 ID">
             <Form.Input
-              placeholder="사용자 ID 입력"
+              placeholder="백준 ID 입력"
               value={baekjoonId}
               handleChangeValue={e => {
                 setBaekjoonId(e.target.value);
