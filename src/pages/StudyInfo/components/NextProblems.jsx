@@ -42,7 +42,7 @@ const Card = ({ data }) => {
           <Trash onClick={handleDelete} className="cursor-pointer" />
         </div>
         <RankTag>{data.rank}</RankTag>
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="flex gap-2 mt-2">
           {data.types &&
             data.types.map((type, idx) => (
               <UserTag title={`#${type}`} tier={6} key={`type${idx}`} />
@@ -52,16 +52,16 @@ const Card = ({ data }) => {
 
       <div className="w-full flex gap-3">
         <Button
-          className="w-full py-2.5 !text-brand-700 !bg-white"
-          onClick={handleClickOpenLink}
-        >
-          문제 바로 가기
-        </Button>
-        <Button
-          className="w-full py-2.5 !text-brand-700 !bg-brand-50"
+          className="w-full py-2.5 !text-gray-700 !bg-white !border !border-gray-300"
           onClick={handleClickCopyLink}
         >
           문제 링크 복사
+        </Button>
+        <Button
+          className="w-full py-2.5 !text-brand-700 !bg-brand-50"
+          onClick={handleClickOpenLink}
+        >
+          문제 바로 가기
         </Button>
       </div>
     </div>
