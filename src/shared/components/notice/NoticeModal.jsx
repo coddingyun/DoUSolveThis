@@ -25,28 +25,28 @@ const NoticeContent = ({ data }) => {
 
   switch (data.noticeType) {
     case 1:
-      alarmTitle = '스터디 참여 신청';
-      alarmContents = `${data.username}가 ${data.title}에 스터디 참여 신청을 보냈습니다.`;
-      break;
-    case 2:
-      alarmTitle = '스터디 참여 거절';
-      alarmContents = `${data.title}에 스터디 참여를 거절 당했습니다.`;
-      break;
-    case 3:
       alarmTitle = '스터디 참여 승인';
       alarmContents = `${data.title}에 스터디 참여가 승인되었습니다.`;
       break;
-    case 4:
-      alarmTitle = '스터디원 변경';
-      alarmContents = `${data.username}가 ${data.title}에서 나갔습니다.`;
-      break;
-    case 5:
+    case 2:
+        alarmTitle = '스터디 참여 거절';
+        alarmContents = `${data.title}에 스터디 참여를 거절 당했습니다.`;
+        break;
+    case 3:
       alarmTitle = '스터디장 변경';
       alarmContents = `${data.title}의 스터디장이 ${data.username}로 변경되었습니다.`;
       break;
-    case 6:
+    case 4:
       alarmTitle = '스터디 삭제';
       alarmContents = `${data.title}이 삭제되었습니다.`;
+      break;
+    case 5:
+      alarmTitle = '스터디 참여 신청';
+      alarmContents = `${data.username}가 ${data.title}에 스터디 참여 신청을 보냈습니다.`;
+      break;
+    case 6:
+      alarmTitle = '스터디원 변경';
+      alarmContents = `${data.username}가 ${data.title}에서 나갔습니다.`;
       break;
   }
 

@@ -8,13 +8,7 @@ const ChangeLead = ({ studyInfoData }) => {
   const { setLead } = useExitActions();
 
   const userName = useUserName();
-  const members = studyInfoData
-    ? studyInfoData.members.map(member => {
-        if (member.username !== userName) {
-          return member;
-        }
-      })
-    : [];
+  const members = studyInfoData && studyInfoData.members && studyInfoData.members.filter(member =>  member.username !== userName);
 
   return (
     <InputContainer>
