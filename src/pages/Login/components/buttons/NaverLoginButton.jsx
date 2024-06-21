@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 import LoginButton from './LoginButton';
 import { ReactComponent as NaverIcon } from '../../../../assets/naverIcon.svg';
-import usePostLogin from '../../hooks/api/usePostLogin';
 
-const NaverLoginButton = ({ onOpen }) => {
+const NaverLoginButton = ({ login }) => {
   const code = new URL(window.location.href).searchParams.get('code');
   const state = new URL(window.location.href).searchParams.get('state');
-
-  const naverLogin = usePostLogin(onOpen);
 
   useEffect(() => {
     const axiosNaverLogin = async () => {
@@ -17,7 +14,7 @@ const NaverLoginButton = ({ onOpen }) => {
           authState: state,
           provider: 'NAVER',
         };
-        naverLogin.mutate(data);
+        login.mutate(data);
       }
     };
 

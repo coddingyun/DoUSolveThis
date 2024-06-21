@@ -62,15 +62,19 @@ const Card = ({ data }) => {
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    const handleScroll = () => {
+    const updateScrollState = () => {
       if (!scrollContainer) return;
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
       setIsScrolledToStart(scrollLeft === 0);
-      setIsScrolledToEnd(scrollLeft + clientWidth === scrollWidth);
+      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth);
     };
-    scrollContainer.addEventListener('scroll', handleScroll);
+    
+    updateScrollState();
+    
+    scrollContainer.addEventListener('scroll', updateScrollState);
+    
     return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll);
+      scrollContainer.removeEventListener('scroll', updateScrollState);
     };
   }, []);
 

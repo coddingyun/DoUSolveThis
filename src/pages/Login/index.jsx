@@ -3,9 +3,26 @@ import UserInfoModal from './components/UserInfoModal';
 import GoogleLoginButton from './components/buttons/GoogleLoginButton';
 import NaverLoginButton from './components/buttons/NaverLoginButton';
 import { useDisclosure } from '@chakra-ui/react';
+import usePostLogin from './hooks/api/usePostLogin';
+import { Loading } from '../../App';
+import { getAccessToken } from '../../shared/utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const login = usePostLogin(onOpen);
+
+  // 네이버 로그인한 이후 다시 로그인페이지에서 네이버 로그인을 하려고 하면 계속 login api 가 요청된다
+  // !isOpen이 없으면 회원가입시 onOpen시 새로고침이 되면서 바로 /search로 넘어가서 프로필 모달을 못보게 됨
+  if (getAccessToken() && !isOpen) {
+    navigate('/search');
+  }
+
+  if (login.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-full h-screen grid place-items-center">
@@ -21,8 +38,8 @@ const Login = () => {
           </div>
         </div>
         <div className="flex gap-4">
-          <GoogleLoginButton onOpen={onOpen} />
-          <NaverLoginButton onOpen={onOpen} />
+          <GoogleLoginButton login={login} />
+          <NaverLoginButton login={login} />
         </div>
       </div>
     </div>
