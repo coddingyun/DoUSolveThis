@@ -29,12 +29,7 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
 
   const userName = useUserName();
   const members = studyInfoData
-    ? studyInfoData.members.map(member => {
-        if (member.username !== userName) {
-          return member;
-        }
-      })
-    : [];
+    ? studyInfoData.members.filter(member => member.username !== userName) : [];
 
   const renderFooter = () => {
     if (isChanged) {
