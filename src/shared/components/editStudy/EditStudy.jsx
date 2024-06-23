@@ -72,7 +72,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
       setStudyTime(studyInfoData.study_time)
       setFrequencyStandard(studyInfoData.period)
       setFrequencyNumber(studyInfoData.frequency)
-      setMembers(studyInfoData.members.map(member => member.username))
+      setMembers(studyInfoData.members)
     }
   }, [studyInfoData])
 
