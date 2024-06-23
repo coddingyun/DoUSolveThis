@@ -198,7 +198,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
           <EditCompleted />
         </Step>
         <Step name={editStudyStepTitle[4]}>
-          <StudyModalError />
+          <StudyModalError type="edit" />
         </Step>
       </Funnel>
     </ModalLayout>

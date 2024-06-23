@@ -71,6 +71,7 @@ const onResponseRejected = async error => {
     requestConfig.headers.Access = newAccessToken;
     return api(requestConfig);
   }
+  return Promise.reject(error);
 };
 
 api.interceptors.request.use(onRequestFulfilled, onRequestRejected);

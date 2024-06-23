@@ -20,6 +20,7 @@ const Login = () => {
     navigate('/search');
   }
 
+  // 네이버 로그인시 페이지가 새로고침되면서 login도 새롭게 정의됌 아닌가?
   if (login.isLoading) {
     return <Loading />;
   }
