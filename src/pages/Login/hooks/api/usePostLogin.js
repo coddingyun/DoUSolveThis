@@ -5,7 +5,7 @@ import { useUserActions } from '../../../../store/userStore';
 import { useNavigate } from 'react-router-dom';
 
 const usePostLogin = onOpen => {
-  const { setUserName, setUserId, setUserImage } = useUserActions();
+  const { setUserName, setUserId, setUserImage, setUserNotices } = useUserActions();
   const navigate = useNavigate();
 
   return useMutation(
@@ -22,6 +22,7 @@ const usePostLogin = onOpen => {
         setUserName(response.data.username);
         setUserId(response.data.email);
         setUserImage(response.data.imageUrl);
+        setUserNotices(response.data.notices);
 
         if (response.data.isFirst) {
           onOpen();
