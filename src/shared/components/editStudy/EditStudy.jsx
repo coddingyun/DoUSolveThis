@@ -168,6 +168,10 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
 
   const curModalState = modalStateList[modalState]
 
+  if (!studyInfoData) {
+    return <></>
+  }
+
   return (
     <ModalLayout
       title={curModalState.title}
