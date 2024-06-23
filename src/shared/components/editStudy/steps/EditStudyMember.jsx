@@ -11,8 +11,8 @@ const EditStudyMember = () => {
   const { addMember } = useEditStudyActions();
 
   const onCheckIdSuccessCallback = data => {
-    if (data.results.valid) {
-      addMember(data.results.bjname); // TODO. { username, userId }
+    if (data.valid) {
+      addMember(data.username);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
