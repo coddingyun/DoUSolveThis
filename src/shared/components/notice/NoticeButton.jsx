@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { ReactComponent as ClickedBell } from '../../../assets/bell-clicked.svg';
 import { ReactComponent as Bell } from '../../../assets/bell.svg';
+import { ReactComponent as BellWithCircle } from '../../../assets/bell-with-circle.svg';
 import { Button } from '@chakra-ui/react';
 import NoticeModal from './NoticeModal';
+import { useUserNotices } from '../../../store/userStore';
 
 const NoticeButton = ({ isOpenMenu, setIsOpenMenu }) => {
   const dropMenuRef = useRef();
+  const userNotices = useUserNotices();
 
   const handleClickNoticeButton = e => {
     e.stopPropagation();
@@ -32,6 +35,8 @@ const NoticeButton = ({ isOpenMenu, setIsOpenMenu }) => {
       >
         {clicked ? (
           <ClickedBell />
+        ) : userNotices > 0 ? (
+          <BellWithCircle />
         ) : (
           <Bell width={20} height={20} stroke="#667085" />
         )}

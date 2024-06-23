@@ -12,7 +12,7 @@ const EditStudyMember = () => {
 
   const onCheckIdSuccessCallback = data => {
     if (data.results.valid) {
-      addMember(data.results.bjname);
+      addMember(data.results.bjname); // TODO. { username, userId }
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
@@ -35,7 +35,7 @@ const EditStudyMember = () => {
       <div className="flex flex-wrap gap-2">
         {members &&
           members.map((member, idx) => (
-            <BaekjoonIdTag key={`member#${idx}`} type="edit" member={member}>{member}</BaekjoonIdTag>
+            <BaekjoonIdTag key={`member#${idx}`} type="edit" member={member}>{member.username}</BaekjoonIdTag>
           ))}
       </div>
     </InputContainer>
