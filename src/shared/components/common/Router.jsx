@@ -18,7 +18,7 @@ const ApplyList = lazy(() => import('../../../pages/ApplyList'));
 const ManagerChange = lazy(() => import('../../../pages/ManagerChange'));
 
 const Router = () => {
-  const { setUserName, setUserId, setUserImage } = useUserActions();
+  const { setUserName, setUserId, setUserImage, setUserNotices } = useUserActions();
   const { data: userInfo, refetch } = useGetUserInfo();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,6 +34,7 @@ const Router = () => {
       setUserName(userInfo.username);
       setUserId(userInfo.email);
       setUserImage(userInfo.imageUrl);
+      setUserNotices(userInfo.notices)
       if (location.pathname === '/') {
         navigate('/search');
       }

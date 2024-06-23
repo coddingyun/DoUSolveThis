@@ -72,7 +72,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
       setStudyTime(studyInfoData.study_time)
       setFrequencyStandard(studyInfoData.period)
       setFrequencyNumber(studyInfoData.frequency)
-      setMembers(studyInfoData.members.map(member => member.username))
+      setMembers(studyInfoData.members)
     }
   }, [studyInfoData])
 
@@ -168,6 +168,10 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
 
   const curModalState = modalStateList[modalState]
 
+  if (!studyInfoData) {
+    return <></>
+  }
+
   return (
     <ModalLayout
       title={curModalState.title}
@@ -194,7 +198,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
           <EditCompleted />
         </Step>
         <Step name={editStudyStepTitle[4]}>
-          <StudyModalError />
+          <StudyModalError type="edit" />
         </Step>
       </Funnel>
     </ModalLayout>
