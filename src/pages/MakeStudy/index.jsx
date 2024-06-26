@@ -6,6 +6,7 @@ import Completed from './components/steps/Completed';
 import { useStudyActions } from '../../store/studyStore';
 import { makeStudyStepTitle } from '../../shared/constants/steps';
 import ModalLayout from '../../shared/layout/ModalLayout';
+import StudyModalError from '../../shared/components/StudyModalError';
 
 const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
             reset();
           }}
         >
-          <Completed />
+          <StudyModalError />
         </ModalLayout>
       </Step>
     </Funnel>
