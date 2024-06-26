@@ -5,7 +5,7 @@ const useCheckId = (id, successCallback) => {
   const { data, isLoading, refetch } = useQuery(
     'checkId',
     async () => {
-      const response = await api.get(`/api/validate/baekjoon?id=${id}`);
+      const response = await api.get(`/api/user/search?email=${id}`);
       return response.data;
     },
     {
