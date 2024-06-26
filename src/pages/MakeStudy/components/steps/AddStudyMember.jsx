@@ -29,7 +29,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
     if (data.valid) {
-      addMember(data.username);
+      addMember(data);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
@@ -62,7 +62,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       openchat: kakaoUrl,
       main_language: language,
       level,
-      members,
+      members: members.map(member => member.username),
       area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
       city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
       how_many: solvedProblemNumber,
@@ -93,7 +93,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
           {members &&
             members.map((member, idx) => (
               <BaekjoonIdTag key={`member#${idx}`} member={member}>
-                {member}
+                {member.username}
               </BaekjoonIdTag>
             ))}
         </div>

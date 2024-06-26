@@ -12,7 +12,7 @@ const EditStudyMember = () => {
 
   const onCheckIdSuccessCallback = data => {
     if (data.valid) {
-      addMember(data.username);
+      addMember(data);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
