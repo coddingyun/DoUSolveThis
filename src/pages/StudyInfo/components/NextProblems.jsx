@@ -66,7 +66,7 @@ const Card = ({ data }) => {
       if (!scrollContainer) return;
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
       setIsScrolledToStart(scrollLeft === 0);
-      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth);
+      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth-1);
     };
     
     updateScrollState();
