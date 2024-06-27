@@ -7,6 +7,7 @@ const usePostStudy = (successCallback, errorCallback) => {
   return useMutation(async data => await api.post(`/api/studies`, data), {
     onSuccess: () => {
       successCallback();
+      queryClient.invalidateQueries('search');
       queryClient.invalidateQueries('myStudy');
     },
     onError: () => {

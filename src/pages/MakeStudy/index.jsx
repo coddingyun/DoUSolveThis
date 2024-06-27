@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import WriteStudyInfo from './components/steps/WriteStudyInfo';
 import WriteMeetingInfo from './components/steps/WriteMeetingInfo';
@@ -15,11 +16,7 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
   const { reset } = useStudyActions();
   const { data } = useGetMyPage();
 
-  const {
-    setLanguage,
-    setMeetingType,
-    setStudyArea,
-  } = useStudyActions();
+  const { setLanguage, setMeetingType, setStudyArea } = useStudyActions();
 
   useEffect(() => {
     if (data) {
@@ -28,9 +25,13 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       setStudyArea({
         area: data.area,
         city: data.city,
-      })
+      });
     }
-  }, [data])
+  }, [data]);
+
+  if (!data) {
+    return <></>;
+  }
 
   return (
     <Funnel>
@@ -61,15 +62,14 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       <Step name={makeStudyStepTitle[3]}>
         <Completed
           onPrev={() => {
-            navigate('/search');
             onClose();
             clickHandler(makeStudyStepTitle[0]);
             reset();
           }}
           onNext={() => {
-            navigate('/my-study');
             onClose();
             clickHandler(makeStudyStepTitle[0]);
+            navigate('/my-study');
             reset();
           }}
         />
@@ -77,13 +77,15 @@ const MakeStudy = ({ clickHandler, Funnel, Step, onClose }) => {
       <Step name={makeStudyStepTitle[4]}>
         <ModalLayout
           title={null}
-          buttonTitle="확인"
-          prevNext={false}
-          onNext={() => {
-            navigate('/my-study');
+          leftButtonTitle="확인"
+          rightButtonTitle="되돌아가기"
+          onPrev={() => {
             onClose();
             clickHandler(makeStudyStepTitle[0]);
             reset();
+          }}
+          onNext={() => {
+            clickHandler(makeStudyStepTitle[2]);
           }}
         >
           <StudyModalError />

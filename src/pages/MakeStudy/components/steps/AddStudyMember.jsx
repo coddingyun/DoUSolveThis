@@ -7,10 +7,10 @@ import useCheckId from '../../../../shared/hooks/api/useCheckId';
 import { useStudyStore, useStudyActions } from '../../../../store/studyStore';
 import usePostStudy from '../../hooks/api/usePostStudy';
 import { makeStudyStepTitle } from '../../../../shared/constants/steps';
-import { useQueryClient } from 'react-query';
 
 const AddStudyMember = ({ onPrev, clickHandler }) => {
   const [term, setTerm] = useState('');
+  const [isValid, setIsValid] = useState(true);
   const {
     studyName,
     description,
@@ -29,7 +29,10 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
   const { addMember } = useStudyActions();
   const onCheckIdSuccessCallback = data => {
     if (data.valid) {
-      addMember(data.username);
+      addMember(data);
+      setTerm('');
+    } else {
+      setIsValid(false);
     }
   };
   const { refetch } = useCheckId(term, onCheckIdSuccessCallback);
@@ -38,15 +41,11 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       refetch();
-      setTerm('');
     }
   };
 
-  const queryClient = useQueryClient();
-
   const onStudySuccessCallback = () => {
     clickHandler(makeStudyStepTitle[3]);
-    queryClient.invalidateQueries('search');
   };
 
   const onStudyErrorCallback = () => {
@@ -62,7 +61,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       openchat: kakaoUrl,
       main_language: language,
       level,
-      members,
+      members: members.map(member => member.username),
       area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
       city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
       how_many: solvedProblemNumber,
@@ -72,6 +71,8 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       study_time: studyTime,
     });
   };
+
+  const borderStyle = !isValid ? '!border-error-300' : 'border-gray-300';
 
   return (
     <ModalLayout
@@ -85,15 +86,24 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       <InputContainer title="스터디원 추가(선택)">
         <Input
           placeholder="스터디원 사용자 ID 등록하려면 입력 후 엔터"
+          className={borderStyle}
           value={term}
-          handleChangeValue={e => setTerm(e.target.value)}
+          handleChangeValue={e => {
+            setTerm(e.target.value);
+            if (!isValid) {
+              setIsValid(true);
+            }
+          }}
           handleKeyDown={handleKeyDown}
         />
+        {!isValid && (
+          <span className="text-sm text-error-500">일치하는 ID가 없습니다</span>
+        )}
         <div className="flex flex-wrap gap-2">
           {members &&
             members.map((member, idx) => (
               <BaekjoonIdTag key={`member#${idx}`} member={member}>
-                {member}
+                {member.username}
               </BaekjoonIdTag>
             ))}
         </div>

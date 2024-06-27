@@ -41,16 +41,16 @@ export const BaekjoonIdTag = ({ children, type, member }) => {
 
   const handleClickDelete = () => {
     if (type == 'edit') {
-      deleteMemberEdit(children);
+      deleteMemberEdit(member);
     } else {
-      deleteMember(children);
+      deleteMember(member);
     }
   };
 
   return (
     <span className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl">
       {children}
-      {member !== userName && <Delete onClick={handleClickDelete} />}
+      {member.username !== userName && <Delete onClick={handleClickDelete} />}
     </span>
   );
 };
