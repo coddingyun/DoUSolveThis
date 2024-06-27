@@ -6,25 +6,35 @@ import EditMeetingInfo from './steps/EditMeetingInfo';
 import { useNavigate } from 'react-router-dom';
 import EditStudyMember from './steps/EditStudyMember';
 import useStudyInfo from '../../hooks/api/useStudyInfo';
-import { useEditStudyActions, useEditStudyStore } from '../../../store/studyStore';
+import {
+  useEditStudyActions,
+  useEditStudyStore,
+} from '../../../store/studyStore';
 import EditCompleted from './steps/EditCompleted';
 import usePutStudyInfo from '../../hooks/api/usePutStudyInfo';
 import StudyModalError from '../StudyModalError';
 
 const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
   const [modalState, setModalState] = useState(0);
+  const [fetching, setFetching] = useState(false);
   const navigate = useNavigate();
 
   const { studyInfoData } = useStudyInfo(editId);
 
   const onEditStudySuccessCallback = () => {
+    setModalState(3);
     clickHandler(editStudyStepTitle[3]);
   };
 
   const onEditStudyErrorCallback = () => {
+    setModalState(4);
     clickHandler(editStudyStepTitle[4]);
-  }
-  const mutation = usePutStudyInfo(editId, onEditStudySuccessCallback, onEditStudyErrorCallback);
+  };
+  const mutation = usePutStudyInfo(
+    editId,
+    onEditStudySuccessCallback,
+    onEditStudyErrorCallback,
+  );
 
   const {
     studyName,
@@ -53,31 +63,31 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
     setStudyTime,
     setFrequencyStandard,
     setFrequencyNumber,
-    setMembers
+    setMembers,
   } = useEditStudyActions();
 
   useEffect(() => {
     if (studyInfoData) {
-      setStudyName(studyInfoData.title)
-      setDescription(studyInfoData.description)
-      setKakaoUrl(studyInfoData.openchat)
-      setLanguage(studyInfoData.language)
-      setLevel(studyInfoData.level)
-      setSolvedProblemNumber(studyInfoData.how_many)
-      setMeetingType(studyInfoData.meeting_type)
+      setStudyName(studyInfoData.title);
+      setDescription(studyInfoData.description);
+      setKakaoUrl(studyInfoData.openchat);
+      setLanguage(studyInfoData.language);
+      setLevel(studyInfoData.level);
+      setSolvedProblemNumber(studyInfoData.how_many);
+      setMeetingType(studyInfoData.meeting_type);
       setStudyArea({
         area: studyInfoData.area,
-        city: studyInfoData.city
+        city: studyInfoData.city,
       }),
-      setStudyTime(studyInfoData.study_time)
-      setFrequencyStandard(studyInfoData.period)
-      setFrequencyNumber(studyInfoData.frequency)
-      setMembers(studyInfoData.members)
+        setStudyTime(studyInfoData.study_time);
+      setFrequencyStandard(studyInfoData.period);
+      setFrequencyNumber(studyInfoData.frequency);
+      setMembers(studyInfoData.members);
     }
-  }, [studyInfoData])
+  }, [studyInfoData]);
 
   useEffect(() => {
-    if (modalState === 3) {
+    if (fetching) {
       mutation.mutate({
         title: studyName,
         description,
@@ -92,9 +102,10 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
         period: frequencyStandard,
         frequency: frequencyNumber,
         study_time: studyTime,
-      })
+      });
+      setFetching(false);
     }
-  }, [modalState])
+  }, [fetching]);
 
   const modalStateList = useMemo(
     () => [
@@ -128,7 +139,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
       {
         title: studyInfoData && studyInfoData.title,
         leftButtonTitle: '이전',
-        rightButtonTitle: '다음',
+        rightButtonTitle: '등록하기',
         rightButtonType: 'next',
         dirtyFieldsCnt: 0,
         onPrev: () => {
@@ -136,40 +147,47 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
           clickHandler(editStudyStepTitle[1]);
         },
         onNext: () => {
-          setModalState(3);
-          //mutation.mutate(putData)
+          setFetching(true);
         },
       },
       {
         title: null,
-        buttonTitle: "확인",
-        prevNext: false,
-        onNext: () => {
-          setModalState(0);
+        leftButtonTitle: '확인',
+        rightButtonTitle: '내 스터디로',
+        onPrev: () => {
           onClose();
+          setModalState(0);
           clickHandler(editStudyStepTitle[0]);
-          navigate('/my-study')
+        },
+        onNext: () => {
+          onClose();
+          setModalState(0);
+          clickHandler(editStudyStepTitle[0]);
+          navigate('/my-study');
         },
       },
       {
         title: null,
-        buttonTitle: "확인",
-        prevNext: false,
-        onNext: () => {
-          setModalState(0);
+        leftButtonTitle: '확인',
+        rightButtonTitle: '되돌아가기',
+        onPrev: () => {
           onClose();
+          setModalState(0);
           clickHandler(editStudyStepTitle[0]);
-          navigate('/my-study')
+        },
+        onNext: () => {
+          setModalState(2);
+          clickHandler(editStudyStepTitle[2]);
         },
       },
     ],
     [studyInfoData],
   );
 
-  const curModalState = modalStateList[modalState]
+  const curModalState = modalStateList[modalState];
 
   if (!studyInfoData) {
-    return <></>
+    return <></>;
   }
 
   return (

@@ -5,7 +5,7 @@ const Completed = ({ onPrev, onNext }) => {
   return (
     <ModalLayout
       title={null}
-      leftButtonTitle="처음으로"
+      leftButtonTitle="확인"
       rightButtonTitle="내 스터디로"
       onPrev={onPrev}
       onNext={onNext}
