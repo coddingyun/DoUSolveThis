@@ -1,12 +1,16 @@
-import React from 'react';
-import { Button, useDisclosure } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Button, Switch, useDisclosure } from '@chakra-ui/react';
 import ParticipateModal from './modals/ParticipateModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
-import { RankTag, RecruitingTag } from '../../../shared/components/Tag';
+import { RankTag } from '../../../shared/components/Tag';
 import { getAccessToken } from '../../../shared/utils/auth';
+import { useUserName } from '../../../store/userStore';
+import usePatchRecruiting from '../hooks/api/usePatchRecruiting';
 
 const Header = ({ studyInfoData, studyId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userName = useUserName();
+  const [isRecruiting, setIsRecruiting] = useState(studyInfoData.recruiting);
 
   const renderModal = () => {
     if (studyInfoData.participated) {
@@ -22,12 +26,22 @@ const Header = ({ studyInfoData, studyId }) => {
     );
   };
 
+  const succesCallback = () => {
+    setIsRecruiting(prev => !prev);
+  };
+
+  const mutation = usePatchRecruiting(succesCallback);
+
+  const handleChangeSwitch = () => {
+    mutation.mutate({ id: studyId, isRecruiting: !isRecruiting });
+  };
+
   return (
     <>
       <div className="py-5 flex justify-between items-start">
         <div>
-          <div className="flex gap-4 mb-4">
-            <RecruitingTag isRecruiting={studyInfoData.recruiting} />
+          <div className="mb-4">
+            {/* <RecruitingTag isRecruiting={studyInfoData.recruiting} /> */}
             <RankTag>{studyInfoData.avg_rank}</RankTag>
           </div>
           <h1 className="!p-0 !mb-4 text-gray-900 text-4xl font-semibold">
@@ -56,6 +70,20 @@ const Header = ({ studyInfoData, studyId }) => {
             >
               참여하기
             </Button>
+          )}
+          {studyInfoData.manager === userName && (
+            <div className="flex items-center gap-2">
+              <span
+                className={`font-semibold ${isRecruiting ? 'text-gray-700' : 'text-gray-400'}`}
+              >
+                {isRecruiting ? '모집 중' : '모집 완료'}
+              </span>
+              <Switch
+                colorScheme="purple"
+                isChecked={isRecruiting}
+                onChange={handleChangeSwitch}
+              />
+            </div>
           )}
         </div>
       </div>
