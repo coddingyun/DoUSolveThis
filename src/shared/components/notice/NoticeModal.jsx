@@ -30,7 +30,7 @@ const NoticeContent = ({ data }) => {
       break;
     case 2:
         alarmTitle = '스터디 참여 거절';
-        alarmContents = `${data.title}에 스터디 참여를 거절 당했습니다.`;
+        alarmContents = `${data.title}에 스터디 참여를 거절되었습니다.`;
         break;
     case 3:
       alarmTitle = '스터디장 변경';
@@ -42,11 +42,11 @@ const NoticeContent = ({ data }) => {
       break;
     case 5:
       alarmTitle = '스터디 참여 신청';
-      alarmContents = `${data.username}가 ${data.title}에 스터디 참여 신청을 보냈습니다.`;
+      alarmContents = `${data.username}님이 ${data.title}에 스터디 참여 신청을 보냈습니다.`;
       break;
     case 6:
       alarmTitle = '스터디원 변경';
-      alarmContents = `${data.username}가 ${data.title}에서 나갔습니다.`;
+      alarmContents = `${data.username}님이 ${data.title}에서 나갔습니다.`;
       break;
   }
 

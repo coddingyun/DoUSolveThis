@@ -49,6 +49,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
     frequencyStandard,
     frequencyNumber,
     members,
+    manager,
   } = useEditStudyStore();
 
   const {
@@ -64,6 +65,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
     setFrequencyStandard,
     setFrequencyNumber,
     setMembers,
+    setManager,
   } = useEditStudyActions();
 
   useEffect(() => {
@@ -83,6 +85,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
       setFrequencyStandard(studyInfoData.period);
       setFrequencyNumber(studyInfoData.frequency);
       setMembers(studyInfoData.members);
+      setManager(studyInfoData.members.find(member => member.username === studyInfoData.manager));
     }
   }, [studyInfoData]);
 
@@ -95,6 +98,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
         main_language: language,
         level,
         members: members.map(member => member.userId),
+        manager: manager.userId,
         area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
         city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
         how_many: solvedProblemNumber,

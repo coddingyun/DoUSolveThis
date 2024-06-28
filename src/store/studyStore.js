@@ -44,6 +44,10 @@ export const useStudyStore = create(set => ({
 
 export const useEditStudyStore = create(set => ({
   ...initialState,
+  manager: {
+    userId: 0,
+    username: '',
+  },
 
   actions: {
     setStudyName: s => set({ studyName: s }),
@@ -57,6 +61,7 @@ export const useEditStudyStore = create(set => ({
     setStudyTime: s => set({ studyTime: s }),
     setFrequencyStandard: s => set({ frequencyStandard: s }),
     setFrequencyNumber: s => set({ frequencyNumber: s }),
+    setManager: s => set({ manager: s }),
     setMembers: s => set({ members: s }),
     addMember: s => set(state => ({ members: [...state.members, s] })),
     deleteMember: s =>
@@ -108,6 +113,8 @@ export const useEditStudyFrequencyStandard = () =>
   useEditStudyStore(state => state.frequencyStandard);
 export const useEditStudyFrequencyNumber = () =>
   useEditStudyStore(state => state.frequencyNumber);
+export const useEditStudyManager = () =>
+  useEditStudyStore(state => state.manager);
 export const useEditStudyMembers = () =>
   useEditStudyStore(state => state.members);
 
