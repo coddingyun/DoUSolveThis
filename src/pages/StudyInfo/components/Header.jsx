@@ -71,7 +71,7 @@ const Header = ({ studyInfoData, studyId }) => {
               참여하기
             </Button>
           )}
-          {studyInfoData.manager === userName && (
+          {studyInfoData.manager.username === userName && (
             <div className="flex items-center gap-2">
               <span
                 className={`font-semibold ${isRecruiting ? 'text-gray-700' : 'text-gray-400'}`}
