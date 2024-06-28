@@ -85,7 +85,7 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
       setFrequencyStandard(studyInfoData.period);
       setFrequencyNumber(studyInfoData.frequency);
       setMembers(studyInfoData.members);
-      setManager(studyInfoData.members.find(member => member.username === studyInfoData.manager));
+      setManager(studyInfoData.manager);
     }
   }, [studyInfoData]);
 

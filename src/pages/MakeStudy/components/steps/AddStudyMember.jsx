@@ -61,7 +61,7 @@ const AddStudyMember = ({ onPrev, clickHandler }) => {
       openchat: kakaoUrl,
       main_language: language,
       level,
-      members: members.map(member => member.username),
+      members: members.map(member => member.userId),
       area: studyArea.area === '전국' ? 'ALL' : studyArea.area,
       city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
       how_many: solvedProblemNumber,
