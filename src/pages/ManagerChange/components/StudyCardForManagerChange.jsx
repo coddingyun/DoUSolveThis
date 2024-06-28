@@ -78,7 +78,7 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
 
               setManager({
                 username: pickedManager[0].username,
-                userId: pickedManager[0].userId,
+                userId: pickedManager[0].id,
               });
             }}
             options={members.map(member => member.username)}
