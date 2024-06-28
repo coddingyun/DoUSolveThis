@@ -51,7 +51,7 @@ const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
       rightButtonType: 'next',
       onPrev: onClose,
       onNext: () => {
-        managerMutation.mutate(lead[0].userId);
+        managerMutation.mutate(lead[0].id);
       },
     },
   ]);
