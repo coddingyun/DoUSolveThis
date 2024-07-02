@@ -24,7 +24,7 @@ const StudyInfo = () => {
             <>
               <MemberList studyInfoData={studyInfoData} />
               <Line />
-              <NextProblems />
+              <NextProblems studyId={id}/>
             </>
           )}
         </div>

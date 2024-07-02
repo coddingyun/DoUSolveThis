@@ -66,13 +66,13 @@ const Card = ({ data }) => {
       if (!scrollContainer) return;
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
       setIsScrolledToStart(scrollLeft === 0);
-      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth-1);
+      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth - 1);
     };
-    
+
     updateScrollState();
-    
+
     scrollContainer.addEventListener('scroll', updateScrollState);
-    
+
     return () => {
       scrollContainer.removeEventListener('scroll', updateScrollState);
     };
@@ -141,7 +141,7 @@ const LoadingCard = () => (
   <div className="min-w-[388px] h-[240px] border border-solid border-gray-200 shadow-sm" />
 );
 
-const NextProblems = () => {
+const NextProblems = ({ studyId }) => {
   const {
     isOpen: isOpenEnterProblem,
     onOpen: onOpenEnterProblem,
@@ -174,7 +174,7 @@ const NextProblems = () => {
   };
 
   const modalTitle = '정말 문제를\n전체 삭제 하시겠습니까?😭';
-  const { deleteAllFetch } = useDeleteAllNextProblems();
+  const { deleteAllFetch } = useDeleteAllNextProblems(studyId);
 
   const handleClickDeleteButton = () => {
     deleteAllFetch();
