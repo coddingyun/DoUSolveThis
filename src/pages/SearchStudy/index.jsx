@@ -37,7 +37,8 @@ const SearchStudy = () => {
     isRecruiting,
   );
 
-  const handleSearch = () => {
+  const handleSearch = e => {
+    e.preventDefault();
     setCompletedTerm(term);
   };
 
@@ -82,7 +83,7 @@ const SearchStudy = () => {
   return (
     <TopNavigation>
       <div>
-        <form onSubmit={handleSearch}>
+        <form onSubmit={(e) => handleSearch(e)}>
           <SearchInput value={term} handleChangeValue={handleChangeTerm} />
         </form>
         <div className="flex justify-between">
