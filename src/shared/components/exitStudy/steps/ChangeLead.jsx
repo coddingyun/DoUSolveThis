@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useExitActions, useExitLead } from '../../../../store/studyStore';
 import { useUserName } from '../../../../store/userStore';
 import InputContainer from '../../InputContainer';
@@ -8,7 +9,16 @@ const ChangeLead = ({ studyInfoData }) => {
   const { setLead } = useExitActions();
 
   const userName = useUserName();
-  const members = studyInfoData && studyInfoData.members && studyInfoData.members.filter(member =>  member.username !== userName);
+  const members =
+    studyInfoData &&
+    studyInfoData.members &&
+    studyInfoData.members.filter(member => member.username !== userName);
+
+  useEffect(() => {
+    if (members && members[0]) {
+      setLead(members[0]);
+    }
+  }, [members]);
 
   return (
     <InputContainer>

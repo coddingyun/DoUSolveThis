@@ -4,7 +4,7 @@ import { api } from '.';
 const usePutStudyManager = (id, onSuccessCallback) => {
   return useMutation(
     async userId =>
-      api.patch(`/api/studies/${id}/manager`, {
+      await api.patch(`/api/studies/${id}/manager`, {
         userId,
       }),
     {

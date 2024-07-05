@@ -122,7 +122,10 @@ export const useEditStudyActions = () =>
   useEditStudyStore(state => state.actions);
 
 const useExitStudyStore = create(set => ({
-  lead: '',
+  lead: {
+    username: '',
+    userId: 0,
+  },
 
   actions: {
     setLead: s => set({ lead: s }),
