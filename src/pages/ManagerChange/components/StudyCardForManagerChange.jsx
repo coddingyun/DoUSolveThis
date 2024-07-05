@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserTag } from '../../../shared/components/Tag';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import SimpleModal from '../../../shared/components/SimpleModal';
@@ -29,7 +29,8 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
 
   const userName = useUserName();
   const members = studyInfoData
-    ? studyInfoData.members.filter(member => member.username !== userName) : [];
+    ? studyInfoData.members.filter(member => member.username !== userName)
+    : [];
 
   const renderFooter = () => {
     if (isChanged) {
@@ -56,6 +57,12 @@ const StudyCardForManagerChange = ({ title, description, id }) => {
   const onClickEdit = () => {
     mutation.mutate(manager.userId);
   };
+
+  useEffect(() => {
+    if (members && members[0]) {
+      setManager(members[0]);
+    }
+  }, [members]);
 
   return (
     <>
