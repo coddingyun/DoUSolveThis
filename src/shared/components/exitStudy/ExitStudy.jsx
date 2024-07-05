@@ -30,7 +30,6 @@ const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
   
   const onManagerSuccessCallback = () => {
     exitMutation.mutate();
-    onClose();
   };
 
   const managerMutation = usePutStudyManager(id, onManagerSuccessCallback);
