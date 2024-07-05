@@ -3,6 +3,9 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import EditModal from './modals/EditModal';
 import ExitModal from './modals/ExitModal';
+import { ReactComponent as Trash } from '../../../assets/trash.svg'
+import SimpleModal from '../../../shared/components/SimpleModal';
+import useDeleteMyStudy from '../hooks/api/useDeleteMyStudy';
 
 const StudyCard = React.memo(({ id, title, management = false }) => {
   const navigate = useNavigate();
@@ -16,6 +19,13 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
     onOpen: onEditModalOpen,
     onClose: onEditModalClose,
   } = useDisclosure();
+  const {
+    isOpen: isOpenDeleteModal,
+    onOpen: onOpenDeleteModal,
+    onClose: onCloseDeleteModal,
+  } = useDisclosure();
+
+  const mutation = useDeleteMyStudy();
 
   const url = `/info/${id}`;
 
@@ -31,6 +41,13 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
     navigate(url);
   };
 
+  const handleClickDeleteButton = () => {
+    mutation.mutate(id);
+    onCloseDeleteModal();
+  }
+
+  const modalTitle = "정말 스터디를\n삭제 하시겠습니까?😭"
+
   return (
     <>
       <EditModal
@@ -43,10 +60,20 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
         onExitModalClose={onExitModalClose}
         id={id}
       />
+      <SimpleModal
+        isOpen={isOpenDeleteModal}
+        onClose={onCloseDeleteModal}
+        title={modalTitle}
+        buttonTitle="스터디 삭제"
+        onClick={handleClickDeleteButton}
+      />
       <div className="block bg-white border border-gray-200 rounded-lg shadow">
-        <h5 className="p-6 text-3xl font-semibold tracking-tight text-gray-900">
-          {title}
-        </h5>
+        <div className='p-6 flex justify-between items-start'>
+          <h5 className="text-3xl font-semibold tracking-tight text-gray-900">
+            {title}
+          </h5>
+          <Trash onClick={onOpenDeleteModal} className="cursor-pointer"/>
+        </div>
         <hr />
         <div className="px-6 py-4 flex justify-between">
           <div className="flex gap-2">
