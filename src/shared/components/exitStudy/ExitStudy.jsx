@@ -25,11 +25,13 @@ const ExitStudy = ({ clickHandler, Funnel, Step, onClose, id }) => {
       queryClient.invalidateQueries('myStudy');
     }
   };
-  const onManagerSuccessCallback = () => {
-    queryClient.invalidateQueries('myStudy');
-    onClose();
-  };
+  
   const exitMutation = usePostStudyOut(id, onExitSuccessCallback);
+  
+  const onManagerSuccessCallback = () => {
+    exitMutation.mutate();
+  };
+
   const managerMutation = usePutStudyManager(id, onManagerSuccessCallback);
 
   const modalStateList = useMemo(() => [
