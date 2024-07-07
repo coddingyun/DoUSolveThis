@@ -14,6 +14,7 @@ import EditCompleted from './steps/EditCompleted';
 import usePutStudyInfo from '../../hooks/api/usePutStudyInfo';
 import StudyModalError from '../StudyModalError';
 import usePutStudyManager from '../../hooks/api/usePutStudyManager';
+import { useQueryClient } from 'react-query';
 
 const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
   const [modalState, setModalState] = useState(0);
@@ -22,7 +23,10 @@ const EditStudy = ({ clickHandler, Funnel, Step, onClose, editId }) => {
 
   const { studyInfoData } = useStudyInfo(editId);
 
+  const queryClient = useQueryClient();
+
   const onEditStudyManagerSuccessCallback = () => {
+    queryClient.invalidateQueries('myStudy');
     setModalState(3);
     clickHandler(editStudyStepTitle[3]);
   };
