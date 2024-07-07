@@ -72,7 +72,7 @@ const StudyCard = React.memo(({ id, title, management = false }) => {
           <h5 className="text-3xl font-semibold tracking-tight text-gray-900">
             {title}
           </h5>
-          <Trash onClick={onOpenDeleteModal} className="cursor-pointer"/>
+          {management && <Trash onClick={onOpenDeleteModal} className="cursor-pointer"/>}
         </div>
         <hr />
         <div className="px-6 py-4 flex justify-between">
