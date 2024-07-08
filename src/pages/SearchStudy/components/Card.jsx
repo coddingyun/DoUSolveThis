@@ -23,7 +23,7 @@ export const StudyCard = React.memo(({ item }) => {
       <hr />
       <div className="px-6 py-3 flex gap-2">
         <BottomTag>{item.language}</BottomTag>
-        <BottomTag>{item.area}</BottomTag>
+        <BottomTag>{item.area==='ALL'?'전국':item.area} {item.city==='ALL'?'전체':item.city}</BottomTag>
         <BottomTag>{item.level}</BottomTag>
         <BottomTag>{item.meeting_type}</BottomTag>
       </div>
