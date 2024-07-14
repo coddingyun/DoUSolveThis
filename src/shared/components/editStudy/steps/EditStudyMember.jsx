@@ -36,7 +36,7 @@ const EditStudyMember = () => {
   const borderStyle = !isValid ? '!border-error-300' : 'border-gray-300';
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className="flex flex-col gap-4">
       <InputContainer title="스터디장 변경">
         <SelectComp
           value={manager.username}
