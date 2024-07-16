@@ -9,7 +9,9 @@ import {
   LANG_OPTIONS,
 } from '../../../shared/constants/options';
 import { useNavigate } from 'react-router-dom';
+import useCheckBJId from '../../../shared/hooks/api/useCheckBjId';
 import useCheckId from '../../../shared/hooks/api/useCheckId';
+
 import usePostUserProfile from '../hooks/api/usePostUserProfile';
 import { useUserName } from '../../../store/userStore';
 import { Form } from '../../../shared/components/Form';
@@ -43,7 +45,7 @@ const UserInfoModal = ({ isOpen, onClose }) => {
       setIsValidBaekjoonId(false);
     }
   };
-  const { refetch } = useCheckId(baekjoonId, onSuccessCallback);
+  const { refetch } = useCheckBJId(baekjoonId, onSuccessCallback);
 
   const handleClickRegister = () => {
     refetch();

@@ -14,17 +14,6 @@ const Login = () => {
 
   const login = usePostLogin(onOpen);
 
-  // 네이버 로그인한 이후 다시 로그인페이지에서 네이버 로그인을 하려고 하면 계속 login api 가 요청된다
-  // !isOpen이 없으면 회원가입시 onOpen시 새로고침이 되면서 바로 /search로 넘어가서 프로필 모달을 못보게 됨
-  if (getAccessToken() && !isOpen) {
-    navigate('/search');
-  }
-
-  // 네이버 로그인시 페이지가 새로고침되면서 login도 새롭게 정의됌 아닌가?
-  if (login.isLoading) {
-    return <Loading />;
-  }
-
   return (
     <div className="w-full h-screen grid place-items-center">
       <UserInfoModal isOpen={isOpen} onClose={onClose} />
