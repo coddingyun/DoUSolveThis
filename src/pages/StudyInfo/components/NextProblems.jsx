@@ -9,6 +9,7 @@ import { ReactComponent as LeftArrow } from '../../../assets/chevron-left.svg';
 import { useNextProbs } from '../../../store/nextProbStore';
 import SimpleModal from '../../../shared/components/SimpleModal';
 import EnterProblem from './modals/checkProblem/EnterProblem';
+import EnterOtherProblem from './modals/checkProblem/EnterOtherProblem';
 import useDeleteAllNextProblems from '../hooks/api/nextProblems/useDeleteAllNextProblems';
 import { useRef, useState, useEffect } from 'react';
 
@@ -143,8 +144,13 @@ const LoadingCard = () => (
 
 const NextProblems = ({ studyId }) => {
   const {
+    isOpen: isOpenOtherEnterProblem,
+    onOpen:   onOpenOtherEnterProblem,
+    onClose: onCloseOtherEnterProblem,
+  } = useDisclosure();
+  const {
     isOpen: isOpenEnterProblem,
-    onOpen: onOpenEnterProblem,
+    onOpen:   onOpenEnterProblem,
     onClose: onCloseEnterProblem,
   } = useDisclosure();
   const {
@@ -183,6 +189,7 @@ const NextProblems = ({ studyId }) => {
 
   return (
     <div className="py-8">
+      <EnterOtherProblem isOpen={isOpenOtherEnterProblem} onClose={onCloseOtherEnterProblem} />
       <EnterProblem isOpen={isOpenEnterProblem} onClose={onCloseEnterProblem} />
       <SimpleModal
         isOpen={isOpenDeleteModal}
@@ -200,7 +207,13 @@ const NextProblems = ({ studyId }) => {
             onClick={onOpenEnterProblem}
             className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
           >
-            문제 추가하기
+            백준 문제 추가
+          </Button>
+          <Button
+            onClick={onOpenOtherEnterProblem}
+            className="!bg-brand-600 !text-white rounded-lg font-semibold text-sm"
+          >
+            타 플랫폼 문제 추가
           </Button>
         </div>
         <Button
