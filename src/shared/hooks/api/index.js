@@ -48,14 +48,6 @@ const onResponseRejected = async error => {
     const requestConfig = error.config;
     if (!requestConfig) return Promise.reject(error);
 
-    if (isTokenRefreshAttempted) {
-      removeAuthToken();
-      window.location.href = '/login';
-      return Promise.reject(error);
-    }
-
-    isTokenRefreshAttempted = true;
-
     const refreshToken = getCookie('Refresh');
 
     const response = await api.post('/api/update/token', {
@@ -67,7 +59,6 @@ const onResponseRejected = async error => {
 
     setCookie('Access', newAccessToken);
     setCookie('Refresh', newRefreshToken);
-
     requestConfig.headers.Access = newAccessToken;
     return api(requestConfig);
   }
