@@ -23,6 +23,7 @@
     "react-infinite-scroller": "^1.2.6",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.19.0",
+    "react-syntax-highlighter": "^15.5.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4",
     "zod": "^3.22.4",

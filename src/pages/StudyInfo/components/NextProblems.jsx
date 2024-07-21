@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../hooks/api/nextProblems/useDeleteNextProblem';
@@ -12,6 +13,7 @@ import EnterProblem from './modals/checkProblem/EnterProblem';
 import EnterOtherProblem from './modals/checkProblem/EnterOtherProblem';
 import useDeleteAllNextProblems from '../hooks/api/nextProblems/useDeleteAllNextProblems';
 import { useRef, useState, useEffect } from 'react';
+import ProblemDetailModal from './modals/checkProblem/PromblemDetailModal';
 
 const RightButton = ({ className }) => {
   return (
@@ -36,6 +38,11 @@ const LeftButton = ({ className }) => {
 const Card = ({ data }) => {
   const toast = useToast();
   const { id } = useParams();
+  const {
+    isOpen: isOpenDetail,
+    onOpen: onOpenDetail,
+    onClose: onCloseDetail,
+  } = useDisclosure();
 
   const { deleteFetch } = useDeleteNextProblem(id, data.probNum);
 
@@ -90,7 +97,16 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200">
+    <div
+      className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200"
+      onClick={onOpenDetail}
+    >
+      <ProblemDetailModal
+        isOpen={isOpenDetail}
+        onClose={onCloseDetail}
+        id={id}
+        problem={data.probNum}
+      ></ProblemDetailModal>
       <div>
         <div className="flex justify-between items-start mb-5">
           <h2 className="text-2xl font-semibold text-gray-900">{data.title}</h2>
@@ -145,12 +161,12 @@ const LoadingCard = () => (
 const NextProblems = ({ studyId }) => {
   const {
     isOpen: isOpenOtherEnterProblem,
-    onOpen:   onOpenOtherEnterProblem,
+    onOpen: onOpenOtherEnterProblem,
     onClose: onCloseOtherEnterProblem,
   } = useDisclosure();
   const {
     isOpen: isOpenEnterProblem,
-    onOpen:   onOpenEnterProblem,
+    onOpen: onOpenEnterProblem,
     onClose: onCloseEnterProblem,
   } = useDisclosure();
   const {
@@ -189,7 +205,10 @@ const NextProblems = ({ studyId }) => {
 
   return (
     <div className="py-8">
-      <EnterOtherProblem isOpen={isOpenOtherEnterProblem} onClose={onCloseOtherEnterProblem} />
+      <EnterOtherProblem
+        isOpen={isOpenOtherEnterProblem}
+        onClose={onCloseOtherEnterProblem}
+      />
       <EnterProblem isOpen={isOpenEnterProblem} onClose={onCloseEnterProblem} />
       <SimpleModal
         isOpen={isOpenDeleteModal}

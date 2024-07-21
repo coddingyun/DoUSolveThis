@@ -57,8 +57,8 @@ const onResponseRejected = async error => {
     const newAccessToken = response.headers.get('Access');
     const newRefreshToken = response.headers.get('Refreshtoken');
 
-    setCookie('Access', newAccessToken);
-    setCookie('Refresh', newRefreshToken);
+    setCookie('Access', newAccessToken, { path: '/' });
+    setCookie('Refresh', newRefreshToken, { path: '/' });
     requestConfig.headers.Access = newAccessToken;
     return api(requestConfig);
   }
