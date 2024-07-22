@@ -18,11 +18,20 @@ import {
 import Input from '../../../../../shared/components/Input';
 import useGetProblemCodes from '../../../hooks/api/useGetProblemCodes';
 import usePutUserCode from '../../../hooks/api/usePutUserCode';
+import useAddUserCode from '../../../hooks/api/useAddUserCode';
 
-const ProblemDetailModal = ({ isOpen, onClose, id, problem }) => {
+const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const [codes, setCodes] = useState([]);
   const [newName, setNewName] = useState('');
+
   const putMutation = usePutUserCode(data => {});
+  const addMutation = useAddUserCode(data => {
+    const newCodeBlock = { name: newName, code: '', id: null };
+    newCodeBlock.id = data.id;
+    const _newCodes = [...codes, newCodeBlock];
+    setCodes(_newCodes);
+    setNewName('');
+  });
   const mutation = useGetProblemCodes(data => {
     setCodes(data.codes);
   });
@@ -39,9 +48,11 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem }) => {
   };
 
   const addNewCodeBlock = () => {
-    const newCodeBlock = { name: newName, code: '' };
-    setCodes([...codes, newCodeBlock]);
-    setNewName('');
+    addMutation.mutate({
+      id,
+      problem,
+      name: newName,
+    });
   };
 
   useEffect(() => {
@@ -52,7 +63,9 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent maxW="1200px">
-        <ModalHeader className="text-grey-900 text-2xl font-semibold"></ModalHeader>
+        <ModalHeader className="text-grey-900 text-2xl font-semibold">
+          {title}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <div className="flex flex-col min-h-[350px] max-h-[550px] overflow-y-auto">
