@@ -11,7 +11,7 @@ const usePostSuggestion = successCallback => {
       await api.post(`/api/studies/${id}/suggestion/${problem}`),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('getNextProblems')
+        queryClient.invalidateQueries('getNextProblems');
         setStatus(null);
         successCallback();
       },

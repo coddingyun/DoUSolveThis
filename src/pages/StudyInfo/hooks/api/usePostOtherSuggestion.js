@@ -3,6 +3,8 @@ import { api } from '../../../../shared/hooks/api';
 import { useSuggestionActions } from '../../../../store/suggestionStore';
 
 const usePostOtherSuggestion = successCallback => {
+  const queryClient = useQueryClient();
+  const { setStatus } = useSuggestionActions();
   return useMutation(
     async ({ id, link, _types, title, rank }) =>
       await api.post(`/api/studies/${id}/other/suggestion`, {
@@ -13,6 +15,8 @@ const usePostOtherSuggestion = successCallback => {
       }),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('getNextProblems');
+        setStatus(null);
         successCallback();
       },
     },

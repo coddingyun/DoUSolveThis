@@ -61,8 +61,10 @@ const Card = ({ data }) => {
     });
   };
 
-  const handleDelete = () => {
+  const handleDelete = e => {
     deleteFetch();
+    e.preventDefault();
+    e.stopPropagation();
   };
   const scrollContainerRef = useRef(null);
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
@@ -106,9 +108,10 @@ const Card = ({ data }) => {
         onClose={onCloseDetail}
         id={id}
         problem={data.probNum}
+        title={data.title}
       ></ProblemDetailModal>
       <div>
-        <div className="flex justify-between items-start mb-5">
+        <div className="flex justify-between items-start mb-5 cursor-pointer">
           <h2 className="text-2xl font-semibold text-gray-900">{data.title}</h2>
           <Trash onClick={handleDelete} className="cursor-pointer" />
         </div>
