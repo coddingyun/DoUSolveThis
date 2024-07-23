@@ -41,6 +41,7 @@ const UserInfoModal = ({ isOpen, onClose }) => {
         city: studyArea.city === '전체' ? 'ALL' : studyArea.city,
         language,
       });
+      onClose();
     } else {
       setIsValidBaekjoonId(false);
     }
@@ -49,7 +50,6 @@ const UserInfoModal = ({ isOpen, onClose }) => {
 
   const handleClickRegister = () => {
     refetch();
-    onClose();
   };
 
   return (
