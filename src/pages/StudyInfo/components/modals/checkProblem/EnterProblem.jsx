@@ -64,10 +64,8 @@ const EnterProblem = ({ isOpen, onClose }) => {
 
   const buttonStyles = {
     solved: {
-      title: '다른 문제 검색',
-      handleClick: () => {
-        setStatus(null);
-      },
+      title: '이 문제 어때요',
+      handleClick: handleSuggestProb,
     },
     not_solved: {
       title: '이 문제 어때요',
@@ -135,18 +133,19 @@ const EnterProblem = ({ isOpen, onClose }) => {
   const renderFooter = () => {
     return (
       <div css={styles.footerButton(status)}>
-        {status === 'not_solved' && (
-          <Button
-            className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
-            variant="outlined"
-            onClick={() => {
-              setStatus(null);
-              setValue('');
-            }}
-          >
-            다른 문제 검색
-          </Button>
-        )}
+        {status === 'not_solved' ||
+          (status === 'solved' && (
+            <Button
+              className="!w-full !rounded-lg border border-solid !border-gray-300 !bg-white text-gray-700 font-semibold mr-1"
+              variant="outlined"
+              onClick={() => {
+                setStatus(null);
+                setValue('');
+              }}
+            >
+              다른 문제 검색
+            </Button>
+          ))}
         <Button
           className="!w-full !rounded-lg !text-white !bg-brand-600"
           onClick={buttonStyles[status].handleClick}
@@ -171,7 +170,8 @@ const EnterProblem = ({ isOpen, onClose }) => {
 const styles = {
   footerButton: status => [
     tw`!w-full`,
-    status === 'not_solved' && tw`grid grid-cols-2 gap-3`,
+    status === 'not_solved' ||
+      (status === 'solved' && tw`grid grid-cols-2 gap-3`),
   ],
 };
 

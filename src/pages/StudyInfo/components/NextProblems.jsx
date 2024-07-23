@@ -46,10 +46,12 @@ const Card = ({ data }) => {
 
   const { deleteFetch } = useDeleteNextProblem(id, data.probNum);
 
-  const handleClickOpenLink = () => {
+  const handleClickOpenLink = event => {
     window.open(data.link);
+    event.preventDefault();
+    event.stopPropagation();
   };
-  const handleClickCopyLink = () => {
+  const handleClickCopyLink = event => {
     navigator.clipboard.writeText(data.link).then(() => {
       // TODO. 스타일링 반영
       toast({
@@ -59,6 +61,8 @@ const Card = ({ data }) => {
         duration: 3000,
       });
     });
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const handleDelete = e => {
@@ -88,19 +92,23 @@ const Card = ({ data }) => {
     };
   }, []);
 
-  const scrollRight = () => {
+  const scrollRight = event => {
     if (!scrollContainerRef.current) return;
     scrollContainerRef.current.scrollBy({ left: 80, behavior: 'smooth' });
+    event.preventDefault();
+    event.stopPropagation();
   };
 
-  const scrollLeft = () => {
+  const scrollLeft = event => {
     if (!scrollContainerRef.current) return;
     scrollContainerRef.current.scrollBy({ left: -80, behavior: 'smooth' });
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   return (
     <div
-      className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200"
+      className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200 cursor-pointer"
       onClick={onOpenDetail}
     >
       <ProblemDetailModal
