@@ -106,7 +106,6 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                     value={newName}
                     placeholder="추가할 유저의 이름을 입력해주세요"
                     handleChangeValue={e => {
-                      console.log('val: ', e.target.value);
                       setNewName(e.target.value);
                     }}
                   ></Input>

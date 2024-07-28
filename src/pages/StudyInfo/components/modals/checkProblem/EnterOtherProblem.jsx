@@ -22,8 +22,11 @@ import tw from 'twin.macro';
 
 const EnterOtherProblem = ({ isOpen, onClose }) => {
   const { id } = useParams();
-
   const [value, setValue] = useState('');
+  const [rank, setRank] = useState('');
+  const [title, setTitle] = useState('');
+  const [types, setTypes] = useState('');
+  const [link, setLink] = useState('');
   const onSuccessCallback = () => {
     setRank('');
     setTypes('');
@@ -35,12 +38,12 @@ const EnterOtherProblem = ({ isOpen, onClose }) => {
   const status = useSuggestionStatus();
   const { setStatus } = useSuggestionActions();
   const solvePeople = useSuggestionSolvePeople();
-  const [rank, setRank] = useState('');
-  const [title, setTitle] = useState('');
-  const [types, setTypes] = useState('');
-  const [link, setLink] = useState('');
   const onPrev = () => {
-    oncClose();
+    setRank('');
+    setTitle('');
+    setTypes('');
+    setLink('');
+    onClose();
   };
   const onNext = () => {
     const _types = types.split(',').map(t => t.trim());
@@ -57,8 +60,10 @@ const EnterOtherProblem = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onClose={() => {
         onClose();
-        clickHandler();
-        reset();
+        setRank('');
+        setTitle('');
+        setTypes('');
+        setLink('');
       }}
       closeOnOverlayClick={false}
     >

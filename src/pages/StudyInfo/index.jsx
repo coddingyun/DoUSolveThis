@@ -8,6 +8,7 @@ import StudyPlan from './components/StudyPlan';
 import MemberList from './components/MemberList';
 import NextProblems from './components/NextProblems';
 import Line from '../../shared/components/Line';
+import ProblemSearch from './components/ProblemSearch';
 
 const StudyInfo = () => {
   const { id } = useParams();
@@ -24,7 +25,9 @@ const StudyInfo = () => {
             <>
               <MemberList studyInfoData={studyInfoData} />
               <Line />
-              <NextProblems studyId={id}/>
+              <ProblemSearch studyId={id} />
+              <Line />
+              <NextProblems studyId={id} />
             </>
           )}
         </div>
