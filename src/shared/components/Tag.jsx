@@ -34,6 +34,25 @@ export const BottomTag = ({ children }) => {
   );
 };
 
+export const ProblemTypeTag = ({ children, handleClickDelete, defaultTag }) => {
+  return (
+    <span className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-green-200 text-sm font-semibold rounded-2xl">
+      {children}
+      {children !== defaultTag && <Delete onClick={handleClickDelete} />}
+    </span>
+  );
+};
+
+export const ProblemTypeTagGuide = ({ children, onClickHandler }) => {
+  return (
+    <span
+      className="w-fit flex gap-1 items-center px-2.5 py-0.5 text-gray-700 bg-gray-200 text-sm font-semibold rounded-2xl"
+      onClick={onClickHandler}
+    >
+      {children}
+    </span>
+  );
+};
 export const BaekjoonIdTag = ({ children, type, member }) => {
   const { deleteMember } = useStudyActions();
   const { deleteMember: deleteMemberEdit } = useEditStudyActions();

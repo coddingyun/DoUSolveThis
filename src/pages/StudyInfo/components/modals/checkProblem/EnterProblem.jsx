@@ -162,7 +162,11 @@ const EnterProblem = ({ isOpen, onClose }) => {
       body={renderBody()}
       footer={renderFooter()}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={() => {
+        setValue('');
+        setStatus(null);
+        onClose();
+      }}
     />
   );
 };
