@@ -197,18 +197,6 @@ const ProblemSearch = ({ studyId }) => {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
   ];
-  useEffect(() => {
-    setValue('');
-    setQuery('');
-    setEnd();
-    setStart();
-    setIsRandom(false);
-    setNotSolved(false);
-    setMinSolved();
-    setTags([defaultTag]);
-    setTagGuides([]);
-    setCards();
-  }, []);
   const handleChangeTagQueryValue = async event => {
     const newQuery = event.target.value;
     setQuery(newQuery);
@@ -225,6 +213,18 @@ const ProblemSearch = ({ studyId }) => {
     onOpen: onOpenDetailSearch,
     onClose: onCloseDetailSearch,
   } = useDisclosure();
+
+  useEffect(() => {
+    setQuery('');
+    setEnd();
+    setStart();
+    setIsRandom(false);
+    setNotSolved(false);
+    setMinSolved();
+    setTags([defaultTag]);
+    setTagGuides([]);
+    setCards();
+  }, [isOpenDetailSearch]);
   const { id } = useParams();
   const { refetch } = useSearchProblem(
     id,
