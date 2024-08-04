@@ -23,7 +23,7 @@ import useAddUserCode from '../../../hooks/api/useAddUserCode';
 const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const [codes, setCodes] = useState([]);
   const [newName, setNewName] = useState('');
-
+  const [t, setT] = useState(false);
   const putMutation = usePutUserCode(data => {});
   const addMutation = useAddUserCode(data => {
     const newCodeBlock = { name: newName, code: '', id: null };
@@ -58,7 +58,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   useEffect(() => {
     if (!isOpen) return;
     mutation.mutate({ id, problem });
-  }, [isOpen]);
+  }, [isOpen, t]);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -71,7 +71,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
           <div className="flex flex-col min-h-[350px] max-h-[550px] overflow-y-auto">
             <Accordion allowToggle>
               {codes?.map((code, index) => (
-                <AccordionItem key={index}>
+                <AccordionItem key={index} onClick={() => setT(!t)}>
                   <AccordionButton>
                     <Box flex="1" textAlign="left">
                       {code.name}
