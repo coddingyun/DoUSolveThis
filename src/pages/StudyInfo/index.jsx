@@ -9,6 +9,7 @@ import MemberList from './components/MemberList';
 import NextProblems from './components/NextProblems';
 import Line from '../../shared/components/Line';
 import ProblemSearch from './components/ProblemSearch';
+import PastProblemSearch from './components/PastProblemSearch';
 
 const StudyInfo = () => {
   const { id } = useParams();
@@ -28,6 +29,8 @@ const StudyInfo = () => {
               <ProblemSearch studyId={id} />
               <Line />
               <NextProblems studyId={id} />
+              <Line />
+              <PastProblemSearch studyId={id} />
             </>
           )}
         </div>

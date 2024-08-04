@@ -74,6 +74,7 @@ const EnterOtherProblem = ({ isOpen, onClose }) => {
         schema={addOtherSchema}
       >
         <ModalLayout
+          title="문제 추가하기"
           leftButtonTitle="이전"
           rightButtonTitle="저장하기"
           dirtyFieldsCnt={5}

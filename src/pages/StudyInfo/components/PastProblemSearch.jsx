@@ -182,7 +182,7 @@ const LoadingCard = () => (
   <div className="min-w-[388px] h-[240px] border border-solid border-gray-200 shadow-sm" />
 );
 
-const ProblemSearch = ({ studyId }) => {
+const PastProblemSearch = ({ studyId }) => {
   const [value, setValue] = useState('');
   const [query, setQuery] = useState('');
   const [start, setStart] = useState();
@@ -267,7 +267,7 @@ const ProblemSearch = ({ studyId }) => {
       <div className="flex items-start justify-between">
         <div className="flex gap-3">
           <h3 className="text-gray-900 text-[24px] font-semibold">
-            🔎 문제 검색하기
+            🕐 지난 시간 푼 문제 검색
           </h3>
         </div>
         <div className="flex flex-row justify-between">
@@ -431,4 +431,4 @@ const ProblemSearch = ({ studyId }) => {
   );
 };
 
-export default ProblemSearch;
+export default PastProblemSearch;
