@@ -1,14 +1,18 @@
-import { typography } from "./src/shared/constants/typography";
-const plugin = require('tailwindcss/plugin')
+import { typography } from './src/shared/constants/typography';
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   // eslint-disable-next-line prettier/prettier
-  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+
+  corePlugins: {
+    preflight: false,
+  },
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,mdx}'],
   plugins: [
-		plugin(({ addComponents }) => {
-			addComponents(typography);
-		})
-	],
+    plugin(({ addComponents }) => {
+      addComponents(typography);
+    }),
+  ],
   theme: {
     extend: {
       colors: {
@@ -44,9 +48,9 @@ module.exports = {
         'rose-700': '#C01048',
       },
       fontFamily: {
-        sans: ["Inter", "Arial", "sans-serif"]
-      }
+        sans: ['Inter', 'Arial', 'sans-serif'],
+      },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

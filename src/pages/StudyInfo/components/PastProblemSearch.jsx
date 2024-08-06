@@ -32,20 +32,57 @@ import levelToRank from '../../../shared/constants/levelToRank';
 import Input from '../../../shared/components/Input';
 import Line from '../../../shared/components/Line';
 import { api } from '../../../shared/hooks/api';
-import usePostSuggestion from '../hooks/api/usePostSuggestion';
+
+import Pagination from 'react-js-pagination';
+import styled from 'styled-components';
+
 import {
   ProblemTypeTag,
   ProblemTypeTagGuide,
 } from '../../../shared/components/Tag';
 
-// import {
-//   Paginator,
-//   Container,
-//   Previous,
-//   Next,
-//   PageGroup,
-//   usePaginator,
-// } from 'chakra-paginator';
+const PaginationBox = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  ul.pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+  ul.pagination li:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  ul.pagination li:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+  ul.pagination li a {
+    text-decoration: none;
+    color: #337ab7;
+    font-size: 1rem;
+  }
+  ul.pagination li.active a {
+    color: white;
+  }
+  ul.pagination li.active {
+    background-color: #337ab7;
+  }
+  ul.pagination li a:hover,
+  ul.pagination li a.active {
+    color: blue;
+  }
+`;
 const defaultTag = '선택된 태그: ';
 const RightButton = ({ className }) => {
   return (
@@ -196,10 +233,10 @@ const PastProblemSearch = ({ studyId }) => {
   const [tags, setTags] = useState([defaultTag]);
   const [tagGuides, setTagGuides] = useState([]);
   const [cards, setCards] = useState();
-  const pagesQuantity = 120;
-  // const { currentPage, setCurrentPage } = usePaginator({
-  //   initialState: { currentPage: 1 },
-  // });
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   const [total, setTotal] = useState(0);
 
   const [selectedStartDate, setSelectedStartDate] = useState(
@@ -244,7 +281,7 @@ const PastProblemSearch = ({ studyId }) => {
         startDate: selectedStartDate,
         endDate: selectedEndDate,
         tags: tags.slice(1),
-        page: 1, //currentPage,
+        page: page,
       },
     ],
     setCards,
@@ -259,10 +296,9 @@ const PastProblemSearch = ({ studyId }) => {
       refetch();
     }
   };
-  // useEffect(() => {
-  //   if (total === 0) return;
-  //   refetch();
-  // }, [currentPage]);
+  useEffect(() => {
+    refetch();
+  }, [page]);
   const renderSearchCard = cards => {
     return (
       <div>
@@ -271,34 +307,19 @@ const PastProblemSearch = ({ studyId }) => {
             cards.length > 0 &&
             cards.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
         </div>
-        {/*cards && cards.length > 0 && (
+        {cards && cards.length > 0 && (
           <div>
-            <ChakraProvider>
-              <Paginator
-                pagesQuantity={Math.ceil(total / 12)}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
-                outerLimit={4}
-                innerLimit={4}
-              >
-                <Container
-                  align="center"
-                  justify="space-between"
-                  w="full"
-                  p={4}
-                >
-                  <Previous>
-                    {'< Previous'}
-                  </Previous>
-                  <PageGroup isInline align="center" />
-                  <Next>
-                    {'Next >'}
-                  </Next>
-                </Container>
-              </Paginator>
-            </ChakraProvider>
+            <PaginationBox>
+              <Pagination
+                activePage={page}
+                itemsCountPerPage={12}
+                totalItemsCount={total}
+                pageRangeDisplayed={5}
+                onChange={setPage}
+              ></Pagination>
+            </PaginationBox>
           </div>
-        )*/}
+        )}
       </div>
     );
   };
