@@ -7,6 +7,7 @@ import spinner from './assets/spinner.gif';
 import Router from './shared/components/common/Router';
 import theme from './shared/layout/theme';
 import { BrowserRouter } from 'react-router-dom';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 const queryClient = new QueryClient({
   defaultOptions: {
