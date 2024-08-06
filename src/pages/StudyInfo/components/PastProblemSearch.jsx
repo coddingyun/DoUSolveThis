@@ -1,12 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Button,
   useDisclosure,
+  ChakraProvider,
   useToast,
   Switch,
   FormLabel,
   FormControl,
 } from '@chakra-ui/react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 import useDeleteNextProblem from '../hooks/api/nextProblems/useDeleteNextProblem';
 import { RankTag, UserTag } from '../../../shared/components/Tag';
@@ -21,7 +24,7 @@ import EnterOtherProblem from './modals/checkProblem/EnterOtherProblem';
 import useDeleteAllNextProblems from '../hooks/api/nextProblems/useDeleteAllNextProblems';
 import { useRef, useState, useEffect } from 'react';
 import ProblemDetailModal from './modals/checkProblem/PromblemDetailModal';
-import useSearchProblem from '../hooks/api/nextProblems/useSearchProblem';
+import useSearchPastProblem from '../hooks/api/nextProblems/useSearchPastProblem';
 import { ReactComponent as Search } from '../../../assets/search.svg';
 import InputContainer from '../../../shared/components/InputContainer';
 import SelectComp from '../../../shared/components/Select';
@@ -34,6 +37,15 @@ import {
   ProblemTypeTag,
   ProblemTypeTagGuide,
 } from '../../../shared/components/Tag';
+
+import {
+  Paginator,
+  Container,
+  Previous,
+  Next,
+  PageGroup,
+  usePaginator,
+} from 'chakra-paginator';
 const defaultTag = '선택된 태그: ';
 const RightButton = ({ className }) => {
   return (
@@ -59,23 +71,27 @@ const Card = ({ data }) => {
   const toast = useToast();
   const { id } = useParams();
 
+  const {
+    isOpen: isOpenDetail,
+    onOpen: onOpenDetail,
+    onClose: onCloseDetail,
+  } = useDisclosure();
+
   const handleClickOpenLink = event => {
-    window.open(`https://www.acmicpc.net/problem/${data.problemId}`);
+    window.open(data.link);
     event.preventDefault();
     event.stopPropagation();
   };
   const handleClickCopyLink = event => {
-    navigator.clipboard
-      .writeText(`https://www.acmicpc.net/problem/${data.problemId}`)
-      .then(() => {
-        // TODO. 스타일링 반영
-        toast({
-          position: 'top',
-          title: '문제 링크가 복사되었습니다.',
-          status: 'success',
-          duration: 3000,
-        });
+    navigator.clipboard.writeText(data.link).then(() => {
+      // TODO. 스타일링 반영
+      toast({
+        position: 'top',
+        title: '문제 링크가 복사되었습니다.',
+        status: 'success',
+        duration: 3000,
       });
+    });
     event.preventDefault();
     event.stopPropagation();
   };
@@ -115,26 +131,21 @@ const Card = ({ data }) => {
     event.stopPropagation();
   };
 
-  const mutation = usePostSuggestion(() => {
-    toast({
-      position: 'top',
-      title: '문제가 추가되었습니다.',
-      status: 'success',
-      duration: 3000,
-    });
-  });
-  const handleSuggestProb = () => {
-    mutation.mutate({
-      id,
-      problem: data.problemId,
-    });
-  };
-
   return (
-    <div className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200 cursor-pointer">
+    <div
+      className="min-w-[388px] h-[240px] flex flex-col justify-between p-6 shadow-sm rounded-xl border border-solid border-gray-200 cursor-pointer"
+      onClick={onOpenDetail}
+    >
+      <ProblemDetailModal
+        isOpen={isOpenDetail}
+        onClose={onCloseDetail}
+        id={id}
+        problem={data.probNum}
+        title={data.title}
+      ></ProblemDetailModal>
       <div>
         <div className="flex justify-between items-start mb-5 cursor-pointer">
-          <h2 className="text-2xl font-semibold text-gray-900">{`(${data.problemId}) ${data.title}`}</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">{`${data.title}`}</h2>
         </div>
         <RankTag>{data.rank}</RankTag>
         <div className="relative">
@@ -159,13 +170,12 @@ const Card = ({ data }) => {
           )}
         </div>
       </div>
-
       <div className="w-full flex gap-3">
         <Button
           className="w-full py-2.5 !font-semibold !text-gray-700 !bg-white !border !border-gray-300"
-          onClick={handleSuggestProb}
+          onClick={handleClickCopyLink}
         >
-          이 문제 어때요?
+          문제 링크 복사
         </Button>
         <Button
           className="w-full py-2.5 !font-semibold !text-brand-700 !bg-brand-50"
@@ -178,25 +188,25 @@ const Card = ({ data }) => {
   );
 };
 
-const LoadingCard = () => (
-  <div className="min-w-[388px] h-[240px] border border-solid border-gray-200 shadow-sm" />
-);
-
 const PastProblemSearch = ({ studyId }) => {
   const [value, setValue] = useState('');
   const [query, setQuery] = useState('');
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-  const [notSolved, setNotSolved] = useState(false);
-  const [minSolved, setMinSolved] = useState();
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(30);
   const [tags, setTags] = useState([defaultTag]);
   const [tagGuides, setTagGuides] = useState([]);
   const [cards, setCards] = useState();
-  const [isRandom, setIsRandom] = useState(false);
-  const ranks = [
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-  ];
+  const pagesQuantity = 120;
+  const { currentPage, setCurrentPage } = usePaginator({
+    initialState: { currentPage: 1 },
+  });
+  const [total, setTotal] = useState(0);
+
+  const [selectedStartDate, setSelectedStartDate] = useState(
+    new Date('2000-01-01'),
+  );
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+
   const handleChangeTagQueryValue = async event => {
     const newQuery = event.target.value;
     setQuery(newQuery);
@@ -216,17 +226,14 @@ const PastProblemSearch = ({ studyId }) => {
 
   useEffect(() => {
     setQuery('');
-    setEnd();
-    setStart();
-    setIsRandom(false);
-    setNotSolved(false);
-    setMinSolved();
+    setEnd(30);
+    setStart(0);
     setTags([defaultTag]);
     setTagGuides([]);
     setCards();
   }, [isOpenDetailSearch]);
   const { id } = useParams();
-  const { refetch } = useSearchProblem(
+  const { refetch } = useSearchPastProblem(
     id,
     [
       'postNextProblem',
@@ -234,13 +241,14 @@ const PastProblemSearch = ({ studyId }) => {
       {
         start: levelToRank.indexOf(start),
         end: levelToRank.indexOf(end),
-        minSolved: minSolved,
-        notSolved: notSolved,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate,
         tags: tags.slice(1),
-        isRandom: isRandom,
+        page: currentPage,
       },
     ],
     setCards,
+    setTotal,
   );
   const handleChangeValue = event => {
     setValue(event.target.value);
@@ -251,13 +259,48 @@ const PastProblemSearch = ({ studyId }) => {
       refetch();
     }
   };
-
+  useEffect(() => {
+    if (total === 0) return;
+    refetch();
+  }, [currentPage]);
   const renderSearchCard = cards => {
     return (
-      <div className="grid grid-cols-3 gap-6">
-        {cards &&
-          cards.length > 0 &&
-          cards.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
+      <div>
+        <div className="grid grid-cols-3 gap-6">
+          {cards &&
+            cards.length > 0 &&
+            cards.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
+        </div>
+        {cards && cards.length > 0 && (
+          <div>
+            <ChakraProvider>
+              <Paginator
+                pagesQuantity={Math.ceil(total / 12)}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                outerLimit={4}
+                innerLimit={4}
+              >
+                <Container
+                  align="center"
+                  justify="space-between"
+                  w="full"
+                  p={4}
+                >
+                  <Previous>
+                    {'< Previous'}
+                    {/* Or an icon from `react-icons` */}
+                  </Previous>
+                  <PageGroup isInline align="center" />
+                  <Next>
+                    {'Next >'}
+                    {/* Or an icon from `react-icons` */}
+                  </Next>
+                </Container>
+              </Paginator>
+            </ChakraProvider>
+          </div>
+        )}
       </div>
     );
   };
@@ -267,7 +310,7 @@ const PastProblemSearch = ({ studyId }) => {
       <div className="flex items-start justify-between">
         <div className="flex gap-3">
           <h3 className="text-gray-900 text-[24px] font-semibold">
-            🕐 지난 시간 푼 문제 검색
+            🕐 과거 문제 검색
           </h3>
         </div>
         <div className="flex flex-row justify-between">
@@ -324,39 +367,32 @@ const PastProblemSearch = ({ studyId }) => {
                   placeholder="티어를 선택해주세요."
                 />
               </InputContainer>
-              <InputContainer title="최소 푼 사람수">
-                <Input
-                  placeholder={'최소 푼 사람수를 적어주세요.'}
-                  value={minSolved}
-                  handleChangeValue={event => {
-                    setMinSolved(event.target.value);
-                  }}
-                  type="number"
-                ></Input>
+
+              <InputContainer title="시작 날짜">
+                <div className="w-full h-10 items-center flex border justify-center rounded-lg border-gray-300 p-2">
+                  <DatePicker
+                    dateFormat="yyyy.MM.dd" // 날짜 형태
+                    shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
+                    minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
+                    maxDate={new Date()} // maxDate 이후 날짜 선택 불가
+                    selected={selectedStartDate}
+                    onChange={date => setSelectedStartDate(date)}
+                  />
+                </div>
               </InputContainer>
-            </div>
-            <div className="flex flex-1 items-center"></div>
-            <div className="flex items-center">
-              <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="email-alerts" mb="0">
-                  랜덤
-                </FormLabel>
-                <Switch
-                  id="랜덤"
-                  isChecked={isRandom}
-                  onChange={() => setIsRandom(!isRandom)}
-                />
-              </FormControl>
-              <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="email-alerts" mb="0">
-                  안푼 문제만
-                </FormLabel>
-                <Switch
-                  id="안푼 문제만"
-                  isChecked={notSolved}
-                  onChange={() => setNotSolved(!notSolved)}
-                />
-              </FormControl>
+
+              <InputContainer title="마지막 날짜">
+                <div className="w-full h-10 items-center flex border justify-center rounded-lg border-gray-300 p-2">
+                  <DatePicker
+                    dateFormat="yyyy.MM.dd" // 날짜 형태
+                    shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
+                    minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
+                    maxDate={new Date()} // maxDate 이후 날짜 선택 불가
+                    selected={selectedEndDate}
+                    onChange={date => setSelectedEndDate(date)}
+                  />
+                </div>
+              </InputContainer>
             </div>
           </div>
 
