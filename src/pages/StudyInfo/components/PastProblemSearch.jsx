@@ -38,14 +38,14 @@ import {
   ProblemTypeTagGuide,
 } from '../../../shared/components/Tag';
 
-import {
-  Paginator,
-  Container,
-  Previous,
-  Next,
-  PageGroup,
-  usePaginator,
-} from 'chakra-paginator';
+// import {
+//   Paginator,
+//   Container,
+//   Previous,
+//   Next,
+//   PageGroup,
+//   usePaginator,
+// } from 'chakra-paginator';
 const defaultTag = '선택된 태그: ';
 const RightButton = ({ className }) => {
   return (
@@ -197,9 +197,9 @@ const PastProblemSearch = ({ studyId }) => {
   const [tagGuides, setTagGuides] = useState([]);
   const [cards, setCards] = useState();
   const pagesQuantity = 120;
-  const { currentPage, setCurrentPage } = usePaginator({
-    initialState: { currentPage: 1 },
-  });
+  // const { currentPage, setCurrentPage } = usePaginator({
+  //   initialState: { currentPage: 1 },
+  // });
   const [total, setTotal] = useState(0);
 
   const [selectedStartDate, setSelectedStartDate] = useState(
@@ -244,7 +244,7 @@ const PastProblemSearch = ({ studyId }) => {
         startDate: selectedStartDate,
         endDate: selectedEndDate,
         tags: tags.slice(1),
-        page: currentPage,
+        page: 1, //currentPage,
       },
     ],
     setCards,
@@ -259,10 +259,10 @@ const PastProblemSearch = ({ studyId }) => {
       refetch();
     }
   };
-  useEffect(() => {
-    if (total === 0) return;
-    refetch();
-  }, [currentPage]);
+  // useEffect(() => {
+  //   if (total === 0) return;
+  //   refetch();
+  // }, [currentPage]);
   const renderSearchCard = cards => {
     return (
       <div>
@@ -271,7 +271,7 @@ const PastProblemSearch = ({ studyId }) => {
             cards.length > 0 &&
             cards.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
         </div>
-        {cards && cards.length > 0 && (
+        {/*cards && cards.length > 0 && (
           <div>
             <ChakraProvider>
               <Paginator
@@ -289,18 +289,16 @@ const PastProblemSearch = ({ studyId }) => {
                 >
                   <Previous>
                     {'< Previous'}
-                    {/* Or an icon from `react-icons` */}
                   </Previous>
                   <PageGroup isInline align="center" />
                   <Next>
                     {'Next >'}
-                    {/* Or an icon from `react-icons` */}
                   </Next>
                 </Container>
               </Paginator>
             </ChakraProvider>
           </div>
-        )}
+        )*/}
       </div>
     );
   };
