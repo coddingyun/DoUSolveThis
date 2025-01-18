@@ -13,6 +13,7 @@ import { makeStudyStepTitle } from '../constants/steps';
 import { getAccessToken } from '../utils/auth';
 import ProfileModal from '../components/ProfileModal';
 import NoticeButton from '../components/notice/NoticeButton';
+import { get } from 'react-hook-form';
 
 const CreateStudyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -116,7 +117,11 @@ const TopNavigation = ({ children }) => {
             type="button"
             className="flex items-center gap-2"
             onClick={() => {
-              navigate('/search');
+              if(getAccessToken()!== null && getAccessToken() !== undefined){
+                navigate('/search');
+              }else{
+                navigate('/');
+              }
             }}
           >
             <LogoMark />

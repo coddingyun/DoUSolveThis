@@ -20,11 +20,12 @@ const ManagerChange = lazy(() => import('../../../pages/ManagerChange'));
 const Router = () => {
   const { setUserName, setUserId, setUserImage, setUserNotices } = useUserActions();
   const { data: userInfo, refetch } = useGetUserInfo();
+  
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (getAccessToken()) {
+    if (getAccessToken() && location.pathname !== '/') {
       refetch();
     }
   }, []);
