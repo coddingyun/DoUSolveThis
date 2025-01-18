@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getCookie, setCookie } from '../../utils/cookie';
-import { removeAuthToken } from '../../utils/auth';
+import { getAccessToken, removeAuthToken } from '../../utils/auth';
 
 export const noAuthApi = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -40,10 +40,16 @@ const onRequestRejected = error => {
 
 const onResponseFulfilled = response => response;
 
-let isTokenRefreshAttempted = false;
+let isTokenRefreshAttempted = true;
 
 const onResponseRejected = async error => {
-  if (error.response?.status === 401) {
+  if (error.response?.status ===429 && isTokenRefreshAttempted){
+    const currentPath = window.location.pathname; // 현재 URL 경로 확인
+    if(currentPath !== "/login" && currentPath !== "/"){
+      window.location.href = "/"; // 로그인 페이지로 이동
+    }
+  }
+  if (error.response?.status === 401){
     // TODO: refresh token 으로 access token 받아오기
     const requestConfig = error.config;
     if (!requestConfig) return Promise.reject(error);
