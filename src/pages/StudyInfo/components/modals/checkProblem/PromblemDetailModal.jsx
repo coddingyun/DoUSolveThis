@@ -46,7 +46,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
       name: newName,
       code: '',
       id: null,
-      language: 'python',
+      language: language,
     };
     newCodeBlock.id = data.id;
     const _newCodes = [...codes, newCodeBlock];
@@ -54,6 +54,11 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
     setNewName('');
   });
   const mutation = useGetProblemCodes(data => {
+    data.codes
+      .filter(code => !code.language)
+      .map(code => {
+        code.language = language;
+      });
     setCodes(data.codes);
   });
   const handleInputChange = (index, event) => {
@@ -70,7 +75,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const handleLanguageChange = (index, newLanguage) => {
     const updatedCodes = [...codes];
     updatedCodes[index].language = newLanguage;
-    setLanguage(newLanguage);
+    setCodes(updatedCodes);
   };
 
   const addNewCodeBlock = () => {
@@ -78,7 +83,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
       id,
       problem,
       name: newName,
-      language: 'python',
+      language: language,
     });
   };
 
