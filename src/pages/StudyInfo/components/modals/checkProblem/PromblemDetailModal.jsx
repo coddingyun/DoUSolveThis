@@ -39,7 +39,6 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   ];
 
   const [language, setLanguage] = useState('python'); // 기본 언어 설정
-
   const putMutation = usePutUserCode(data => {});
   const addMutation = useAddUserCode(data => {
     const newCodeBlock = {
@@ -85,7 +84,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   useEffect(() => {
     if (!isOpen) return;
     mutation.mutate({ id, problem });
-  }, [isOpen]);
+  }, [isOpen, t]);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -98,7 +97,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
           <div className="flex flex-col min-h-[350px] max-h-[550px] overflow-y-auto border-none">
             <Accordion allowToggle>
               {codes?.map((code, index) => (
-                <AccordionItem key={index}>
+                <AccordionItem key={index} onClick={() => setT(!t)}>
                   <AccordionButton>
                     <Box flex="1" textAlign="left">
                       {code.name}
