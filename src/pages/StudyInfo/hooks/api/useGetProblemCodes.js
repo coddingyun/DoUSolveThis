@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../../../../shared/hooks/api';
-import { useSuggestionActions } from '../../../../store/suggestionStore';
 
 const useGetProblemCodes = successCallback => {
   return useMutation(
