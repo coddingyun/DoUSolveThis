@@ -69,6 +69,11 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
     setNewName('');
   });
   const mutation = useGetProblemCodes(data => {
+    data.codes
+      .filter(code => !code.language)
+      .map(code => {
+        code.language = language;
+      });
     setCodes(data.codes);
   });
   const handleInputChange = (index, event) => {
@@ -153,7 +158,6 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                       >
                         <pre
                           className={`language-${code.language || language}`}
-                        >
                           <code
                             className={`language-${code.language || language}`}
                             dangerouslySetInnerHTML={{
