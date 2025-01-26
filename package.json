@@ -26,7 +26,7 @@
     "react-js-pagination": "^3.0.3",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.19.0",
-    "react-syntax-highlighter": "^15.5.0",
+    "react-syntax-highlighter": "^15.6.1",
     "styled-components": "^6.1.12",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4",

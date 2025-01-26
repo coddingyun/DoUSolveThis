@@ -12,6 +12,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Select,
   Button,
   Box,
 } from '@chakra-ui/react';
@@ -19,14 +20,33 @@ import Input from '../../../../../shared/components/Input';
 import useGetProblemCodes from '../../../hooks/api/useGetProblemCodes';
 import usePutUserCode from '../../../hooks/api/usePutUserCode';
 import useAddUserCode from '../../../hooks/api/useAddUserCode';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const [codes, setCodes] = useState([]);
+  const [selectedCode, setSelectedCode] = useState(-1);
   const [newName, setNewName] = useState('');
-  const [t, setT] = useState(false);
+  const supportedLanguages = [
+    'javascript',
+    'python',
+    'java',
+    'c',
+    'cpp',
+    'ruby',
+    'kotlin',
+    'json',
+  ];
+
+  const [language, setLanguage] = useState('python'); // 기본 언어 설정
   const putMutation = usePutUserCode(data => {});
   const addMutation = useAddUserCode(data => {
-    const newCodeBlock = { name: newName, code: '', id: null };
+    const newCodeBlock = {
+      name: newName,
+      code: '',
+      id: null,
+      language: 'python',
+    };
     newCodeBlock.id = data.id;
     const _newCodes = [...codes, newCodeBlock];
     setCodes(_newCodes);
@@ -46,12 +66,18 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
       code: event.target.value,
     });
   };
+  const handleLanguageChange = (index, newLanguage) => {
+    const updatedCodes = [...codes];
+    updatedCodes[index].language = newLanguage;
+    setLanguage(newLanguage);
+  };
 
   const addNewCodeBlock = () => {
     addMutation.mutate({
       id,
       problem,
       name: newName,
+      language: 'python',
     });
   };
 
@@ -68,7 +94,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <div className="flex flex-col min-h-[350px] max-h-[550px] overflow-y-auto">
+          <div className="flex flex-col min-h-[350px] max-h-[550px] overflow-y-auto border-none">
             <Accordion allowToggle>
               {codes?.map((code, index) => (
                 <AccordionItem key={index} onClick={() => setT(!t)}>
@@ -78,13 +104,44 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
-                  <AccordionPanel pb={4}>
-                    <textarea
-                      className="flex w-full h-[400px] border"
-                      value={code.code}
-                      placeholder="코드를 복사해서 넣어주세요!"
-                      onChange={event => handleInputChange(index, event)}
-                    />
+                  <AccordionPanel pb={4} onClick={e => e.stopPropagation()}>
+                    <Select
+                      value={code.language || language}
+                      onChange={e =>
+                        handleLanguageChange(index, e.target.value)
+                      }
+                      mb={4}
+                      size="sm"
+                    >
+                      {supportedLanguages.map(lang => (
+                        <option key={lang} value={lang}>
+                          {lang.toUpperCase()}
+                        </option>
+                      ))}
+                    </Select>
+
+                    {selectedCode === index ? (
+                      <textarea
+                        className="flex w-full h-[400px] outline-none p-2 border rounded-md"
+                        value={code.code}
+                        placeholder="코드를 복사해서 넣어주세요!"
+                        onChange={event => handleInputChange(index, event)}
+                        onBlur={() => setSelectedCode(-1)} // 포커스 아웃 시 코드 에디터 모드 해제
+                        autoFocus
+                      />
+                    ) : (
+                      <div
+                        onClick={() => setSelectedCode(index)}
+                        className="cursor-pointer p-2 border rounded-md bg-gray-50"
+                      >
+                        <SyntaxHighlighter
+                          language={code.language}
+                          style={atomOneLight}
+                        >
+                          {code.code || '// 코드를 입력해주세요'}
+                        </SyntaxHighlighter>
+                      </div>
+                    )}
                   </AccordionPanel>
                 </AccordionItem>
               ))}
