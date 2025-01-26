@@ -14,6 +14,7 @@ import EnterOtherProblem from './modals/checkProblem/EnterOtherProblem';
 import useDeleteAllNextProblems from '../hooks/api/nextProblems/useDeleteAllNextProblems';
 import { useRef, useState, useEffect } from 'react';
 import ProblemDetailModal from './modals/checkProblem/PromblemDetailModal';
+import useStudyInfo from '../../../shared/hooks/api/useStudyInfo';
 
 const RightButton = ({ className }) => {
   return (
@@ -187,21 +188,27 @@ const NextProblems = ({ studyId }) => {
   } = useDisclosure();
   const { id } = useParams();
   const { isLoading } = useGetNextProblems(id);
+  const { studyInfoData, isStudyLoading } = useStudyInfo(id);
 
   const nextProbs = useNextProbs();
 
   const renderCard = () => {
-    if (isLoading) {
+    if (isLoading || isStudyLoading) {
       return Array.from({ length: 3 }).map((_, idx) => (
         <LoadingCard key={`Card${idx}`} />
       ));
     }
+    console.log(studyInfoData.how_many);
+    console.log('ff: ', parseInt(studyInfoData.how_many) || 1);
 
     return (
       <div className="grid grid-cols-3 gap-6">
         {nextProbs &&
-          nextProbs.length > 0 &&
-          nextProbs.map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
+          nextProbs.slice(0, parseInt(studyInfoData.how_many) || 1).length >
+            0 &&
+          nextProbs
+            .slice(0, parseInt(studyInfoData.how_many) || 1)
+            .map((prob, idx) => <Card data={prob} key={`Card${idx}`} />)}
       </div>
     );
   };
