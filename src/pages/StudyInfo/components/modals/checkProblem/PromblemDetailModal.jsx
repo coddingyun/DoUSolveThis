@@ -158,6 +158,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                       >
                         <pre
                           className={`language-${code.language || language}`}
+                        >
                           <code
                             className={`language-${code.language || language}`}
                             dangerouslySetInnerHTML={{
