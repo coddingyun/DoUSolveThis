@@ -39,6 +39,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   ];
 
   const [language, setLanguage] = useState('python'); // 기본 언어 설정
+  const [t, setT] = useState(false);
   const putMutation = usePutUserCode(data => {});
   const addMutation = useAddUserCode(data => {
     const newCodeBlock = {
