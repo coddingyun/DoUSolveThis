@@ -136,7 +136,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                         className="cursor-pointer p-2 border rounded-md bg-gray-50"
                       >
                         <SyntaxHighlighter
-                          language={code.language}
+                          language={code.language || language}
                           style={atomOneLight}
                         >
                           {code.code || '// 코드를 입력해주세요'}
