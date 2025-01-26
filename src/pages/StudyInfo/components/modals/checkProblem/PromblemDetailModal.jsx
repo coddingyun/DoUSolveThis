@@ -41,6 +41,11 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const [language, setLanguage] = useState('python'); // 기본 언어 설정
   const [t, setT] = useState(false);
   const putMutation = usePutUserCode(data => {});
+
+  useEffect(() => {
+    // SyntaxHighlighter 초기화
+    window.SyntaxHighlighter?.highlight();
+  }, []);
   const addMutation = useAddUserCode(data => {
     const newCodeBlock = {
       name: newName,
