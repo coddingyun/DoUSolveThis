@@ -83,7 +83,7 @@ const SearchStudy = () => {
   return (
     <TopNavigation>
       <div>
-        <form onSubmit={(e) => handleSearch(e)}>
+        <form onSubmit={e => handleSearch(e)}>
           <SearchInput value={term} handleChangeValue={handleChangeTerm} />
         </form>
         <div className="flex justify-between">
@@ -134,9 +134,11 @@ const SearchStudy = () => {
         </div>
         <div className="scroll-auto mt-8 grid grid-cols-3 gap-6">
           {isFetching &&
-            Array.from({ length: 4 }, (_, idx) => <LoadingCard id={idx} />)}
+            Array.from({ length: 4 }, (_, idx) => <LoadingCard key={idx} />)}
           {!isFetching &&
-            data?.pages?.[0]?.data?.map(item => <StudyCard item={item} />)}
+            data?.pages?.[0]?.data?.map((item, idx) => (
+              <StudyCard item={item} key={'sc-' + idx} />
+            ))}
         </div>
       </div>
     </TopNavigation>

@@ -20,8 +20,18 @@ import Input from '../../../../../shared/components/Input';
 import useGetProblemCodes from '../../../hooks/api/useGetProblemCodes';
 import usePutUserCode from '../../../hooks/api/usePutUserCode';
 import useAddUserCode from '../../../hooks/api/useAddUserCode';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css'; // 이 컴포넌트에서만 스타일 적용
+// 필요한 언어를 import
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-ruby';
+import 'prismjs/components/prism-kotlin';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-go';
 
 const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
   const [codes, setCodes] = useState([]);
@@ -117,6 +127,7 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                   </AccordionButton>
                   <AccordionPanel pb={4} onClick={e => e.stopPropagation()}>
                     <Select
+                      key={index}
                       value={code.language || language}
                       onChange={e =>
                         handleLanguageChange(index, e.target.value)
@@ -145,12 +156,19 @@ const ProblemDetailModal = ({ isOpen, onClose, id, problem, title }) => {
                         onClick={() => setSelectedCode(index)}
                         className="cursor-pointer p-2 border rounded-md bg-gray-50"
                       >
-                        <SyntaxHighlighter
-                          language={code.language || language}
-                          style={atomOneLight}
-                        >
-                          {code.code || '// 코드를 입력해주세요'}
-                        </SyntaxHighlighter>
+                        <pre
+                          className={`language-${code.language || language}`}
+                          <code
+                            className={`language-${code.language || language}`}
+                            dangerouslySetInnerHTML={{
+                              __html: Prism.highlight(
+                                code.code,
+                                Prism.languages[code.language || language],
+                                code.language || language,
+                              ),
+                            }}
+                          />
+                        </pre>
                       </div>
                     )}
                   </AccordionPanel>
